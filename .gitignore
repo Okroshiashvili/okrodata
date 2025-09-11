@@ -1,2 +1,34 @@
 /.quarto/
 **/*.quarto_ipynb
+/_site/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+
+# Ruff
+.ruff_cache/
+
+# IDE specific files
+.vscode/
+.zed/
+.DS_Store
+

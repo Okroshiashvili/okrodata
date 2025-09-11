@@ -1,0 +1,35 @@
+[project]
+name = "okrodata"
+version = "0.1.0"
+description = "Personal Blog"
+readme = "README.md"
+
+requires-python = ">=3.13"
+
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.37.0",
+]
+
+
+# Poe tasks
+[tool.poe.tasks]
+build = "python -m build"
+publish = "twine upload dist/*"
+lint = "flake8 okrodata tests"
+format = "black okrodata tests"
+typecheck = "mypy okrodata tests"
+test = "pytest tests"
+pre-commit = "pre-commit run --all-files"
+all = "poe format lint typecheck test"
+
+
+
+
+
+
+
+
+
