@@ -1,2 +1,3 @@
-# okrodata
-Blog
+# Okro Data
+
+Personal Blog

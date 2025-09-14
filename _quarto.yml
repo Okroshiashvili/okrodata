@@ -1,21 +1,42 @@
 project:
   type: website
+  resources:
+    - "assets/resume.pdf"
 
 website:
-  title: "okrodata"
+  # title: "Okro Data"
+  description: Data Software Engineering blog
+  favicon: assets/favicon.ico
+  page-footer: "Copyright 2025, Nodar Okroshiashvili"
+  site-url: https://okrodata.dev
+  search:
+    location: navbar
+    type: textbox
+    copy-button: true
   navbar:
+    # logo: "assets/logo.png"
+    back-to-top-navigation: true
+    background: primary
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Blog"
+        file: blog.qmd
+      - text: "Open Source"
+        file: open_source.qmd
     right:
-      - about.qmd
+      - text: "About"
+        file: about.qmd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/nodar-okroshiashvili/
+        target: _blank
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/Okroshiashvili
+        target: _blank
+      # - icon: rss
+      #   href: index.xml
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      - flatly
     css: styles.css
-
-
-
