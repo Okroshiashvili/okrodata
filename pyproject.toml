@@ -6,7 +6,14 @@ readme = "README.md"
 
 requires-python = ">=3.13"
 
-dependencies = []
+dependencies = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.6",
+    "numpy>=2.3.3",
+    "scipy>=1.16.2",
+    "seaborn>=0.13.2",
+    "sympy>=1.14.0",
+]
 
 [dependency-groups]
 dev = [
