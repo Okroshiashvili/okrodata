@@ -1,0 +1,61 @@
+---
+title: "Lost in Pandas - Part 4"
+author: "Nodar Okroshiashvili"
+date: "2020-04-29"
+categories: [Data Science]
+tags: [Pandas, Data Analysis]
+keywords: [pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas]
+---
+
+# Introduction
+
+I'll show how to assign new value for each unique group in Pandas DataFrame.
+
+```{python}
+
+import pandas as pd
+
+```
+
+```{python}
+
+data = {
+    "ID": [1, 1, 1, 2, 2, 3, 3],
+    "class": ["Lower", "Moderate", "Moderate", "Lower", "High", "High", "Lower"]
+}
+
+df = pd.DataFrame(data)
+
+df
+
+```
+
+Now, let assign new values according to ```class``` column and then rearrange ```class``` column in order to assign new group names.
+
+```{python}
+
+value_map = {"Lower": 33, "Moderate": 34, "High": 40}
+
+df["new"] = df["class"].map(value_map)
+
+df
+
+```
+
+```{python}
+
+df["Max"] = (df.set_index("class")
+                .groupby("ID")["new"]
+                .transform("idxmax").values)
+
+df
+
+```
+
+```{python}
+
+df["Max"] = df["Max"].mask(df["ID"].duplicated(), "")
+
+df
+
+```
