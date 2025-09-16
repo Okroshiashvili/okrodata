@@ -1,3 +1,0 @@
-# Okro Data
-
-Personal Blog
