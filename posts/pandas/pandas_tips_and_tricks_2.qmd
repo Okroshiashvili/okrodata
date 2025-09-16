@@ -1,0 +1,144 @@
+---
+title: "Lost in Pandas - Part 2"
+author: "Nodar Okroshiashvili"
+date: "2020-04-14"
+categories: [Data Science]
+tags: [Pandas, Data Analysis]
+keywords: [pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas]
+---
+
+# Introduction
+
+I will show you how to fill missing values by the average of its before and after values if our dataframe has the following form:
+
+## Problem Statement
+
+How can we perform ```groupby``` and fill ```Nan```'s with its preceding and following values?
+
+```{python}
+
+import pandas as pd
+import numpy as np
+
+```
+
+```{python}
+
+data = {
+    "type": [
+        "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+        "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b",
+    ],
+    "date": [
+        "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03",
+        "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10",
+        "2019-11", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02",
+        "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09",
+        "2019-10", "2019-11",
+    ],
+    "v1": [
+        10, np.nan, np.nan, 20, np.nan, np.nan, 30, np.nan, np.nan, 40, np.nan,
+        np.nan, 50, np.nan, np.nan, 60, np.nan, np.nan, 70, np.nan, np.nan, 80,
+        np.nan, np.nan, 90, np.nan, np.nan, 100, np.nan, np.nan,
+    ],
+    "v2": [
+        10, np.nan, np.nan, 20, np.nan, np.nan, 30, np.nan, np.nan, 40, np.nan,
+        np.nan, 50, np.nan, np.nan, 60, np.nan, np.nan, 70, np.nan, np.nan, 80,
+        np.nan, np.nan, 90, np.nan, np.nan, 100, np.nan, np.nan,
+    ],
+}
+
+
+df = pd.DataFrame(data)
+
+df.head()
+
+```
+
+We see that values in ```type``` and ```date``` column are repetitive. Moreover, it does not matter what values are in other two columns, unless it is numeric type. Our aim is to fill these missing values by the average of its before and after value for ```v1``` and ```v2``` columns. We also notice that sorting and then filling won't give desired result. We need something different. But before we find that solution we need to convert columns in numeric type in order to compute average by using Pandas ```to_numeric()``` method with parameter "errors" set to "coerce", because Pandas DataFrame ```astype()``` method won't work in this case.
+
+We have two solution here. To use both of them let make copy of initial dataframe. The first uses ```groupby``` and then applies aggregator with "backward fill" and "forward fill" and then again ```groupby``` and then computes mean. The second solution does almost the same as the first but uses ```apply()``` method instead of aggregation.
+
+```{python}
+
+# The first solution
+
+df_first = df.copy(deep=True)
+
+df_first[["v1", "v2"]] = (df_first.groupby("type")[["v1", "v2"]]
+                                  .agg(["bfill", "ffill"])
+                                  .groupby(level=0, axis=1)
+                                  .mean())
+
+df_first
+
+```
+
+```{python}
+
+# The second solution
+
+df_second = df.copy(deep=True)
+
+g = df_second.groupby(["type"], group_keys=False)[["v1", "v2"]]
+
+df_second[["v1", "v2"]] = (g.ffill() + g.bfill()) / 2
+
+df_second[["v1", "v2"]] = g.apply(lambda x: x.bfill().ffill())
+
+
+df_second
+
+```
+
+Above two methods gave us desirable results. Let try some plain method to achieve the same. Below is the dry, plain method which fill missing values by  backward and forward average. However by using this we introduce bug which will be hard to detect. Let see.
+
+```{python}
+
+# The third method
+
+df_third = df.copy(deep=True)
+
+df_third[["v1", "v2"]] = (df_third[["v1", "v2"]].ffill() + df_third[["v1", "v2"]].bfill()) / 2
+
+df_third[["v1", "v2"]] = df_third[["v1", "v2"]].bfill().ffill()
+
+df_third
+
+```
+
+At the first glance everything seems ok, but let check the equality of these three dataframes with double equality sign and ```all``` method.
+
+```{python}
+
+df_first == df_second
+
+# The result of the first and the second method are equal
+
+```
+
+```{python}
+
+df_third == df_first
+
+```
+
+At index position 13 and 14 we have ```False``` values. That was the reason of inequality. But why do we have these ```False``` values? The dry plain method calculated the average of non-missing values sequentially not by ```type```. At index 13 and 14 the average is 50 not 55, because the third method calculated the average between 50 and 60 instead of 50 and NaN. That resulted the bug!
+
+```{python}
+
+df.iloc[12:16]
+
+```
+
+```{python}
+
+df_first.iloc[12:16]
+
+```
+
+```{python}
+
+df_third.iloc[12:16]  # Not Correct
+
+```

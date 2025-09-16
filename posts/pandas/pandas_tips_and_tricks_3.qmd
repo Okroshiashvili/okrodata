@@ -1,0 +1,68 @@
+---
+title: "Lost in Pandas - Part 3"
+author: "Nodar Okroshiashvili"
+date: "2020-04-20"
+categories: [Data Science]
+tags: [Pandas, Data Analysis]
+keywords: [pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas]
+---
+
+# Introduction
+
+I'll show you how to split one column with repetitive index and/or value into multiple rows with unique index.
+
+```{python}
+
+import pandas as pd
+
+```
+
+```{python}
+
+data = {
+    "ID": [100, 100, 200, 200, 200, 300, 300, 400],
+    "Product_Name": ["Apple", "Banana", "Cherry", "Apricot", "Apple", "Avocado", "Avocado", "Orange"],
+}
+
+df = pd.DataFrame(data)
+
+df
+
+```
+
+We see that our dataframe contains repetitive index (```ID```) and also not unique values for each unique index. Our aim is to convert ```Product_Name``` column into rows such as to keep index unique and in each new colum to be each product name. We need the following format:
+
+
+|   ID  | 0 | 1 | 2 |
+| --- | --- | --- | --- |
+| 100 | Apple | Banana | NaN |
+| 200 | Cherry | Apricot | Apple |
+| 300 | Avocado | Avocado | NaN |
+| 400 | Orange | NaN | NaN |
+
+
+To achieve our aim we can use ```cumcount``` for new columns names to ```MultiIndex``` by ```set_index``` and reshape by ```unstack```. The second way to do this will be to create ```Series``` of ```lists``` and new ```DataFrame``` by contructor:
+
+```{python}
+
+df.set_index(["ID", df.groupby("ID").cumcount()])["Product_Name"].unstack()
+
+```
+
+```{python}
+
+# Second way of doing the same as above
+
+s = df.groupby("ID")["Product_Name"].apply(list)
+
+pd.DataFrame(s.values.tolist(), index=s.index)
+
+```
+
+That's good. We found the solution, but what if we want to have just two columns. I mean to aggregate ```Product_Name``` column values in one cell for each unique index? That's even easy to do. Use ```groupby``` then ```apply``` ```join``` and ```reset_index```
+
+```{python}
+
+df.groupby("ID")["Product_Name"].apply(" ".join).reset_index(name="New_Product_Name")
+
+```

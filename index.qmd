@@ -1,0 +1,8 @@
+
+
+![](assets/thumbnail.jpg)
+
+
+This is the first post in a Quarto blog. Welcome!
+
+

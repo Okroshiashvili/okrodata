@@ -1,0 +1,35 @@
+---
+title: "My Post"
+description: "Post description"
+author: "Fizz McPhee"
+date: "5/22/2021"
+draft: true
+---
+
+
+
+
+https://en.wikipedia.org/wiki/Earth_mover%27s_distance
+
+https://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/RUBNER/emd.htm
+
+https://towardsdatascience.com/earth-movers-distance-68fff0363ef2
+
+http://infolab.stanford.edu/pub/cstr/reports/cs/tr/99/1620/CS-TR-99-1620.ch4.pdf
+
+https://jeremykun.com/2018/03/05/earthmover-distance/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
