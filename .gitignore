@@ -32,5 +32,4 @@ dmypy.json
 /.quarto/
 /_site/
 .DS_Store
-.*
 
