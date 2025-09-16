@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nodar Okroshiashvili">
+<meta name="dcterms.date" content="2021-03-01">
+<meta name="keywords" content="linear algebra basics in python, vectors and matrices with python, linear algebra, machine learning, python, numpy, scipy">
+
+<title>Basic Linear Algebra with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f59cc608e70ce16b384b3e6fc30ca698.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": true,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../open_source.html"> 
+<span class="menu-text">Open Source</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/nodar-okroshiashvili/" target="_blank"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Okroshiashvili" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Basic Linear Algebra with Python</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Mathematics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Nodar Okroshiashvili </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 1, 2021</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+
+  <div>
+    <div class="keywords">
+      <div class="block-title">Keywords</div>
+      <p>linear algebra basics in python, vectors and matrices with python, linear algebra, machine learning, python, numpy, scipy</p>
+    </div>
+  </div>
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#one-variable-equation" id="toc-one-variable-equation" class="nav-link" data-scroll-target="#one-variable-equation">One Variable Equation</a></li>
+  <li><a href="#two-variable-equation" id="toc-two-variable-equation" class="nav-link" data-scroll-target="#two-variable-equation">Two Variable Equation</a></li>
+  <li><a href="#the-systems-of-equations" id="toc-the-systems-of-equations" class="nav-link" data-scroll-target="#the-systems-of-equations">The Systems of Equations</a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a>
+  <ul class="collapse">
+  <li><a href="#vectors-and-vector-notation" id="toc-vectors-and-vector-notation" class="nav-link" data-scroll-target="#vectors-and-vector-notation">Vectors and Vector Notation</a></li>
+  <li><a href="#dimensions-of-vector" id="toc-dimensions-of-vector" class="nav-link" data-scroll-target="#dimensions-of-vector">Dimensions of Vector</a></li>
+  <li><a href="#operations-on-vectors" id="toc-operations-on-vectors" class="nav-link" data-scroll-target="#operations-on-vectors">Operations on Vectors</a></li>
+  <li><a href="#vector-length" id="toc-vector-length" class="nav-link" data-scroll-target="#vector-length">Vector Length</a></li>
+  <li><a href="#unit-vector" id="toc-unit-vector" class="nav-link" data-scroll-target="#unit-vector">Unit Vector</a></li>
+  <li><a href="#scalar-product-of-two-vectors" id="toc-scalar-product-of-two-vectors" class="nav-link" data-scroll-target="#scalar-product-of-two-vectors">Scalar Product of Two Vectors</a></li>
+  </ul></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices">Matrices</a>
+  <ul class="collapse">
+  <li><a href="#matrices-and-matrix-notation" id="toc-matrices-and-matrix-notation" class="nav-link" data-scroll-target="#matrices-and-matrix-notation">Matrices and Matrix Notation</a></li>
+  <li><a href="#dimension-of-matrices" id="toc-dimension-of-matrices" class="nav-link" data-scroll-target="#dimension-of-matrices">Dimension of Matrices</a></li>
+  <li><a href="#matrix-operations" id="toc-matrix-operations" class="nav-link" data-scroll-target="#matrix-operations">Matrix Operations</a></li>
+  <li><a href="#matrix-transpose" id="toc-matrix-transpose" class="nav-link" data-scroll-target="#matrix-transpose">Matrix Transpose</a></li>
+  <li><a href="#identity-matrix" id="toc-identity-matrix" class="nav-link" data-scroll-target="#identity-matrix">Identity Matrix</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This is the <strong>second</strong> post in the blog series about linear algebra, covering the basics.</p>
+<ol type="1">
+<li><a href="../../posts/mathematics/linear_algebra_1.html">Introduction to Linear Algebra with Python</a></li>
+<li><strong>Basic Linear Algebra with Python</strong></li>
+<li>Intermediate linear algebra
+<ol type="1">
+<li>Intermediate Linear Algebra with Python - Part I</li>
+<li>Intermediate Linear Algebra with Python - Part II</li>
+</ol></li>
+<li>Advanced linear algebra
+<ol type="1">
+<li>Advance Linear Algebra with Python - Part I</li>
+<li>Advance Linear Algebra with Python - Part II</li>
+</ol></li>
+</ol>
+<p>In this post I will introduce you to the basics of linear algebra, starting from introduciong one and two variable equations, then moving on to vectors and operations on vectors. After that, I will move on to matrices and operations defined on matrices. I will also show you how to use Python to solve linear algebra problems.</p>
+<section id="one-variable-equation" class="level2">
+<h2 class="anchored" data-anchor-id="one-variable-equation">One Variable Equation</h2>
+<p>Generally, equations state that two things are equal. They contain one or more variables and solving them means to find the value of those variable to make equality true. This value is known as a solution. Consider the following equation:</p>
+<p><span class="math display">\[
+2x + 5 = 15
+\]</span></p>
+<p>In this case, our variable is <span class="math inline">\(x\)</span> and the solution is <span class="math inline">\(10\)</span>.</p>
+<div id="32197bc5" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">15</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>True</code></pre>
+</div>
+</div>
+</section>
+<section id="two-variable-equation" class="level2">
+<h2 class="anchored" data-anchor-id="two-variable-equation">Two Variable Equation</h2>
+<p>Equations with two variables are known as linear equations. Consider the following equation:</p>
+<p><span class="math display">\[
+2y + 3 = 2x - 1
+\]</span></p>
+<p>This equation includes two different variables, <span class="math inline">\(x\)</span>, and <span class="math inline">\(y\)</span>. These variables depend on one another. The value of <span class="math inline">\(x\)</span> is determined in part by the value of <span class="math inline">\(y\)</span> and vice-versa. So we can”t solve this equation as in the case of one variable equation. However, we can express <span class="math inline">\(y\)</span> in terms of <span class="math inline">\(x\)</span> and obtain a result that describes a relative relationship between the variables.</p>
+<p>For example, let’s solve this equation for <span class="math inline">\(y\)</span>. First, rearrage equation in a way to have following:</p>
+<p><span class="math display">\[
+2y = 2x - 4
+\Rightarrow
+y = x - 2
+\]</span></p>
+<p><em>Note that this is not linear function, this is an <a href="https://math.stackexchange.com/questions/275310/what-is-the-difference-between-linear-and-affine-function">affine function</a></em></p>
+<p>Below we will see the solution of the above equation for various values of <span class="math inline">\(y\)</span>. It’s also good practice to plot the solutions.</p>
+<div id="d7152340" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="ead6d538" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with a column x, containing values from -10 to 10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">11</span>)})</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column y, by applying the solved equation to x</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"y"</span>] <span class="op">=</span> df[<span class="st">"x"</span>] <span class="op">-</span> <span class="dv">2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dataframe</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x</th>
+<th data-quarto-table-cell-role="th">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>-10</td>
+<td>-12</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>-9</td>
+<td>-11</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>-8</td>
+<td>-10</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>-7</td>
+<td>-9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>-6</td>
+<td>-8</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Above table shows valid solutions for values of <span class="math inline">\(x\)</span> in range <span class="math inline">\((-10, 10)\)</span>. Besides numerical solution, let see the graphical solution.</p>
+<div id="e9f6b80d" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(num<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>, facecolor<span class="op">=</span><span class="st">"w"</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.axhline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear_algebra_2_files/figure-html/cell-5-output-1.png" width="568" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The solution of the above equation lies on the blue line, for any value pairs <span class="math inline">\((x,y)~\in~\mathbb{R}\)</span></p>
+<p>When we use a linear equation to plot a line, we can easily see where the line intersects the X and Y axes of the plot. These points are known as <em>intercepts</em>. The <em>x-intercept</em> is where the line intersects the X (horizontal) axis, and the <em>y-intercept</em> is where the line intersects the Y (horizontal) axis.</p>
+<p>The x-intercept is the point where the line crosses the <span class="math inline">\(X\)</span> axis, and at this point, the value for <span class="math inline">\(y\)</span> is always 0. Similarly, the y-intercept is where the line crosses the <span class="math inline">\(Y\)</span> axis, at which <span class="math inline">\(x\)</span> value is 0. So to find the intercepts, we need to solve the equation for <span class="math inline">\(x\)</span> when <span class="math inline">\(y\)</span> is 0 and for <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is 0.</p>
+<p>For the x-intercept, we have:</p>
+<p><span class="math display">\[
+y = x - 2 = 0
+\Rightarrow
+x = 2
+\]</span></p>
+<p>For y-intercept, we have:</p>
+<p><span class="math display">\[
+y = x - 2
+\Rightarrow
+y = 0 - 2
+\Rightarrow
+y = -2
+\]</span></p>
+<div id="e738afc5" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(num<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>, facecolor<span class="op">=</span><span class="st">"w"</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.axhline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.axvline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"x-intercept"</span>, (<span class="dv">2</span>, <span class="dv">0</span>), color<span class="op">=</span><span class="st">"red"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"y-intercept"</span>, (<span class="dv">0</span>, <span class="op">-</span><span class="dv">2</span>), color<span class="op">=</span><span class="st">"red"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear_algebra_2_files/figure-html/cell-6-output-1.png" width="568" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is natural to ask, what if we move one unit along the <span class="math inline">\(x\)</span> axis, how the value for the <span class="math inline">\(y\)</span> change? The answer to this question is the notion of <em>slope</em>. Slope is defined as</p>
+<p><span class="math display">\[
+m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}
+\]</span></p>
+<p>This means that for any given two ordered pairs of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, how a change in <span class="math inline">\(x\)</span> affect <span class="math inline">\(y\)</span>. For example:</p>
+<ul>
+<li>(5, 3)</li>
+<li>(6, 4)</li>
+</ul>
+<p>So, according to our formula, slope equal to:</p>
+<p><span class="math display">\[
+m = \frac{4 - 3}{6 - 5} = 1
+\]</span></p>
+<p>So what does that actually mean? Well, if we start from any point on the blue line and move one unit to the right (along with the <span class="math inline">\(X\)</span> axis), we’ll need to move 1 unit up (along with the <span class="math inline">\(Y\)</span> axis) to get back to the blue line.</p>
+</section>
+<section id="the-systems-of-equations" class="level2">
+<h2 class="anchored" data-anchor-id="the-systems-of-equations">The Systems of Equations</h2>
+<p>To have the system of equations means that we have two or more linear equations together and we have to solve them simultaneously to make the equality true. There are three possible solutions of the linear system. One solution, No solution or system is inconsistent and infinitely many solutions. Generally, the linear system can have two or more variables and two or more equations. There, I will consider two variable and two-equation system with three solutions, in order to depict the intuition. It’s up to you to delve deeper.</p>
+<ul>
+<li>The system with one solution, meaning two lines intersect</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+2x-y = 2 \\
+x+y = -2
+\end{cases}
+\]</span></p>
+<p>If we divide these equations we’ll get <span class="math inline">\(x=-2\)</span> and <span class="math inline">\(y=0\)</span>. This is the solution. Now let see it graphically.</p>
+<div id="17c1080c" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">11</span>)})</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">"y"</span>] <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> df_1[<span class="st">"x"</span>] <span class="op">-</span> <span class="dv">2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">11</span>)})</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_2[<span class="st">"y"</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">*</span> df_2[<span class="st">"x"</span>] <span class="op">-</span> <span class="dv">2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.figure(num<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>, facecolor<span class="op">=</span><span class="st">"w"</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.plot(df_1[<span class="st">"x"</span>], df_1[<span class="st">"y"</span>])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.plot(df_2[<span class="st">"x"</span>], df_2[<span class="st">"y"</span>])</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"2x - y = 2"</span>, (<span class="fl">7.5</span>, <span class="dv">18</span>), weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"x + y = -2"</span>, (<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>), weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># I put coordinates(0,-3) intentionally to make annotation look clear</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"Solution (x = -2 ; y = 0)"</span>, (<span class="dv">0</span>, <span class="op">-</span><span class="dv">3</span>))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear_algebra_2_files/figure-html/cell-7-output-1.png" width="557" height="421" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The system with no solution or inconsistent system, meaning two lines are parallel</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+3x+2y = 3 \\
+3x+2y = -4
+\end{cases}
+\]</span></p>
+<p>The system is inconsistent. There is no solution.</p>
+<div id="1803fb4f" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">11</span>)})</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">"y"</span>] <span class="op">=</span> (<span class="op">-</span><span class="dv">3</span> <span class="op">/</span> <span class="dv">2</span>) <span class="op">*</span> df_1[<span class="st">"x"</span>] <span class="op">+</span> <span class="dv">3</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">11</span>)})</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df_2[<span class="st">"y"</span>] <span class="op">=</span> (<span class="op">-</span><span class="dv">3</span> <span class="op">/</span> <span class="dv">2</span>) <span class="op">*</span> df_2[<span class="st">"x"</span>] <span class="op">-</span> <span class="dv">2</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.figure(num<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>, facecolor<span class="op">=</span><span class="st">"w"</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.plot(df_1[<span class="st">"x"</span>], df_1[<span class="st">"y"</span>])</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.plot(df_2[<span class="st">"x"</span>], df_2[<span class="st">"y"</span>])</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"3x + 2y = 3"</span>, (<span class="op">-</span><span class="dv">5</span>, <span class="dv">10</span>), weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"3x + 2y = -4"</span>, (<span class="op">-</span><span class="dv">10</span>, <span class="fl">7.5</span>), weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear_algebra_2_files/figure-html/cell-8-output-1.png" width="557" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The system with infinitely many solutions, meaning two lines coincide</li>
+</ul>
+<p><span class="math display">\[
+\begin{cases}
+x-y = -3 \\
+2x-2y = -6
+\end{cases}
+\]</span></p>
+<p>The system has infinitely many solutions, as one of them is a linear combination of another. In this case, the second equation is scaled by 2 version of the first equation.</p>
+<div id="8435c0dc" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">11</span>)})</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_1[<span class="st">"y"</span>] <span class="op">=</span> df_1[<span class="st">"x"</span>] <span class="op">-</span> <span class="dv">3</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: <span class="bu">range</span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">6</span>)})</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>df_2[<span class="st">"y"</span>] <span class="op">=</span> df_2[<span class="st">"x"</span>] <span class="op">-</span> <span class="dv">3</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.figure(num<span class="op">=</span><span class="va">None</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>, facecolor<span class="op">=</span><span class="st">"w"</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.plot(df_1[<span class="st">"x"</span>], df_1[<span class="st">"y"</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.plot(df_2[<span class="st">"x"</span>], df_2[<span class="st">"y"</span>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"y"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"2x - 2y = -6"</span>, (<span class="dv">5</span>, <span class="dv">5</span>), weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.annotate(<span class="st">"x - y = -3"</span>, (<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">5</span>), weight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear_algebra_2_files/figure-html/cell-9-output-1.png" width="568" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors" class="level2">
+<h2 class="anchored" data-anchor-id="vectors">Vectors</h2>
+<section id="vectors-and-vector-notation" class="level3">
+<h3 class="anchored" data-anchor-id="vectors-and-vector-notation">Vectors and Vector Notation</h3>
+<p>In plain English, the vector is a directed arrow. Mathematically, the vector is an object that has magnitude and direction. Magnitude is the length of the vector and direction is from its tail to its end. In other words, imagine vector as the line which connects two points in the Cartesian Coordinate System. A vector of length <span class="math inline">\(n\)</span> is a sequence or array of <span class="math inline">\(n\)</span> numbers, which we can write as:</p>
+<p><span class="math display">\[
+\vec{X} = (x_1, x_2, x_3...x_n)
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+\vec{X} = [x_1, x_2, x_3, ... x_n]
+\]</span></p>
+<p>Horizontally represented vector is a row vector, while vertically represented vector is a column vector. Let see how they look graphically.</p>
+<div id="f487bebb" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the axes through the origin</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> [<span class="st">"left"</span>, <span class="st">"bottom"</span>]:</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    ax.spines[spine].set_position(<span class="st">"zero"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> [<span class="st">"right"</span>, <span class="st">"top"</span>]:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    ax.spines[spine].set_color(<span class="st">"none"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ax.grid()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>vecs <span class="op">=</span> ((<span class="dv">2</span>, <span class="dv">4</span>), (<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>))  <span class="co"># These are vectors</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> vecs:</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>v, xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>), arrowprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"blue"</span>, shrink<span class="op">=</span><span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, width<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">1.1</span> <span class="op">*</span> v[<span class="dv">0</span>], <span class="fl">1.1</span> <span class="op">*</span> v[<span class="dv">1</span>], <span class="bu">str</span>(v))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="linear_algebra_2_files/figure-html/cell-10-output-1.png" width="777" height="624" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dimensions-of-vector" class="level3">
+<h3 class="anchored" data-anchor-id="dimensions-of-vector">Dimensions of Vector</h3>
+<p>The dimension of vector is the number of elements in it. For example, the above vector is a row vector with dimension <span class="math inline">\(1\times n\)</span>, but if we take it as a column vector its dimension will be <span class="math inline">\(n\times 1\)</span>.</p>
+<p><span class="math display">\[
+\vec{X} = [x_1,x_2,...x_n]_{1\times~n}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\vec{X} =
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}_{n\times1}
+\]</span></p>
+<div id="46a5646e" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>]])</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X is a row vector with dimension"</span>, np.shape(X))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Y is a column vector with dimension"</span>, np.shape(Y))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X is a row vector with dimension (1, 3)
+Y is a column vector with dimension (3, 1)</code></pre>
+</div>
+</div>
+</section>
+<section id="operations-on-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="operations-on-vectors">Operations on Vectors</h3>
+<p>The most common operations on vectors are vector addition/subtraction and scalar multiplication.</p>
+<p>If we have two vectors, <span class="math inline">\(\vec{X}\)</span> and <span class="math inline">\(\vec{Y}\)</span>, we can add them up in the following way:</p>
+<p><span class="math display">\[
+\vec{X} + \vec{Y} =
+\begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    \vdots \\
+    x_n
+\end{bmatrix}_{n\times1} +
+\begin{bmatrix}
+     y_1 \\
+     y_2 \\
+    \vdots \\
+     y_n
+\end{bmatrix}_{n\times1} =
+\begin{bmatrix}
+    x_1 + y_1 \\
+    x_2 + y_2 \\
+    \vdots \\
+    x_n + y_n
+\end{bmatrix}_{n\times1}
+\]</span></p>
+<div id="bec1db8e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>]])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.array([[<span class="dv">3</span>], [<span class="dv">4</span>], [<span class="dv">5</span>]])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X + Y = "</span>, X <span class="op">+</span> Y, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X + Y = 
+[[4]
+ [6]
+ [8]]</code></pre>
+</div>
+</div>
+<p>Multiplying vector by a scalar <span class="math inline">\(\alpha\)</span>, gives</p>
+<p><span class="math display">\[
+\alpha \vec{X} =
+\begin{bmatrix}
+\alpha x_1 \\
+\alpha x_2 \\
+\vdots \\
+\alpha x_n
+\end{bmatrix}_{n\times1}
+\]</span></p>
+<p>For scalar multiplication, if we have vector <span class="math inline">\(X\)</span> and scalar <span class="math inline">\(\alpha = 5\)</span> then alpha times <span class="math inline">\(X\)</span> is:</p>
+<div id="a2618ff9" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">5</span> <span class="op">*</span> X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 5 10 15]]</code></pre>
+</div>
+</div>
+</section>
+<section id="vector-length" class="level3">
+<h3 class="anchored" data-anchor-id="vector-length">Vector Length</h3>
+<p>The vector length or the magnitude is calculated by the following formula:</p>
+<p><span class="math display">\[
+\|\vec{X}\| = \sqrt{x_1^2 + x_2^2 + x_3^2 + ... + x_n^2} = \sqrt{\sum_{i=1}^n x_i^2}
+\]</span></p>
+<p>We can link notion of vector length to the Euclidean distance. If our vector <span class="math inline">\(\vec{X}\)</span> has tail at origin, <span class="math inline">\(\vec{0} = [0_1, 0_2, 0_3, ... , 0_n]\)</span> and point at <span class="math inline">\(\vec{X} = [x_1,x_2,...x_n]\)</span>, then Euclidean distance between tail and point is the length of <span class="math inline">\(\vec{X}\)</span> by the formula:</p>
+<p><span class="math display">\[
+d(\vec{0},\vec{X}) = \sqrt{(0_1 - x_1)^2 + (0_2 - x_2)^2 + ... + (0_n - x_n)^2} = \sqrt{\sum_{i=1}^n (0_i - x_i)^2}
+\]</span></p>
+<p>For example, we have vector <span class="math inline">\(X\)</span></p>
+<p><span class="math display">\[
+\vec{X} =
+\begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix}
+\]</span></p>
+<p>then its length is</p>
+<p><span class="math display">\[
+\|\vec{X}\| = \sqrt{1^2 + 2^2 + 3^2} = \sqrt{14}
+\]</span></p>
+<div id="6a8aa849" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># In numpy, there are two ways to compute vector length</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.sqrt(np.<span class="bu">sum</span>(X<span class="op">**</span><span class="dv">2</span>)))  <span class="co"># More verbose method</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.linalg.norm(X))  <span class="co"># More concise method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3.7416573867739413
+3.7416573867739413</code></pre>
+</div>
+</div>
+</section>
+<section id="unit-vector" class="level3">
+<h3 class="anchored" data-anchor-id="unit-vector">Unit Vector</h3>
+<p>What if the length of a vector equal to 1? This kind of vector is known as the unit vector and it plays a very important role in different calculations and formulae. We’ll see it in later posts, but here unit vector is defined as</p>
+<p><span class="math display">\[
+\hat{X} = \frac{X}{\|X\|}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{X}\)</span> is a unit vector, the numerator is vector <span class="math inline">\(\vec{X}\)</span> and denominator is the norm of vector <span class="math inline">\(\vec{X}\)</span>.</p>
+<p>We can use vector <span class="math inline">\(X\)</span> from above example. We already calculated it length which is <span class="math inline">\(\|\vec{X}\| = \sqrt{14}\)</span>. So, we can construct unit vector <span class="math inline">\(\hat{X}\)</span> in the following way:</p>
+<p><span class="math display">\[
+\hat{X} = \frac{X}{\|X\|} =
+\frac{1}{\sqrt{14}}; \frac{2}{\sqrt{14}}; \frac{3}{\sqrt{14}}
+\Rightarrow
+[0.26726124; \ 0.53452248; \ 0.80178373]
+\]</span></p>
+<div id="e6ad4c5c" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> X <span class="op">/</span> np.linalg.norm(X)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Vector n ="</span>, n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Vector n = [0.26726124 0.53452248 0.80178373]</code></pre>
+</div>
+</div>
+<div id="6a621d94" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If we take length of vector n, we'll get 1</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The length of vector n is:"</span>, np.linalg.norm(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The length of vector n is: 1.0</code></pre>
+</div>
+</div>
+</section>
+<section id="scalar-product-of-two-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="scalar-product-of-two-vectors">Scalar Product of Two Vectors</h3>
+<p>Multiplication of two vectors is known as dot product, scalar product, or inner product and is defined by:</p>
+<p><span class="math display">\[
+\langle\, \vec{X},\vec{Y}\rangle~=~\vec{X}\cdot\vec{Y}~=~x_1\times y_1 + x_2\times y_2 + ... + x_n\times y_n~=~\sum_{i=1}^n x_i\cdot y_i
+\]</span></p>
+<p><em>The inner product is defined only when the dimensions of two vectors coincide.</em></p>
+<p>Another formula of inner product is:</p>
+<p><span class="math display">\[
+\vec{X}\cdot\vec{Y}~=~\|\vec{X}\|\cdot\|\vec{Y}\|\cdot\cos{\theta}
+\]</span></p>
+<p>where <span class="math inline">\(\cos{\theta}\)</span> is an angle between the vectors <span class="math inline">\(\vec{X}\)</span> and <span class="math inline">\(\vec{Y}\)</span>.</p>
+<div id="33ff3b03" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It's more convenient to represent the vector as a Numpy ndarray, rather than Python tuple.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.array((<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Numpy have two possible ways to compute vector inner product</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>scalar_prod <span class="op">=</span> np.<span class="bu">sum</span>(X <span class="op">*</span> Y)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>dot_prod <span class="op">=</span> np.dot(X, Y)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Scalar Product is:"</span>, scalar_prod)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dot Product is:"</span>, dot_prod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Scalar Product is: 28
+Dot Product is: 28</code></pre>
+</div>
+</div>
+<div id="5398f937" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute angle between vector X and vector Y</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cosine_theta <span class="op">=</span> np.dot(X, Y) <span class="op">/</span> (np.linalg.norm(X) <span class="op">*</span> np.linalg.norm(Y))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Angle theta</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.arccos(cosine_theta)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cosine theta is:"</span>, cosine_theta)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Angle theta is:"</span>, theta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cosine theta is: 1.0
+Angle theta is: 0.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matrices" class="level2">
+<h2 class="anchored" data-anchor-id="matrices">Matrices</h2>
+<section id="matrices-and-matrix-notation" class="level3">
+<h3 class="anchored" data-anchor-id="matrices-and-matrix-notation">Matrices and Matrix Notation</h3>
+<p>Matrix is a rectangular array of numbers and/or expressions that are arranged into rows and columns. These rows and columns can be considered as row and column vectors. So, the matrix is the rectangular array which contains either row or column vectors. Generally, capital letters are used to denote matrix and lower case letters to denote each element of that matrix and I will follow this convention. A matrix arranges numbers into rows and columns, like this:</p>
+<p><span class="math display">\[
+A =
+\begin{bmatrix}
+a_{1,1} &amp; a_{1,2}\\
+a_{2,1} &amp; a_{2,2}
+\end{bmatrix}
+\]</span></p>
+<p>Here, matrix <span class="math inline">\(A\)</span> has four elements, denoted by lower letter <span class="math inline">\(a\)</span>, where subscripts denote row and column number. For example, <span class="math inline">\(a_{2,1}\)</span> denotes element at the cross of the second row and first column.</p>
+</section>
+<section id="dimension-of-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="dimension-of-matrices">Dimension of Matrices</h3>
+<p>If a matrix <span class="math inline">\(A\)</span> has <span class="math inline">\(n\)</span> rows and <span class="math inline">\(m\)</span> columns, we call <span class="math inline">\(A\)</span> <span class="math inline">\(n\times m\)</span> matrix and it is read as <strong>“n by m matrix”</strong>. A typical <span class="math inline">\(n\times m\)</span> matrix <span class="math inline">\(A\)</span> can be written as:</p>
+<p><span class="math display">\[
+A =
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1m} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2m} \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nm}
+\end{bmatrix}_{n \times m}
+\]</span></p>
+<p>When <span class="math inline">\(n=m\)</span> we have square matrix. To link this matrix to the vector we can rewrite it by the following way:</p>
+<p><span class="math display">\[
+A =
+\begin{bmatrix}
+[a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1m}] \\
+[a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2m}] \\
+[\vdots &amp; \vdots &amp;  &amp; \vdots] \\
+[a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nm}]
+\end{bmatrix}_{n \times m}
+\]</span></p>
+<div id="4ad8933c" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix A is"</span>, A, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Dimensions of A is:"</span>, np.shape(A))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix A is
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+Dimensions of A is: (3, 3)</code></pre>
+</div>
+</div>
+</section>
+<section id="matrix-operations" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-operations">Matrix Operations</h3>
+<p>We add two matrices element-wise. In order this addition to exist, we require that the dimensions of the two matrices coincide. If we have two matrices, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, addition is defined by:</p>
+<p><span class="math display">\[
+A + B =
+\begin{bmatrix}
+a_{11} &amp; \cdots &amp; a_{1m} \\
+\vdots &amp; \vdots &amp; \vdots \\
+a_{n1} &amp; \cdots &amp; a_{nm} \\
+\end{bmatrix} +
+\begin{bmatrix}
+b_{11} &amp; \cdots &amp; b_{1m} \\
+\vdots &amp; \vdots &amp; \vdots \\
+b_{n1} &amp; \cdots &amp; b_{nm} \\
+\end{bmatrix} =
+\begin{bmatrix}
+a_{11} + b_{11} &amp;  \cdots &amp; a_{1m} + b_{1m} \\
+\vdots &amp; \vdots &amp; \vdots \\
+a_{n1} + b_{n1} &amp;  \cdots &amp; a_{nm} + b_{nm} \\
+\end{bmatrix}
+\]</span></p>
+<p>Matrix subtraction is defined in the same fashion as the addition.</p>
+<div id="17895939" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">8</span>], [<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>]])</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>], [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">8</span>], [<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">3</span>]])</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix A is:"</span>, A, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix B is:"</span>, B, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum of them is:"</span>, A <span class="op">+</span> B, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The difference of them is:"</span>, A <span class="op">-</span> B, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix A is:
+[[1 5 3]
+ [4 2 8]
+ [3 6 9]]
+Matrix B is:
+[[1 1 3]
+ [1 2 8]
+ [0 5 3]]
+The sum of them is:
+[[ 2  6  6]
+ [ 5  4 16]
+ [ 3 11 12]]
+The difference of them is:
+[[0 4 0]
+ [3 0 0]
+ [3 1 6]]</code></pre>
+</div>
+</div>
+<p>The negative of a matrix, is just a matrix with the sign of each element reversed:</p>
+<p><span class="math display">\[
+A =
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1m} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2m} \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nm}
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+-A =
+\begin{bmatrix}
+-a_{11} &amp; -a_{12} &amp; \cdots &amp; -a_{1m} \\
+-a_{21} &amp; -a_{22} &amp; \cdots &amp; -a_{2m} \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+-a_{n1} &amp; -a_{n2} &amp; \cdots &amp; -a_{nm}
+\end{bmatrix}
+\]</span></p>
+<div id="9b2c0019" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>]])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix C is:"</span>, C, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The negative of C is:"</span>, <span class="op">-</span>C, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Matrix C is:
+[[-5 -3 -1]
+ [ 1  3  5]]
+The negative of C is:
+[[ 5  3  1]
+ [-1 -3 -5]]</code></pre>
+</div>
+</div>
+<p>Multiplying matrices is a little more complex than the operations we’ve seen so far. There are two cases to consider. One is <em>scalar multiplication</em> (multiplying a matrix by a single number), and second is <em>matrix multiplication</em> (multiplying a matrix by another matrix).</p>
+<p>If we have some scalar or number <span class="math inline">\(\gamma\)</span> and matrix <span class="math inline">\(A\)</span>, scalar multiplication is:</p>
+<p><span class="math display">\[
+\gamma A =
+\gamma
+\begin{bmatrix}
+a_{11} &amp;  \cdots &amp; a_{1m} \\
+\vdots &amp; \vdots  &amp; \vdots \\
+a_{n1} &amp;  \cdots &amp; a_{nm} \\
+\end{bmatrix} =
+\begin{bmatrix}
+\gamma a_{11} &amp; \cdots &amp; \gamma a_{1m} \\
+\vdots &amp; \vdots &amp; \vdots \\
+\gamma a_{n1} &amp; \cdots &amp; \gamma a_{nm} \\
+\end{bmatrix}
+\]</span></p>
+<div id="e698e819" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>scalar <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Scalar is:"</span>, scalar)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix A is:"</span>, A, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matrix multiplied by the scalar is:"</span>, scalar <span class="op">*</span> A, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Scalar is: 2
+Matrix A is:
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+Matrix multiplied by the scalar is:
+[[ 2  4  6]
+ [ 8 10 12]
+ [14 16 18]]</code></pre>
+</div>
+</div>
+<p>To multiply two matrices, we take <strong>inner product of <span class="math inline">\(i\)</span>-th row of the matrix <span class="math inline">\(A\)</span> and <span class="math inline">\(j\)</span>-th columns of matrix <span class="math inline">\(B\)</span></strong>. If we have two matrices <span class="math inline">\(A\)</span> is <span class="math inline">\(n \times k\)</span> and <span class="math inline">\(B\)</span> is <span class="math inline">\(j \times m\)</span>, then to multiply <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, we require <span class="math inline">\(k=j\)</span>, and resulting matrix <span class="math inline">\(AB\)</span> is <span class="math inline">\(n \times m\)</span>.</p>
+<p><span class="math display">\[
+A \cdot B =
+\begin{bmatrix}
+a_{11} &amp; \cdots &amp; a_{1k} \\
+\vdots &amp; \vdots &amp; \vdots \\
+a_{n1} &amp; \cdots &amp; a_{nk} \\
+\end{bmatrix}_{n\times k}
+\cdot
+\begin{bmatrix}
+b_{11} &amp; \cdots &amp; b_{1m} \\
+\vdots &amp; \vdots &amp; \vdots \\
+b_{j1} &amp; \cdots &amp; b_{jm} \\
+\end{bmatrix}_{j \times m}
+= \quad
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+(a_{11} \times b_{11} &amp; +~\cdots~+ &amp; a_{1k} \times b_{j1}),~\cdots~,(a_{11} \times b_{1m} &amp; +~\cdots~+ &amp; a_{1k} \times b_{jm}) \\
+\vdots &amp; \vdots &amp; \vdots \\
+(a_{n1} \times b_{11} &amp; +~\cdots~+ &amp; a_{nk} \times b_{j1}),~\cdots~,(a_{n1} \times b_{1m} &amp; +~\cdots~+ &amp; a_{nk} \times b_{jm})\\
+\end{bmatrix}_{n \times m}
+\]</span></p>
+<p>If you did not catch the idea of matrix multiplication don’t worry. It takes time to get used to it. Below, I will provide a numerical example to make it more clear.</p>
+<blockquote class="blockquote">
+<p><strong>Note</strong> that, in matrix multiplication, <span class="math inline">\(A \cdot B\)</span> is <strong>not</strong> same as <span class="math inline">\(B \cdot A\)</span>.</p>
+</blockquote>
+<div id="4dad6fa0" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In Numpy matrix multiplication can be done with no effort</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">9</span>, <span class="dv">8</span>], [<span class="dv">7</span>, <span class="dv">6</span>], [<span class="dv">5</span>, <span class="dv">4</span>]])</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A * B is:"</span>, np.dot(A, B), sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"B * A is:"</span>, np.dot(B, A), sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A * B is:
+[[ 38  32]
+ [101  86]]
+B * A is:
+[[41 58 75]
+ [31 44 57]
+ [21 30 39]]</code></pre>
+</div>
+</div>
+<p>It’s really easy to multiply a matrix by a matrix in Numpy. Let us see how it can be done by hand.</p>
+<p>Let’s look at an example:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+9 &amp; 8 \\ 7 &amp; 6 \\ 5 &amp; 4
+\end{bmatrix}
+\]</span></p>
+<p>Note that the first matrix is <span class="math inline">\(2\times 3\)</span>, and the second matrix is <span class="math inline">\(3\times 2\)</span>. The important thing here is that the first matrix has two rows, and the second matrix has two columns. To perform the multiplication, we first take the dot product of the first <strong><em>row</em></strong> of the first matrix (1,2,3) and the first <strong><em>column</em></strong> of the second matrix (9,7,5):</p>
+<p><span class="math display">\[
+(1,2,3)
+\cdot
+(9,7,5) =
+(1 \times 9) + (2 \times 7) + (3 \times 5) = 38
+\]</span></p>
+<p>In our resulting matrix (which will always have the same number of <strong><em>rows</em></strong> as the first matrix, and the same number of <strong><em>columns</em></strong> as the second matrix), we can enter this into the first row and first column element:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+38 &amp; ?\\? &amp; ?
+\end{bmatrix}
+\]</span></p>
+<p>Now we can take the dot product of the first row of the first matrix and the second column of the second matrix:</p>
+<p><span class="math display">\[
+(1,2,3) \cdot (8,6,4) = (1 \times 8) + (2 \times 6) + (3 \times 4) = 32
+\]</span></p>
+<p>Let’s add that to our resulting matrix in the first row and second column element:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+38 &amp; 32\\? &amp; ?
+\end{bmatrix}
+\]</span></p>
+<p>Now we can repeat this process for the second row of the first matrix and the first column of the second matrix:</p>
+<p><span class="math display">\[
+(4,5,6) \cdot (9,7,5) = (4 \times 9) + (5 \times 7) + (6 \times 5) = 101
+\]</span></p>
+<p>Which fills in the next element in the result:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+38 &amp; 32\\101 &amp; ?
+\end{bmatrix}
+\]</span></p>
+<p>Finally, we get the dot product for the second row of the first matrix and the second column of the second matrix:</p>
+<p><span class="math display">\[
+(4,5,6) \cdot (8,6,4) = (4 \times 8) + (5 \times 6) + (6 \times 4) = 86
+\]</span></p>
+<p>Giving us:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+38 &amp; 32\\101 &amp; 86
+\end{bmatrix}
+\]</span></p>
+<p>If this is not enough to catch the idea, take a look this <a href="https://www.mathsisfun.com/algebra/matrix-multiplying.html">explanation</a></p>
+</section>
+<section id="matrix-transpose" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-transpose">Matrix Transpose</h3>
+<p>In the above example, we saw that the matrix is the collection of vectors. We also know that vectors can be horizontal as well as vertical, or row and column vectors. Now, what if we change in any matrix row vectors into column vectors? This operation is known as transposition. The idea of this operation is to change matrix rows into matrix columns or vice versa, and is denoted by the superscript <span class="math inline">\(T\)</span>.</p>
+<p><span class="math display">\[
+A =
+\begin{bmatrix}
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1m} \\
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2m} \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nm}
+\end{bmatrix}_{n \times m}
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+A^{T} =
+\begin{bmatrix}
+a_{11} &amp; a_{21} &amp; \cdots &amp; a_{n1} \\
+a_{12} &amp; a_{22} &amp; \cdots &amp; a_{n2} \\
+\vdots &amp; \vdots &amp;  &amp; \vdots \\
+a_{1m} &amp; a_{2m} &amp; \cdots &amp; a_{nm}
+\end{bmatrix}_{m \times n}
+\]</span></p>
+<div id="983be4fd" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Matix A is:"</span>, A, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Transpose of A is:"</span>, A.T, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Matix A is:
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+Transpose of A is:
+[[1 4 7]
+ [2 5 8]
+ [3 6 9]]</code></pre>
+</div>
+</div>
+</section>
+<section id="identity-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="identity-matrix">Identity Matrix</h3>
+<p>There are several different types of matrices. In this post, we will introduce only <strong>identity matix</strong>. Future post will introduce other types of matrices. An identity matrix (usually indicated by a capital <span class="math inline">\(I\)</span>) is the equivalent in matrix terms of the number 1. It is always square matrix, and it has the value <strong>1</strong> in the diagonal element positions I<sub>1,1</sub>, I<sub>2,2</sub>, etc; and 0 in all other element positions. Here’s an example of a <span class="math inline">\(3 \times 3\)</span> identity matrix:</p>
+<p><span class="math display">\[
+I =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{bmatrix}_{3 \times 3}
+\]</span></p>
+<p>Multiplying any matrix by an identity matrix is the same as multiplying a number by 1; the result is the same as the original value.</p>
+<div id="670d005d" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We have two ways to define identity matrix in Numpy.</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First is to define by hand, like above examples, and second is to use Numpy's buildin function</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>I_1 <span class="op">=</span> np.array([[<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>], [<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>], [<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>]])</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>I_2 <span class="op">=</span> np.identity(<span class="dv">3</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(I_1)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(I_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]</code></pre>
+</div>
+</div>
+<div id="370cc356" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix identity multiplication</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.identity(<span class="dv">3</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A = "</span>, A, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"A * I = "</span>, np.dot(A, I), sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A = 
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+A * I = 
+[[1. 2. 3.]
+ [4. 5. 6.]
+ [7. 8. 9.]]</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this post, I tried to cover the basics of linear algebra. I depicted some theory with examples solved by hand as well as with Numpy. I do hope, this blog will help you to grab the necessary knowledge in linear algebra basics and further gives you the direction where to dig deeper. I did not provide here further resources not to confuse the reader and give freedom to look for some other materials.</p>
+<section id="references" class="level4">
+<h4 class="anchored" data-anchor-id="references">References</h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Vector_(mathematics_and_physics)">Vector</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)">Matrix</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/okrodata\.dev");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "Okroshiashvili/okrodata";
+    script.dataset.repoId = "R_kgDOPtLDxQ";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "bottom";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2025, Nodar Okroshiashvili</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

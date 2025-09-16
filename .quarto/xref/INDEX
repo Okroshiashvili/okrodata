@@ -1,0 +1,98 @@
+{
+  "posts/general/information_theory.qmd": {
+    "information_theory.html": "81746741"
+  },
+  "posts/mathematics/taylor_series_expansion.qmd": {
+    "taylor_series_expansion.html": "7bd87644"
+  },
+  "posts/mathematics/linear_algebra_2.qmd": {
+    "linear_algebra_2.html": "197752f8"
+  },
+  "posts/mathematics/linear_algebra_3.qmd": {
+    "linear_algebra_3.html": "612bfb66"
+  },
+  "posts/mathematics/linear_algebra_1.qmd": {
+    "linear_algebra_1.html": "6b415461"
+  },
+  "posts/mathematics/linear_algebra_4.qmd": {
+    "linear_algebra_4.html": "bc3a677e"
+  },
+  "posts/mathematics/linear_algebra_5.qmd": {
+    "linear_algebra_5.html": "c83ac1c8"
+  },
+  "posts/mathematics/linear_algebra_6.qmd": {
+    "linear_algebra_6.html": "50f66ff1"
+  },
+  "posts/mathematics/integer_sequences.qmd": {
+    "integer_sequences.html": "cfef9635"
+  },
+  "posts/time_series_analysis/singular_spectrum_analysis.qmd": {
+    "singular_spectrum_analysis.html": "89398ff2"
+  },
+  "posts/python_was_BACKUP/mathematics/earth_movers_distance.qmd": {
+    "earth_movers_distance.html": "45b6dc80"
+  },
+  "posts/python_was_BACKUP/natural_language_processing/ts_ss.qmd": {
+    "ts_ss.html": "fbcc7879"
+  },
+  "posts/python_was_BACKUP/did_you_know/startswith_OR_condition.qmd": {
+    "startswith_OR_condition.html": "a1560846"
+  },
+  "posts/python_was_BACKUP/did_you_know/remove_duplicates_from_list.qmd": {
+    "remove_duplicates_from_list.html": "514bf2ec"
+  },
+  "posts/python_was_BACKUP/did_you_know/partition_all.qmd": {
+    "partition_all.html": "ec0c233a"
+  },
+  "posts/python_was_BACKUP/did_you_know/flatten_iterable.qmd": {
+    "flatten_iterable.html": "17bd4f06"
+  },
+  "posts/python_was_BACKUP/did_you_know/remove_duplicates_from_list_of_tuples.qmd": {
+    "remove_duplicates_from_list_of_tuples.html": "5d4fdc3d"
+  },
+  "posts/python_was_BACKUP/did_you_know/data_validators.qmd": {
+    "data_validators.html": "210c4ddf"
+  },
+  "posts/python_was_BACKUP/did_you_know/sort_list_of_dicts_by_value_length.qmd": {
+    "sort_list_of_dicts_by_value_length.html": "26d4ce89"
+  },
+  "posts/python_was_BACKUP/did_you_know/remove_duplicates_from_list_of_lists.qmd": {
+    "remove_duplicates_from_list_of_lists.html": "5b455b7e"
+  },
+  "posts/python_was_BACKUP/did_you_know/generate_random_dates.qmd": {
+    "generate_random_dates.html": "19701c23"
+  },
+  "posts/economics/single_market_economy.qmd": {
+    "single_market_economy.html": "0d294ac6"
+  },
+  "posts/pandas/pandas_tips_and_tricks_4.qmd": {
+    "pandas_tips_and_tricks_4.html": "17352006"
+  },
+  "posts/pandas/pandas_tips_and_tricks_3.qmd": {
+    "pandas_tips_and_tricks_3.html": "937a0c8e"
+  },
+  "posts/pandas/pandas_tips_and_tricks_2.qmd": {
+    "pandas_tips_and_tricks_2.html": "cf017487"
+  },
+  "posts/pandas/pandas_tips_and_tricks_1.qmd": {
+    "pandas_tips_and_tricks_1.html": "aed16eee"
+  },
+  "open_source.qmd": {
+    "open_source.html": "f8f887a7"
+  },
+  "404.qmd": {
+    "404.html": "dd428c32"
+  },
+  "index.qmd": {
+    "index.html": "a9efdeef"
+  },
+  "about.qmd": {
+    "about.html": "e48cf8e7"
+  },
+  "templates/template.qmd": {
+    "template.html": "49198d7c"
+  },
+  "blog.qmd": {
+    "blog.html": "84df4bd0"
+  }
+}
