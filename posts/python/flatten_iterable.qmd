@@ -3,12 +3,11 @@ title: "My Post"
 description: "Post description"
 author: "Fizz McPhee"
 date: "5/22/2021"
-draft: true
 ---
 
 
 
-
+This is a test post.
 
 ამისი კოდი snippet-ებში მაქვს
 

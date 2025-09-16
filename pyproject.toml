@@ -22,5 +22,5 @@ dev = ["poethepoet>=0.37.0"]
 # Poe tasks
 [tool.poe.tasks]
 preview = "quarto preview"
-render = "quarto render"
-publish = "quarto publish"
+build = "quarto render"
+publish = "quarto publish gh-pages"
