@@ -1,0 +1,23 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/time_series_analysis/singular_spectrum_analysis.html",
+      "/posts/python/flatten_iterable.html",
+      "/posts/mathematics/linear_algebra_6.html",
+      "/posts/mathematics/linear_algebra_5.html",
+      "/posts/mathematics/linear_algebra_4.html",
+      "/posts/mathematics/linear_algebra_3.html",
+      "/posts/mathematics/linear_algebra_2.html",
+      "/posts/mathematics/linear_algebra_1.html",
+      "/posts/mathematics/integer_sequences.html",
+      "/posts/mathematics/taylor_series_expansion.html",
+      "/posts/general/information_theory.html",
+      "/posts/pandas/pandas_tips_and_tricks_4.html",
+      "/posts/pandas/pandas_tips_and_tricks_3.html",
+      "/posts/pandas/pandas_tips_and_tricks_2.html",
+      "/posts/pandas/pandas_tips_and_tricks_1.html",
+      "/posts/economics/single_market_economy.html"
+    ]
+  }
+]
