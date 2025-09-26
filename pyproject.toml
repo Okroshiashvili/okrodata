@@ -8,10 +8,13 @@ requires-python = ">=3.13"
 
 dependencies = [
     "jupyter>=1.1.1",
+    "loguru>=0.7.3",
     "matplotlib>=3.10.6",
     "numpy>=2.3.3",
+    "pydantic[email,timezone]>=2.11.9",
     "scipy>=1.16.2",
     "seaborn>=0.13.2",
+    "structlog>=25.4.0",
     "sympy>=1.14.0",
 ]
 
