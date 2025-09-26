@@ -10,6 +10,7 @@ execute:
   freeze: auto
 code-fold: true
 image: "image.jpg"
+draft: true
 ---
 
 ## Introduction
