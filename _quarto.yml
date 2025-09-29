@@ -9,6 +9,7 @@ website:
   favicon: assets/favicon.ico
   page-footer: "Copyright 2025, Nodar Okroshiashvili"
   site-url: https://okrodata.dev
+  open-graph: true
   search:
     location: navbar
     type: textbox
