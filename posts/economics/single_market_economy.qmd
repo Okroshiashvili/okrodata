@@ -11,8 +11,7 @@ categories:
 tags: [Economics, Python, Demand and Supply, Economic Modeling]
 
 abstract: |
-  Implementation of one good market economy in Python, where supply and demand are linear functions of price
-  and agents of this economy are price takers.
+  Implementation of one good market economy in Python, where supply and demand are linear functions of price and agents of this economy are price takers.
 
 image: "image.jpg"
 ---
