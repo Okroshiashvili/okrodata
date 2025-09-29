@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2019-06-16">
-<meta name="keywords" content="economics, economic modeling, macroeconomics and python, computational macroeconomics with python, single good market, supply, demand, consumer surplus, producer surplus, python, equilibrium price">
 
 <title>Modeling Single Good Market</title>
 <style>
@@ -138,6 +137,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Modeling Single Good Market">
+<meta property="og:description" content="Implementation of one good market economy in Python, where supply and demand are linear functions of price and agents of this economy are price takers.">
+<meta property="og:image" content="https://okrodata.dev/posts/economics/image.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -198,6 +200,7 @@ window.Quarto = {
       <h1 class="title">Modeling Single Good Market</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Economics</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -219,14 +222,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 26, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>economics, economic modeling, macroeconomics and python, computational macroeconomics with python, single good market, supply, demand, consumer surplus, producer surplus, python, equilibrium price</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Implementation of one good market economy in Python, where supply and demand are linear functions of price and agents of this economy are price takers.</p>
     </div>
   </div>
   
@@ -345,51 +353,56 @@ p(Q) =
 \]</span></p>
 <p>Consumer surplus is the area under inverse demand function and producer surplus is the area above inverse supply function. This may not be clear but after plotting demand and supply curves it will be understandable, what is consumer and producer surplus and how to calculate them. For general sense, we need integrals of inverse demand and supply functions to calculate surplus. See the <a href="https://en.wikipedia.org/wiki/Economic_surplus#Calculation">link</a> for more information.</p>
 <p>As we have all the necessary information and equations, we can start to code these equations in Python. I’m going to write a simple Python class, which will calculate equilibrium price and quantity, consumer and producer surplus.</p>
-<div id="5fd7479e" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> quad</span>
+<div id="f74f1207" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> PathPatch</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.path <span class="im">import</span> Path</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> PathPatch</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> quad</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6e7a3b0b" class="cell" data-execution_count="2">
+<div id="7a33ed05" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Market:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a, b, c, d):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.a <span class="op">=</span> a</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> b</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.c <span class="op">=</span> c</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.d <span class="op">=</span> d</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&lt;</span> c:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Insufficient demand!"</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> price(<span class="va">self</span>):</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Returns equilibrium price"""</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">-</span> <span class="va">self</span>.c) <span class="op">/</span> (<span class="va">self</span>.d <span class="op">+</span> <span class="va">self</span>.b)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> quantity(<span class="va">self</span>):</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Returns equilibrium quantity"""</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.a <span class="op">-</span> <span class="va">self</span>.b <span class="op">*</span> <span class="va">self</span>.price()</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> inverse_demand(<span class="va">self</span>, x):</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">-</span> x) <span class="op">/</span> <span class="va">self</span>.b</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> inverse_supply(<span class="va">self</span>, x):</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (x <span class="op">-</span> <span class="va">self</span>.c) <span class="op">/</span> <span class="va">self</span>.d</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> consumer_surplus(<span class="va">self</span>):</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        integrand <span class="op">=</span> <span class="kw">lambda</span> x: (<span class="va">self</span>.a <span class="op">-</span> x) <span class="op">/</span> <span class="va">self</span>.b</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        area, error <span class="op">=</span> quad(integrand, <span class="dv">0</span>, <span class="va">self</span>.quantity())</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> area <span class="op">-</span> <span class="va">self</span>.price() <span class="op">*</span> <span class="va">self</span>.quantity()</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> producer_surplus(<span class="va">self</span>):</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        integrand <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">-</span> <span class="va">self</span>.c) <span class="op">/</span> <span class="va">self</span>.d</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        area, error <span class="op">=</span> quad(integrand, <span class="dv">0</span>, <span class="va">self</span>.quantity())</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.price() <span class="op">*</span> <span class="va">self</span>.quantity() <span class="op">-</span> area</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""A class to model a single good market with linear demand and supply functions."""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, a, b, c, d):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.a <span class="op">=</span> a</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.b <span class="op">=</span> b</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.c <span class="op">=</span> c</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.d <span class="op">=</span> d</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a <span class="op">&lt;</span> c:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Insufficient demand!"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> price(<span class="va">self</span>):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Returns equilibrium price"""</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">-</span> <span class="va">self</span>.c) <span class="op">/</span> (<span class="va">self</span>.d <span class="op">+</span> <span class="va">self</span>.b)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> quantity(<span class="va">self</span>):</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Returns equilibrium quantity"""</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.a <span class="op">-</span> <span class="va">self</span>.b <span class="op">*</span> <span class="va">self</span>.price()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> inverse_demand(<span class="va">self</span>, x):</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Inverse demand function."""</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">-</span> x) <span class="op">/</span> <span class="va">self</span>.b</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> inverse_supply(<span class="va">self</span>, x):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Inverse supply function."""</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (x <span class="op">-</span> <span class="va">self</span>.c) <span class="op">/</span> <span class="va">self</span>.d</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> consumer_surplus(<span class="va">self</span>):</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculates consumer surplus."""</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        integrand <span class="op">=</span> <span class="kw">lambda</span> x: (<span class="va">self</span>.a <span class="op">-</span> x) <span class="op">/</span> <span class="va">self</span>.b</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        area, error <span class="op">=</span> quad(integrand, <span class="dv">0</span>, <span class="va">self</span>.quantity())</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> area <span class="op">-</span> <span class="va">self</span>.price() <span class="op">*</span> <span class="va">self</span>.quantity()</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> producer_surplus(<span class="va">self</span>):</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculates producer surplus."""</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        integrand <span class="op">=</span> <span class="kw">lambda</span> x: (x <span class="op">-</span> <span class="va">self</span>.c) <span class="op">/</span> <span class="va">self</span>.d</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        area, error <span class="op">=</span> quad(integrand, <span class="dv">0</span>, <span class="va">self</span>.quantity())</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.price() <span class="op">*</span> <span class="va">self</span>.quantity() <span class="op">-</span> area</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let, test our model with some base line parameters.</p>
-<div id="7ae9fccc" class="cell" data-execution_count="3">
+<div id="311d90ce" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">15</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">0.5</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="op">-</span><span class="dv">2</span></span>
@@ -397,7 +410,7 @@ p(Q) =
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> Market(a, b, c, d)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f53b0745" class="cell" data-execution_count="4">
+<div id="7ef44d67" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Equilibrium Price = "</span>, m.price())</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Equilibrium Quantity = "</span>, m.quantity())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -405,7 +418,7 @@ p(Q) =
 Equilibrium Quantity =  6.5</code></pre>
 </div>
 </div>
-<div id="a3472688" class="cell" data-execution_count="5">
+<div id="84a42777" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Consumer Surplus ='</span>, m.consumer_surplus())</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Producer Surplus ='</span>, m.producer_surplus())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -414,7 +427,7 @@ Producer Surplus = 42.25</code></pre>
 </div>
 </div>
 <p>Let plot inverse demand and inverse supply curves and shade consumer and producer surplus area.</p>
-<div id="cf236d2c" class="cell" data-execution_count="6">
+<div id="1c10d554" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>q_max <span class="op">=</span> m.quantity() <span class="op">*</span> <span class="dv">2</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>q_grid <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, q_max, <span class="dv">100</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -444,19 +457,19 @@ Producer Surplus = 42.25</code></pre>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="dv">0</span>, <span class="dv">17</span>, <span class="st">"$P^{*}$"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">6.5</span>, <span class="dv">0</span>, <span class="st">"$Q^{*}$"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Quantity"</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Quantity"</span>, labelpad<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, q_max)</span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Price"</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"best"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">"best"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="single_market_economy_files/figure-html/cell-7-output-1.png" width="959" height="509" class="figure-img"></p>
+<p><img src="single_market_economy_files/figure-html/cell-7-output-1.png" width="959" height="527" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>In the above graph, we see the equilibrium point. We can ask the following question. What will happen to the equilibrium price and quantity if demand or supply curve shits? Let make a table and summarize the changes in equilibrium due to changes in supply and demand curve.|</p>
+<p>In the above graph, we see the equilibrium point. We can ask the following question. What will happen to the equilibrium price and quantity if demand or supply curve shits? Let make a table and summarize the changes in equilibrium due to changes in supply and demand curve.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 30%">
@@ -523,7 +536,7 @@ Producer Surplus = 42.25</code></pre>
 <h4 class="anchored" data-anchor-id="references">References</h4>
 <ul>
 <li><a href="https://www.khanacademy.org/economics-finance-domain/microeconomics">Khan Academy</a></li>
-<li><a href="https://lectures.quantecon.org/py/">Quantecon</a></li>
+<li><a href="https://quantecon.org/lectures/">Quantecon</a></li>
 </ul>
 
 

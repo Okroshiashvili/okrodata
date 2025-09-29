@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2020-04-29">
-<meta name="keywords" content="pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas">
 
 <title>Lost in Pandas - Part 4</title>
 <style>
@@ -112,6 +111,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Lost in Pandas - Part 4">
+<meta property="og:description" content="Pandas tips and tricks that I found useful in my data science journey.">
+<meta property="og:image" content="https://okrodata.dev/posts/pandas/image.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -193,14 +195,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 29, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Pandas tips and tricks that I found useful in my data science journey.</p>
     </div>
   </div>
   
@@ -226,10 +233,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>I’ll show how to assign new value for each unique group in Pandas DataFrame.</p>
-<div id="b5f1c715" class="cell" data-execution_count="1">
+<div id="2d593533" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="90901552" class="cell" data-execution_count="2">
+<div id="c3bc30f4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ID"</span>: [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"class"</span>: [<span class="st">"Lower"</span>, <span class="st">"Moderate"</span>, <span class="st">"Moderate"</span>, <span class="st">"Lower"</span>, <span class="st">"High"</span>, <span class="st">"High"</span>, <span class="st">"Lower"</span>]</span>
@@ -238,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -293,13 +300,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now, let assign new values according to <code>class</code> column and then rearrange <code>class</code> column in order to assign new group names.</p>
-<div id="a43b5720" class="cell" data-execution_count="3">
+<div id="75939583" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>value_map <span class="op">=</span> {<span class="st">"Lower"</span>: <span class="dv">33</span>, <span class="st">"Moderate"</span>: <span class="dv">34</span>, <span class="st">"High"</span>: <span class="dv">40</span>}</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"new"</span>] <span class="op">=</span> df[<span class="st">"class"</span>].<span class="bu">map</span>(value_map)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -361,13 +368,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="71342287" class="cell" data-execution_count="4">
+<div id="5e8363e0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Max"</span>] <span class="op">=</span> (df.set_index(<span class="st">"class"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                .groupby(<span class="st">"ID"</span>)[<span class="st">"new"</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                .transform(<span class="st">"idxmax"</span>).values)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -437,11 +444,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f8b46bfc" class="cell" data-execution_count="5">
+<div id="1fa44032" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Max"</span>] <span class="op">=</span> df[<span class="st">"Max"</span>].mask(df[<span class="st">"ID"</span>].duplicated(), <span class="st">""</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 

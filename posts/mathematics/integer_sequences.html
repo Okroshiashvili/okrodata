@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2020-12-23">
-<meta name="keywords" content="integer sequences with python, number theory, plot sequences in python, mathematical plotting in python, fibonacci sequence in python, factorial in python">
 
 <title>Integer Sequences in Python</title>
 <style>
@@ -138,6 +137,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Integer Sequences in Python">
+<meta property="og:description" content="This post reviews some famous integer sequences with Python.">
+<meta property="og:image" content="https://okrodata.dev/posts/mathematics/sequences.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -198,6 +200,7 @@ window.Quarto = {
       <h1 class="title">Integer Sequences in Python</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Mathematics</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -219,14 +222,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 30, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>integer sequences with python, number theory, plot sequences in python, mathematical plotting in python, fibonacci sequence in python, factorial in python</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>This post reviews some famous integer sequences with Python.</p>
     </div>
   </div>
   
@@ -260,16 +268,16 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>In this article, I want to review some integer sequences from <a href="https://en.wikipedia.org/wiki/Number_theory">number theory</a>. Particularly, I will review their mathematical formulation, then will write Python functions for them and later on generate sequences to visualize them.</p>
+<p>In this article, I want to review some integer sequences from <a href="https://en.wikipedia.org/wiki/Number_theory">number theory</a>. Particularly, I will review their mathematical formulation, then will implement them in Python and visualize.</p>
 <p>In short, <strong>integer sequence</strong> is an ordered list of integers. Generally, in mathematics, the sequence is a collection of objects, where repetition is allowed, and object order does not matter. The number of objects a.k.a elements is the length of the sequence. The sequence can be finite or infinite, increasing or decreasing, convergent or divergent, bounded or unbounded.</p>
 <p>A sequence generally has a <strong>rule</strong>, which indicates how we can find the value of each element. An integer sequence can be declared either by the formula for its <span class="math inline">\(n^{th}\)</span> element, or by giving the relationship between its elements. Moreover, sequences have the initial condition, which gives us the value of the first few terms of the sequence.</p>
-<div id="64bfb3f7" class="cell" data-execution_count="1">
+<div id="9e9d802a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c50e9a99" class="cell" data-execution_count="2">
+<div id="b802c1ee" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_sequence(sequence, x_range, title, x_label, y_label):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Plot a sequence of integers.</span></span>
@@ -293,7 +301,7 @@ window.Quarto = {
 <p>Let first review the well-known <strong><a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci Sequence</a></strong>. In the sequence each element is the sum of the two preceding elements starting from <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. The sequence is commonly denoted by <span class="math inline">\(F_{n}\)</span> and the initial condition is given as: <span class="math inline">\(F_{0} = 0\)</span> and <span class="math inline">\(F_{1} = 1\)</span>. The general formula is: <span class="math display">\[
 F_{n} = F_{n-1} + F_{n - 2} \ \ \ \ \ \ \ \ \text{for} \ n &gt; 1
 \]</span></p>
-<div id="a4be1402" class="cell" data-execution_count="3">
+<div id="38ec36a2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
@@ -302,7 +310,7 @@ F_{n} = F_{n-1} + F_{n - 2} \ \ \ \ \ \ \ \ \text{for} \ n &gt; 1
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> fibonacci(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fibonacci(n <span class="op">-</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9b9a6b9e" class="cell" data-execution_count="4">
+<div id="4740903d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fibonacci_sequence <span class="op">=</span> [fibonacci(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">7</span>)]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fibonacci_sequence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -310,7 +318,7 @@ F_{n} = F_{n-1} + F_{n - 2} \ \ \ \ \ \ \ \ \text{for} \ n &gt; 1
 <pre><code>[0, 1, 1, 2, 3, 5, 8]</code></pre>
 </div>
 </div>
-<div id="934d7109" class="cell" data-execution_count="5">
+<div id="1e395a47" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plot_sequence(fibonacci_sequence, <span class="dv">7</span>, <span class="st">"Fibonacci Sequence"</span>, <span class="st">"n"</span>, <span class="st">"Fibonacci(n)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -327,14 +335,14 @@ F_{n} = F_{n-1} + F_{n - 2} \ \ \ \ \ \ \ \ \text{for} \ n &gt; 1
 n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1
 \]</span></p>
 <p>For integers <span class="math inline">\(n \geq 1\)</span> we have the following formula: <span class="math inline">\(n! = \prod_{i=1}^{n} i\)</span>, which leads us to the following reccurence relation: <span class="math inline">\(n! = n \cdot (n-1)!\)</span>. The initial condition is that <span class="math inline">\(n!=1\)</span> for <span class="math inline">\(n\)</span> equal to 1 and 0.</p>
-<div id="60598aa2" class="cell" data-execution_count="6">
+<div id="2cdf5179" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n <span class="op">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="39fa5f35" class="cell" data-execution_count="7">
+<div id="f28ea1cd" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>factorial_sequence <span class="op">=</span> [factorial(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>factorial_sequence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -342,7 +350,7 @@ n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1
 <pre><code>[1, 1, 2, 6, 24, 120]</code></pre>
 </div>
 </div>
-<div id="d0db4929" class="cell" data-execution_count="8">
+<div id="3dc1a80d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plot_sequence(factorial_sequence, <span class="dv">6</span>, <span class="st">"Factorial Sequence"</span>, <span class="st">"n"</span>, <span class="st">"Factorial(n)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -358,14 +366,14 @@ n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1
 <p><strong><a href="https://en.wikipedia.org/wiki/Padovan_sequence">Padovan Sequence</a></strong> is the sequence of integers with initial value given by: <span class="math inline">\(P(0) = P(1) = P(2) = 1\)</span>. The recurrence relation is defined by <span class="math display">\[
 P(n) = P(n - 2) + P(n - 3)
 \]</span></p>
-<div id="31607010" class="cell" data-execution_count="9">
+<div id="db3b8e89" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> padovan(n):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">3</span>:</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> padovan(n <span class="op">-</span> <span class="dv">2</span>) <span class="op">+</span> padovan(n <span class="op">-</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="980ba972" class="cell" data-execution_count="10">
+<div id="91e103ca" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>padovan_sequence <span class="op">=</span> [padovan(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>padovan_sequence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -373,7 +381,7 @@ P(n) = P(n - 2) + P(n - 3)
 <pre><code>[1, 1, 1, 2, 2, 3]</code></pre>
 </div>
 </div>
-<div id="9e06b010" class="cell" data-execution_count="11">
+<div id="15001b1d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plot_sequence(padovan_sequence, <span class="dv">6</span>, <span class="st">"Padovan Sequence"</span>, <span class="st">"n"</span>, <span class="st">"Padovan(n)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -389,7 +397,7 @@ P(n) = P(n - 2) + P(n - 3)
 <p>The reccurent formula for <strong><a href="https://en.wikipedia.org/wiki/Perrin_number">Perrin Sequence</a></strong> with initial values <span class="math inline">\(P(0) = 3\)</span>, <span class="math inline">\(P(1) = 0\)</span>, and <span class="math inline">\(P(2) = 2\)</span> is defined by <span class="math display">\[
 P(n) = P(n - 2) + P(n - 3)
 \]</span></p>
-<div id="d019329b" class="cell" data-execution_count="12">
+<div id="6760d5b3" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> perrin(n):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">3</span></span>
@@ -400,7 +408,7 @@ P(n) = P(n - 2) + P(n - 3)
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> perrin(n <span class="op">-</span> <span class="dv">2</span>) <span class="op">+</span> perrin(n <span class="op">-</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="2560c9b3" class="cell" data-execution_count="13">
+<div id="dd811cc9" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>perrin_sequence <span class="op">=</span> [perrin(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>)]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>perrin_sequence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -408,7 +416,7 @@ P(n) = P(n - 2) + P(n - 3)
 <pre><code>[3, 0, 2, 3, 2, 5, 5, 7, 10]</code></pre>
 </div>
 </div>
-<div id="8ce10b93" class="cell" data-execution_count="14">
+<div id="8f4e3e67" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot_sequence(perrin_sequence, <span class="dv">9</span>, <span class="st">"Perrin Sequence"</span>, <span class="st">"n"</span>, <span class="st">"Perrin(n)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -427,14 +435,14 @@ S_{n} = 1 + \prod_{i=0}^{n-1} s_{i}
 <p>Rewriting it into recurrence formula, gives: <span class="math display">\[
 S_{i} = S_{i-1}\cdot(S_{i-1} - 1) + 1
 \]</span></p>
-<div id="9c646f88" class="cell" data-execution_count="15">
+<div id="11b361de" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sylvester(n):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sylvester(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> (sylvester(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="06a07494" class="cell" data-execution_count="16">
+<div id="db9dcb8f" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sylvester_sequence <span class="op">=</span> [sylvester(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sylvester_sequence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -442,7 +450,7 @@ S_{i} = S_{i-1}\cdot(S_{i-1} - 1) + 1
 <pre><code>[2, 3, 7, 43, 1807]</code></pre>
 </div>
 </div>
-<div id="801cc9b6" class="cell" data-execution_count="17">
+<div id="840d20f1" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot_sequence(sylvester_sequence, <span class="dv">5</span>, <span class="st">"Sylvester Sequence"</span>, <span class="st">"n"</span>, <span class="st">"Sylvester(n)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -462,11 +470,11 @@ F_{n} = 2^{2^{n}} + 1
 F_{n} = (F_{n-1} - 1)^{2} + 1
 \]</span></p>
 <p>Note that, both formulae are valid. However, I use the first to implement it in Python.</p>
-<div id="8795a13c" class="cell" data-execution_count="18">
+<div id="fd9451dd" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fermat(n):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span> <span class="op">**</span> (<span class="dv">2</span><span class="op">**</span>n) <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c3226149" class="cell" data-execution_count="19">
+<div id="66ee2d20" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fermat_sequence <span class="op">=</span> [fermat(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fermat_sequence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -474,7 +482,7 @@ F_{n} = (F_{n-1} - 1)^{2} + 1
 <pre><code>[3, 5, 17, 257, 65537, 4294967297]</code></pre>
 </div>
 </div>
-<div id="2b3122f4" class="cell" data-execution_count="20">
+<div id="4e484aa2" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plot_sequence(fermat_sequence, <span class="dv">6</span>, <span class="st">"Fermat Sequence"</span>, <span class="st">"n"</span>, <span class="st">"Fermat(n)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>

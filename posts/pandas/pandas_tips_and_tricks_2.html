@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2020-04-14">
-<meta name="keywords" content="pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas">
 
 <title>Lost in Pandas - Part 2</title>
 <style>
@@ -112,6 +111,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Lost in Pandas - Part 2">
+<meta property="og:description" content="Pandas tips and tricks that I found useful in my data science journey.">
+<meta property="og:image" content="https://okrodata.dev/posts/pandas/image.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -193,14 +195,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 29, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>pandas, python, data analysis, pandas tips and tricks, advance pandas, data transformation in pandas</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Pandas tips and tricks that I found useful in my data science journey.</p>
     </div>
   </div>
   
@@ -232,11 +239,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="problem-statement" class="level2">
 <h2 class="anchored" data-anchor-id="problem-statement">Problem Statement</h2>
 <p>How can we perform <code>groupby</code> and fill <code>Nan</code>’s with its preceding and following values?</p>
-<div id="6c2c9377" class="cell" data-execution_count="1">
+<div id="92450c95" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6705a759" class="cell" data-execution_count="2">
+<div id="5d67c441" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"type"</span>: [</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"a"</span>,</span>
@@ -323,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We see that values in <code>type</code> and <code>date</code> column are repetitive. Moreover, it does not matter what values are in other two columns, unless it is numeric type. Our aim is to fill these missing values by the average of its before and after value for <code>v1</code> and <code>v2</code> columns. We also notice that sorting and then filling won’t give desired result. We need something different. But before we find that solution we need to convert columns in numeric type in order to compute average by using Pandas <code>to_numeric()</code> method with parameter “errors” set to “coerce”, because Pandas DataFrame <code>astype()</code> method won’t work in this case.</p>
 <p>We have two solution here. To use both of them let make copy of initial dataframe. The first uses <code>groupby</code> and then applies aggregator with “backward fill” and “forward fill” and then again <code>groupby</code> and then computes mean. The second solution does almost the same as the first but uses <code>apply()</code> method instead of aggregation.</p>
-<div id="4ba63fcd" class="cell" data-execution_count="3">
+<div id="c7eaf22b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The first solution</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_first <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
@@ -335,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>df_first</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/mz/3thvm62j52l8lpr5sllrt6rh0000gn/T/ipykernel_21906/1351098040.py:7: FutureWarning: DataFrame.groupby with axis=1 is deprecated. Do `frame.T.groupby(...)` without axis instead.
+<pre><code>/var/folders/mz/3thvm62j52l8lpr5sllrt6rh0000gn/T/ipykernel_82975/1351098040.py:7: FutureWarning: DataFrame.groupby with axis=1 is deprecated. Do `frame.T.groupby(...)` without axis instead.
   .groupby(level=0, axis=1)</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -569,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="7d51ae2c" class="cell" data-execution_count="4">
+<div id="dabf98b1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The second solution</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_second <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
@@ -814,7 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Above two methods gave us desirable results. Let try some plain method to achieve the same. Below is the dry, plain method which fill missing values by backward and forward average. However by using this we introduce bug which will be hard to detect. Let see.</p>
-<div id="54ef4418" class="cell" data-execution_count="5">
+<div id="c7b2c8c2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The third method</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_third <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
@@ -1056,7 +1063,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>At the first glance everything seems ok, but let check the equality of these three dataframes with double equality sign and <code>all</code> method.</p>
-<div id="23fa47cf" class="cell" data-execution_count="6">
+<div id="35a6c918" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_first <span class="op">==</span> df_second</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The result of the first and the second method are equal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1291,7 +1298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f60730ce" class="cell" data-execution_count="7">
+<div id="7d4240d8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_third <span class="op">==</span> df_first</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -1525,7 +1532,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>At index position 13 and 14 we have <code>False</code> values. That was the reason of inequality. But why do we have these <code>False</code> values? The dry plain method calculated the average of non-missing values sequentially not by <code>type</code>. At index 13 and 14 the average is 50 not 55, because the third method calculated the average between 50 and 60 instead of 50 and NaN. That resulted the bug!</p>
-<div id="a63ab31c" class="cell" data-execution_count="8">
+<div id="e65f47ea" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">12</span>:<span class="dv">16</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -1576,7 +1583,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="ec9beb16" class="cell" data-execution_count="9">
+<div id="1a31dc06" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_first.iloc[<span class="dv">12</span>:<span class="dv">16</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -1627,7 +1634,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="9489098a" class="cell" data-execution_count="10">
+<div id="be9d4173" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_third.iloc[<span class="dv">12</span>:<span class="dv">16</span>]  <span class="co"># Not Correct</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>

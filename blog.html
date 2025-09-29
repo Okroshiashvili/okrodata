@@ -80,9 +80,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -131,6 +131,8 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Okro Data">
+<meta property="og:image" content="https://okrodata.dev/posts/mathematics/sequences.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -206,7 +208,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(16)</span></div><div class="category" data-category="RGF0YSUyMFNjaWVuY2U=">Data Science <span class="quarto-category-count">(4)</span></div><div class="category" data-category="RWNvbm9taWNz">Economics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2VuZXJhbA==">General <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWF0aGVtYXRpY3M=">Mathematics <span class="quarto-category-count">(8)</span></div><div class="category" data-category="VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz">Time Series Analysis <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(16)</span></div><div class="category" data-category="RGF0YSUyMFNjaWVuY2U=">Data Science <span class="quarto-category-count">(4)</span></div><div class="category" data-category="RWNvbm9taWNz">Economics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2VuZXJhbA==">General <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWF0aGVtYXRpY3M=">Mathematics <span class="quarto-category-count">(8)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(4)</span></div><div class="category" data-category="VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz">Time Series Analysis <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -218,7 +220,7 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
@@ -240,433 +242,489 @@ window.Quarto = {
     </select>
   </div>
 </div>
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz" data-listing-date-sort="1628539200000" data-listing-file-modified-sort="1758022154475" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1511">
-<a href="./posts/time_series_analysis/singular_spectrum_analysis.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/time_series_analysis/singular_spectrum_analysis_files/figure-html/cell-13-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Singular Spectrum Analysis with Python
-</h5>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz" data-listing-date-sort="1628539200000" data-listing-file-modified-sort="1758022154475" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1511">
+<div class="thumbnail"><a href="./posts/time_series_analysis/singular_spectrum_analysis.html" class="no-external">
+
+<p class="card-img-top"><img src="posts/time_series_analysis/singular_spectrum_analysis_files/figure-html/cell-13-output-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/time_series_analysis/singular_spectrum_analysis.html" class="no-external">Singular Spectrum Analysis with Python</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('VGltZSUyMFNlcmllcyUyMEFuYWx5c2lz'); return false;">Time Series Analysis</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/time_series_analysis/singular_spectrum_analysis.html" class="no-external">
 In this article, I will talk about <code>Singular Spectrum Analysis (SSA)</code> and its implementation in Python. For the sake of simplicity, I will use the univariate time series and…
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/time_series_analysis/singular_spectrum_analysis.html" class="no-external">
 <div class="listing-date">
 Aug 10, 2021
 </div>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1621627200000" data-listing-file-modified-sort="1758022154471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
-<a href="./posts/python/flatten_iterable.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-My Post
-</h5>
-<div class="card-text listing-description delink">
-<p>Post description</p>
-</div>
-<div class="card-attribution card-text-small justify">
 <div class="listing-author">
-Fizz McPhee
+Nodar Okroshiashvili
 </div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1621627200000" data-listing-file-modified-sort="1758022154471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="8">
+<div class="thumbnail"><a href="./posts/python/flatten_iterable.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/python/flatten_iterable.html" class="no-external">My Post</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/python/flatten_iterable.html" class="no-external">
+<p>Post description</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/python/flatten_iterable.html" class="no-external">
 <div class="listing-date">
 May 22, 2021
 </div>
+<div class="listing-author">
+Fizz McPhee
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1620849600000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2018">
-<a href="./posts/mathematics/linear_algebra_6.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Advance Linear Algebra with Python - Part II
-</h5>
+<div class="quarto-post image-right" data-index="2" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1620849600000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2018">
+<div class="thumbnail"><a href="./posts/mathematics/linear_algebra_6.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/linear_algebra_6.html" class="no-external">Advance Linear Algebra with Python - Part II</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/mathematics/linear_algebra_6.html" class="no-external">
 This is the <strong>sixth</strong> post in the blog series about linear algebra, solely devoted to various matrix decompositions.
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/linear_algebra_6.html" class="no-external">
 <div class="listing-date">
 May 13, 2021
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="3" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1618948800000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5125">
-<a href="./posts/mathematics/linear_algebra_5.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/mathematics/linear_algebra_5_files/figure-html/cell-4-output-2.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Advance Linear Algebra with Python - Part I
-</h5>
+<div class="quarto-post image-right" data-index="3" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1618948800000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5125">
+<div class="thumbnail"><a href="./posts/mathematics/linear_algebra_5.html" class="no-external">
+
+<p class="card-img-top"><img src="posts/mathematics/linear_algebra_5_files/figure-html/cell-4-output-2.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/linear_algebra_5.html" class="no-external">Advance Linear Algebra with Python - Part I</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/mathematics/linear_algebra_5.html" class="no-external">
 This is the <strong>fifth</strong> post in the blog series about linear algebra, covering advanced vector and matrix operations.
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/linear_algebra_5.html" class="no-external">
 <div class="listing-date">
 Apr 21, 2021
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="4" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1616356800000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5389">
-<a href="./posts/mathematics/linear_algebra_4.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Intermediate Linear Algebra with Python - Part II
-</h5>
+<div class="quarto-post image-right" data-index="4" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1616356800000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5389">
+<div class="thumbnail"><a href="./posts/mathematics/linear_algebra_4.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/linear_algebra_4.html" class="no-external">Intermediate Linear Algebra with Python - Part II</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/mathematics/linear_algebra_4.html" class="no-external">
 This is the <strong>fourth</strong> post in the blog series about linear algebra, covering the matrix and matrix operations.
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/linear_algebra_4.html" class="no-external">
 <div class="listing-date">
 Mar 22, 2021
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="5" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1615924800000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1599">
-<a href="./posts/mathematics/linear_algebra_3.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/mathematics/right_handed.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Intermediate Linear Algebra with Python - Part I
-</h5>
+<div class="quarto-post image-right" data-index="5" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1615924800000" data-listing-file-modified-sort="1758022154469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1599">
+<div class="thumbnail"><a href="./posts/mathematics/linear_algebra_3.html" class="no-external">
+
+<p class="card-img-top"><img src="posts/mathematics/right_handed.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/linear_algebra_3.html" class="no-external">Intermediate Linear Algebra with Python - Part I</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/mathematics/linear_algebra_3.html" class="no-external">
 This is the <strong>third</strong> post in the blog series about linear algebra, covering the vector and vector operations.
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/linear_algebra_3.html" class="no-external">
 <div class="listing-date">
 Mar 17, 2021
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="6" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1614542400000" data-listing-file-modified-sort="1758022154468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3400">
-<a href="./posts/mathematics/linear_algebra_2.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/mathematics/linear_algebra_2_files/figure-html/cell-5-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Basic Linear Algebra with Python
-</h5>
+<div class="quarto-post image-right" data-index="6" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1614542400000" data-listing-file-modified-sort="1758022154468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3400">
+<div class="thumbnail"><a href="./posts/mathematics/linear_algebra_2.html" class="no-external">
+
+<p class="card-img-top"><img src="posts/mathematics/linear_algebra_2_files/figure-html/cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/linear_algebra_2.html" class="no-external">Basic Linear Algebra with Python</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/mathematics/linear_algebra_2.html" class="no-external">
 This is the <strong>second</strong> post in the blog series about linear algebra, covering the basics.
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/linear_algebra_2.html" class="no-external">
 <div class="listing-date">
 Mar 1, 2021
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="7" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1613937600000" data-listing-file-modified-sort="1758022154468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="690">
-<a href="./posts/mathematics/linear_algebra_1.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Introduction to Linear Algebra with Python
-</h5>
+<div class="quarto-post image-right" data-index="7" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1613937600000" data-listing-file-modified-sort="1758022154468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="690">
+<div class="thumbnail"><a href="./posts/mathematics/linear_algebra_1.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/linear_algebra_1.html" class="no-external">Introduction to Linear Algebra with Python</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
 </div>
-<div class="card-text listing-description delink">
+<div class="delink listing-description"><a href="./posts/mathematics/linear_algebra_1.html" class="no-external">
 These are the series of linear algebra mainly based on <em>Numpy</em> and <em>Scipy</em>.
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/linear_algebra_1.html" class="no-external">
 <div class="listing-date">
 Feb 22, 2021
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="8" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1608667200000" data-listing-file-modified-sort="1758022154468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="997">
-<a href="./posts/mathematics/integer_sequences.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/mathematics/integer_sequences_files/figure-html/cell-6-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Integer Sequences in Python
-</h5>
+<div class="quarto-post image-right" data-index="8" data-categories="TWF0aGVtYXRpY3MlMkNQeXRob24=" data-listing-date-sort="1608667200000" data-listing-file-modified-sort="1759171981292" data-listing-date-modified-sort="1759176000000" data-listing-reading-time-sort="5" data-listing-word-count-sort="971">
+<div class="thumbnail"><a href="./posts/mathematics/integer_sequences.html" class="no-external">
+
+<img loading="lazy" src="./posts/mathematics/sequences.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/integer_sequences.html" class="no-external">Integer Sequences in Python</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
+<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
+
 </div>
-<div class="card-text listing-description delink">
-In this article, I want to review some integer sequences from number theory. Particularly, I will review their mathematical formulation, then will write Python functions for…
+<div class="delink listing-description"><a href="./posts/mathematics/integer_sequences.html" class="no-external">
+<p>This post reviews some famous integer sequences with Python.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/integer_sequences.html" class="no-external">
 <div class="listing-date">
 Dec 23, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="9" data-categories="TWF0aGVtYXRpY3M=" data-listing-date-sort="1602273600000" data-listing-file-modified-sort="1758022154470" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1379">
-<a href="./posts/mathematics/taylor_series_expansion.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/mathematics/taylor_series_expansion_files/figure-html/cell-6-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Taylor Series Expansion with Python
-</h5>
+<div class="quarto-post image-right" data-index="9" data-categories="TWF0aGVtYXRpY3MlMkNQeXRob24=" data-listing-date-sort="1602273600000" data-listing-file-modified-sort="1759171715721" data-listing-date-modified-sort="1759176000000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1355">
+<div class="thumbnail"><a href="./posts/mathematics/taylor_series_expansion.html" class="no-external">
+
+<img loading="lazy" src="./posts/mathematics/taylor.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mathematics/taylor_series_expansion.html" class="no-external">Taylor Series Expansion with Python</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TWF0aGVtYXRpY3M='); return false;">Mathematics</div>
 
+<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
+
 </div>
-<div class="card-text listing-description delink">
-In this blog, I want to review famous Taylor Series Expansion and its special case Maclaurin Series Expansion. According to wikipedia, the aim of Taylor Series Expansion…<strong></strong><strong></strong>
+<div class="delink listing-description"><a href="./posts/mathematics/taylor_series_expansion.html" class="no-external">
+<p>Taylor and Maclaurin series with Python.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/mathematics/taylor_series_expansion.html" class="no-external">
 <div class="listing-date">
 Oct 10, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="10" data-categories="R2VuZXJhbA==" data-listing-date-sort="1594497600000" data-listing-file-modified-sort="1758022154467" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1752">
-<a href="./posts/general/information_theory.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/general/mutual_information.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Basics of Information Theory with Python
-</h5>
+<div class="quarto-post image-right" data-index="10" data-categories="R2VuZXJhbCUyQ1B5dGhvbg==" data-listing-date-sort="1594497600000" data-listing-file-modified-sort="1759170952647" data-listing-date-modified-sort="1759176000000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1815">
+<div class="thumbnail"><a href="./posts/general/information_theory.html" class="no-external">
+
+<img loading="lazy" src="./posts/general/image.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/general/information_theory.html" class="no-external">Basics of Information Theory with Python</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2VuZXJhbA=='); return false;">General</div>
 
+<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
+
 </div>
-<div class="card-text listing-description delink">
-Information flows around us. It’s everywhere. No matter what we have, either it will be some well-known play or painting or just a bunch of numbers or video streams. For…<strong></strong><em></em>
+<div class="delink listing-description"><a href="./posts/general/information_theory.html" class="no-external">
+<p>This post reviews some basic concepts of information theory with Python.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/general/information_theory.html" class="no-external">
 <div class="listing-date">
 Jul 12, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="11" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1588104000000" data-listing-file-modified-sort="1758022154471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="109">
-<a href="./posts/pandas/pandas_tips_and_tricks_4.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Lost in Pandas - Part 4
-</h5>
+<div class="quarto-post image-right" data-index="11" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1588104000000" data-listing-file-modified-sort="1759168726023" data-listing-date-modified-sort="1759089600000" data-listing-reading-time-sort="1" data-listing-word-count-sort="109">
+<div class="thumbnail"><a href="./posts/pandas/pandas_tips_and_tricks_4.html" class="no-external">
+
+<img loading="lazy" src="./posts/pandas/image.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pandas/pandas_tips_and_tricks_4.html" class="no-external">Lost in Pandas - Part 4</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFNjaWVuY2U='); return false;">Data Science</div>
 
 </div>
-<div class="card-text listing-description delink">
-I’ll show how to assign new value for each unique group in Pandas DataFrame.
+<div class="delink listing-description"><a href="./posts/pandas/pandas_tips_and_tricks_4.html" class="no-external">
+<p>Pandas tips and tricks that I found useful in my data science journey.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/pandas/pandas_tips_and_tricks_4.html" class="no-external">
 <div class="listing-date">
 Apr 29, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="12" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1587326400000" data-listing-file-modified-sort="1758022154471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="239">
-<a href="./posts/pandas/pandas_tips_and_tricks_3.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Lost in Pandas - Part 3
-</h5>
+<div class="quarto-post image-right" data-index="12" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1587326400000" data-listing-file-modified-sort="1759168720909" data-listing-date-modified-sort="1759089600000" data-listing-reading-time-sort="2" data-listing-word-count-sort="239">
+<div class="thumbnail"><a href="./posts/pandas/pandas_tips_and_tricks_3.html" class="no-external">
+
+<img loading="lazy" src="./posts/pandas/image.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pandas/pandas_tips_and_tricks_3.html" class="no-external">Lost in Pandas - Part 3</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFNjaWVuY2U='); return false;">Data Science</div>
 
 </div>
-<div class="card-text listing-description delink">
-I’ll show you how to split one column with repetitive index and/or value into multiple rows with unique index.
+<div class="delink listing-description"><a href="./posts/pandas/pandas_tips_and_tricks_3.html" class="no-external">
+<p>Pandas tips and tricks that I found useful in my data science journey.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/pandas/pandas_tips_and_tricks_3.html" class="no-external">
 <div class="listing-date">
 Apr 20, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="13" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1586808000000" data-listing-file-modified-sort="1758022154470" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="763">
-<a href="./posts/pandas/pandas_tips_and_tricks_2.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Lost in Pandas - Part 2
-</h5>
+<div class="quarto-post image-right" data-index="13" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1586808000000" data-listing-file-modified-sort="1759168716136" data-listing-date-modified-sort="1759089600000" data-listing-reading-time-sort="4" data-listing-word-count-sort="763">
+<div class="thumbnail"><a href="./posts/pandas/pandas_tips_and_tricks_2.html" class="no-external">
+
+<img loading="lazy" src="./posts/pandas/image.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pandas/pandas_tips_and_tricks_2.html" class="no-external">Lost in Pandas - Part 2</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFNjaWVuY2U='); return false;">Data Science</div>
 
 </div>
-<div class="card-text listing-description delink">
-I will show you how to fill missing values by the average of its before and after values if our dataframe has the following form:
+<div class="delink listing-description"><a href="./posts/pandas/pandas_tips_and_tricks_2.html" class="no-external">
+<p>Pandas tips and tricks that I found useful in my data science journey.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/pandas/pandas_tips_and_tricks_2.html" class="no-external">
 <div class="listing-date">
 Apr 14, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="14" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1586462400000" data-listing-file-modified-sort="1758022154470" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2525">
-<a href="./posts/pandas/pandas_tips_and_tricks_1.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Lost in Pandas - Part 1
-</h5>
+<div class="quarto-post image-right" data-index="14" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1586462400000" data-listing-file-modified-sort="1759168704061" data-listing-date-modified-sort="1759089600000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2475">
+<div class="thumbnail"><a href="./posts/pandas/pandas_tips_and_tricks_1.html" class="no-external">
+
+<img loading="lazy" src="./posts/pandas/image.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pandas/pandas_tips_and_tricks_1.html" class="no-external">Lost in Pandas - Part 1</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFNjaWVuY2U='); return false;">Data Science</div>
 
 </div>
-<div class="card-text listing-description delink">
-Many have been told and written about Pandas and its capabilities. I could not imagine data scientist or data analyst who had not heard about Pandas or had not used it at…
+<div class="delink listing-description"><a href="./posts/pandas/pandas_tips_and_tricks_1.html" class="no-external">
+<p>Pandas tips and tricks that I found useful in my data science journey.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/pandas/pandas_tips_and_tricks_1.html" class="no-external">
 <div class="listing-date">
 Apr 10, 2020
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
+</div>
+</a>
 </div>
 </div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="15" data-categories="RWNvbm9taWNz" data-listing-date-sort="1560628800000" data-listing-file-modified-sort="1758022154467" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2136">
-<a href="./posts/economics/single_market_economy.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts/economics/single_market_economy_files/figure-html/cell-7-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Modeling Single Good Market
-</h5>
+<div class="quarto-post image-right" data-index="15" data-categories="RWNvbm9taWNzJTJDUHl0aG9u" data-listing-date-sort="1560628800000" data-listing-file-modified-sort="1759168536027" data-listing-date-modified-sort="1758830400000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2192">
+<div class="thumbnail"><a href="./posts/economics/single_market_economy.html" class="no-external">
+
+<img loading="lazy" src="./posts/economics/image.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/economics/single_market_economy.html" class="no-external">Modeling Single Good Market</a>
+</h3>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RWNvbm9taWNz'); return false;">Economics</div>
 
+<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
+
 </div>
-<div class="card-text listing-description delink">
-In this blog, I want to review simple one good market economy, where supply and demand are linear functions of price and agents of this economy are price takers. Those…
+<div class="delink listing-description"><a href="./posts/economics/single_market_economy.html" class="no-external">
+<p>Implementation of one good market economy in Python, where supply and demand are linear functions of price and agents of this economy are price takers.</p>
+</a></div>
 </div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Nodar Okroshiashvili
-</div>
+<div class="metadata">
+<a href="./posts/economics/single_market_economy.html" class="no-external">
 <div class="listing-date">
 Jun 16, 2019
 </div>
+<div class="listing-author">
+Nodar Okroshiashvili
 </div>
+</a>
 </div>
-</div></a>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>

@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2020-07-12">
-<meta name="keywords" content="information theory in python, entropy, self information, joint entropy in python, conditional entropy in python">
 
 <title>Basics of Information Theory with Python</title>
 <style>
@@ -138,6 +137,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Basics of Information Theory with Python">
+<meta property="og:description" content="This post reviews some basic concepts of information theory with Python.">
+<meta property="og:image" content="https://okrodata.dev/posts/general/image.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -198,6 +200,7 @@ window.Quarto = {
       <h1 class="title">Basics of Information Theory with Python</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">General</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -219,14 +222,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 30, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>information theory in python, entropy, self information, joint entropy in python, conditional entropy in python</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>This post reviews some basic concepts of information theory with Python.</p>
     </div>
   </div>
   
@@ -288,16 +296,16 @@ I(C) = - \log_2(\frac{1}{6}) = 2.58
 <p><span class="math display">\[
 I(X) = I(0101) = - \log_2(\frac{1}{2^{4}}) = 4
 \]</span></p>
-<div id="99132dc6" class="cell" data-execution_count="1">
+<div id="9fcf5373" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="2d54f4b7" class="cell" data-execution_count="2">
+<div id="c3e8a195" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> self_information(p):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.log2(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="daa5bece" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>self_information(<span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span><span class="op">**</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="060d6356" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>self_information(<span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="243">
 <pre><code>np.float64(4.0)</code></pre>
 </div>
 </div>
@@ -315,16 +323,16 @@ I(X) = I(0101) = - \log_2(\frac{1}{2^{4}}) = 4
 H(X) = - \sum_{i} p_{i} \log_{2} p_{i}
 \]</span></p>
 <p>In Python it looks the following:</p>
-<div id="53db9385" class="cell" data-execution_count="4">
+<div id="f23a4b2e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># np.nansum return the sum of NaNs. Treats them as zeros.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> entropy(p):</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.nansum(<span class="op">-</span>p <span class="op">*</span> np.log2(p))</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a2219797" class="cell" data-execution_count="5">
+<div id="6f25f7db" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>entropy(np.array([<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="245">
 <pre><code>np.float64(1.6854752972273346)</code></pre>
 </div>
 </div>
@@ -337,14 +345,14 @@ H(X) = - \sum_{i} p_{i} \log_{2} p_{i}
 H(X, Y) = - \sum_{x} \sum_{y} p_{X, Y}(x, y) \log_{2} p_{X, Y}(x, y)
 \]</span></p>
 <p>Here are two important facts. If <span class="math inline">\(X = Y\)</span> this implies that <span class="math inline">\(H(X,Y) = H(X) = H(Y)\)</span> and if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(H(X, Y) = H(X) + H(Y)\)</span>.</p>
-<div id="7a4b04f9" class="cell" data-execution_count="6">
+<div id="c4398f1c" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> joint_entropy(p_xy):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.nansum(<span class="op">-</span>p_xy <span class="op">*</span> np.log2(p_xy))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="061f5029" class="cell" data-execution_count="7">
+<div id="a038e8f9" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>joint_entropy(np.array([[<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>], [<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.02</span>]]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="247">
 <pre><code>np.float64(2.0558948969327187)</code></pre>
 </div>
 </div>
@@ -361,15 +369,15 @@ H(Y \mid X) = - \sum_{x} \sum_{y} p(x, y) \log_{2} p(y \mid x)
 H(Y \mid X) = H(X, Y) - H(X)
 \]</span></p>
 <p>meaning that the information contained in <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> equals information jointly contained in <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> minus the amount of information only contained in <span class="math inline">\(X\)</span>.</p>
-<div id="ec5c46bd" class="cell" data-execution_count="8">
+<div id="d613a63a" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> conditional_entropy(p_xy, p_x):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    p_y_given_x <span class="op">=</span> p_xy <span class="op">/</span> p_x</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.nansum(<span class="op">-</span>p_xy <span class="op">*</span> np.log2(p_y_given_x))</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3a6cee9d" class="cell" data-execution_count="9">
+<div id="8abe403a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>conditional_entropy(np.array([[<span class="fl">0.1</span>, <span class="fl">0.5</span>], [<span class="fl">0.2</span>, <span class="fl">0.3</span>]]), np.array([<span class="fl">0.2</span>, <span class="fl">0.8</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="249">
 <pre><code>np.float64(0.8635472023399721)</code></pre>
 </div>
 </div>
@@ -382,22 +390,18 @@ H(Y \mid X) = H(X, Y) - H(X)
 I(X, Y) = H(X, Y) - H(Y \mid X) − H(X \mid Y)
 \]</span></p>
 <p>This means that we have to subtract the information only contained in <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> to all the information at hand. This relationship is perfectly described by this picture.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="mutual_information.png" class="img-fluid figure-img"></p>
-<figcaption>mutual_information</figcaption>
-</figure>
-</div>
+<p><img src="mutual_information.png" class="img-fluid"></p>
 <p>The concept of mutual information likewise correlation coefficient, allow us to measure the linear relationship between two random variables as well as the amount of maximum information shared between them.</p>
-<div id="f6e00bdf" class="cell" data-execution_count="10">
+<div id="e3e4746c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mutual_information(p_xy, p_x, p_y):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> p_xy <span class="op">/</span> (p_x <span class="op">*</span> p_y)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.nansum(p_xy <span class="op">*</span> np.log2(p))</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="36198ef3" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mutual_information(np.array([[<span class="fl">0.1</span>, <span class="fl">0.5</span>], [<span class="fl">0.1</span>, <span class="fl">0.3</span>]]), np.array([<span class="fl">0.2</span>, <span class="fl">0.8</span>]), np.array([[<span class="fl">0.75</span>, <span class="fl">0.25</span>]]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div id="de19fd40" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mutual_information(np.array([[<span class="fl">0.1</span>, <span class="fl">0.5</span>], [<span class="fl">0.1</span>, <span class="fl">0.3</span>]]),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                np.array([<span class="fl">0.2</span>, <span class="fl">0.8</span>]), np.array([[<span class="fl">0.75</span>, <span class="fl">0.25</span>]]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="251">
 <pre><code>np.float64(0.7194602975157967)</code></pre>
 </div>
 </div>
@@ -420,23 +424,23 @@ D_{\mathrm{KL}}(P\|Q) = E_{x \sim P} \left[ \log \frac{p(x)}{q(x)} \right]
 <li>The KL divergence is non-symmetric or equivalently, <span class="math inline">\(D_{\mathrm{KL}}(P\|Q) \neq D_{\mathrm{KL}}(Q\|P), \text{ if } P \neq Q\)</span></li>
 <li>The KL divergence is non-negative or equivalently, <span class="math inline">\(D_{\mathrm{KL}}(P\|Q) \geq 0\)</span></li>
 </ul>
-<div id="cd3e66f7" class="cell" data-execution_count="12">
+<div id="8c889591" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kl_divergence(p, q):</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    kl <span class="op">=</span> p <span class="op">*</span> np.log2(p <span class="op">/</span> q)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.nansum(kl)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">abs</span>(out)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace non-positive values with a small positive number (e.g., 1e-7)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to avoid `invalid value encountered in log` warning.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> np.where(p <span class="op">&gt;</span> <span class="dv">0</span>, p, <span class="fl">1e-7</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> np.where(q <span class="op">&gt;</span> <span class="dv">0</span>, q, <span class="fl">1e-7</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    kl <span class="op">=</span> p <span class="op">*</span> np.log2(p <span class="op">/</span> q)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> np.nansum(kl)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">abs</span>(out)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5f78f080" class="cell" data-execution_count="13">
+<div id="7a318b88" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.random.normal(<span class="dv">1</span>, <span class="dv">2</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> np.random.normal(<span class="dv">1</span>, <span class="dv">2</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>kl_divergence(p, q)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/mz/3thvm62j52l8lpr5sllrt6rh0000gn/T/ipykernel_17154/409365545.py:2: RuntimeWarning: invalid value encountered in log2
-  kl = p * np.log2(p / q)</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>np.float64(664.1303906552347)</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="253">
+<pre><code>np.float64(11527.660129655596)</code></pre>
 </div>
 </div>
 </section>
@@ -450,17 +454,17 @@ D_{\mathrm{KL}}(P\|Q) = E_{x \sim P} \left[ \log \frac{p(x)}{q(x)} \right]
 <p><span class="math display">\[
 \mathrm{CE}(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{i=1}^n \sum_{j=1}^k y_{ij} \log_{2}{p_{\theta} (y_{ij}  \mid  \mathbf{x}_i)}
 \]</span></p>
-<div id="20e83554" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cross_entropy(y_hat, y):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    ce <span class="op">=</span> <span class="op">-</span>np.log(y_hat[<span class="bu">range</span>(<span class="bu">len</span>(y_hat)), y])</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ce.mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ab479f9e" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cross_entropy(y_hat, y):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    ce <span class="op">=</span> <span class="op">-</span>np.log(y_hat[<span class="bu">range</span>(<span class="bu">len</span>(y_hat)), y])</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ce.mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="8ef87c38" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">2</span>])</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> np.array([[<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span>], [<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>]])</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>cross_entropy(preds, labels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div id="80c3ac57" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">2</span>])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> np.array([[<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span>], [<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>]])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>cross_entropy(preds, labels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="255">
 <pre><code>np.float64(0.9485599924429406)</code></pre>
 </div>
 </div>
