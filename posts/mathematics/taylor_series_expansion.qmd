@@ -2,28 +2,36 @@
 title: "Taylor Series Expansion with Python"
 author: "Nodar Okroshiashvili"
 date: "2020-10-10"
-categories: [Mathematics]
-tags: [Taylor Series Expansion, Maclaurin Series Expansion]
-keywords: [taylor series expansion with python, maclaurin series expansion with python, python mathematics, numpy, scipy, sympy, taylor series python, how to sum a taylor series in python, taylor approximation python, maclaurin series python]
+categories: [Mathematics, Python]
+date-modified: "2025-09-30"
+tags: [Taylor Series Expansion, Maclaurin Series Expansion, Python, Numpy, Scipy, Sympy]
+
+abstract: |
+    Taylor and Maclaurin series with Python.
+
+image: "taylor.jpg"
 ---
 
 # Introduction
 
 In this blog, I want to review famous Taylor Series Expansion and its special case  Maclaurin Series Expansion.
-According to [wikipedia](https://en.wikipedia.org/wiki/Taylor_series),  the aim of Taylor Series Expansion (TSE) is to represent a function as an infinite sum of terms that are derived from the values of that function's derivatives, which in turn are evaluated at some predefined single point. In other words, by using TSE, we try to represent some given function as an infinite sum of its derivatives and these derivatives are evaluated at some single point 
-which we can choose. Before diving into mechanics of TSE and its special case Maclaurin Series Expansion (MSE), it's worth to know some history behind these guys. Back in the 17th century the concept of expansion first was introduced by mathematician **James Gregory**, but in 1715 the notion of function expansion was formally introduced by **Brook Taylor**.
+According to [wikipedia](https://en.wikipedia.org/wiki/Taylor_series),  the aim of Taylor Series Expansion (TSE) is to represent a function as an infinite sum
+of terms that are derived from the values of that function's derivatives, which in turn are evaluated at some predefined single point.
+In other words, by using TSE, we try to represent some given function as an infinite sum of its derivatives and these derivatives are evaluated at some single point
+which we can choose. Before diving into mechanics of TSE and its special case Maclaurin Series Expansion (MSE),
+it's worth to know some history behind these guys. Back in the 17th century the concept of expansion first was introduced by mathematician **James Gregory**, but in 1715 the notion of function expansion was formally introduced by **Brook Taylor**.
 
 A one-dimensional Taylor series is an expansion of a real function $\mathbb F(x)$ about a point $x=a$ is given by:
 
 $$
 \mathbb F(x) \approx
-\mathbb F(a) + \mathbb F^{'}(a)\cdot(x - a) + \frac{1}{2!}\cdot\mathbb F^{''}(a)\cdot(x - a)^{2} + 
+\mathbb F(a) + \mathbb F^{'}(a)\cdot(x - a) + \frac{1}{2!}\cdot\mathbb F^{''}(a)\cdot(x - a)^{2} +
 \frac{1}{3!}\cdot\mathbb F^{3}(a)\cdot(x - a)^{3} + \cdots + \frac{1}{n!}\cdot\mathbb F^{n}(a)\cdot(x - a)^{n}
 $$
 
-where, $n!$ denotes the factorial of $n$ and $\mathbb F^{n}(a)$ denotes nth derivative of $\mathbb F$ 
-evaluated at point $a$. Every term on the right hand side denotes the order of Taylor expansion. 
-For instance, $\mathbb F(a)$ is zeroth-order expansion and $\mathbb F^{'}(a)\cdot(x - a)$ is 
+where, $n!$ denotes the factorial of $n$ and $\mathbb F^{n}(a)$ denotes nth derivative of $\mathbb F$
+evaluated at point $a$. Every term on the right hand side denotes the order of Taylor expansion.
+For instance, $\mathbb F(a)$ is zeroth-order expansion and $\mathbb F^{'}(a)\cdot(x - a)$ is
 the first-order expansion. The above representation is called open-form representation of an expansion.
 
 We can write this expansion in more compact notation in the following way:
@@ -47,8 +55,8 @@ cos(x) \approx
 cos(a) - sin(a)\cdot(x - a) - \frac{1}{2}\cdot cos(a)\cdot (x - a)^2 + \frac{1}{6}\cdot sin(a)\cdot(x - a)^3
 $$
 
-You ask, what is $a$ and how can we choose it? $a$ is the point where we want to have $cosine$ 
-approximation and it can be any number from $-\infty$ to $+\infty$. Note that, this is not the 
+You ask, what is $a$ and how can we choose it? $a$ is the point where we want to have $cosine$
+approximation and it can be any number from $-\infty$ to $+\infty$. Note that, this is not the
 case for other functions. We are restricted to choose $a$ from **domain** of a given function.
 
 Now, let do Taylor approximation for $sin(x)$ at $x = a$
@@ -98,10 +106,10 @@ e^{x} =
 1 + x + \frac{1}{2}x^2 + \frac{1}{6}x^3
 $$
 
-This kind of expansion is known as **Maclaurin** series expansion, in other words when 
+This kind of expansion is known as **Maclaurin** series expansion, in other words when
 approximation point is zero we call it Maclaurin expansion.
 
-Calculating third order approximation for these functions by hand does not seem too hard, but for higher order it's tedious. To solve this problem we can use Python, namely **Sympy** if we want to have a symbolic approximation, or **Numpy**/**Scipy** to have a numeric approximation. Not to be confused with numeric approximation and approximation point. At $a = 0$ for function $\mathbb F(x) = e^{x}$ we had Taylor approximation 
+Calculating third order approximation for these functions by hand does not seem too hard, but for higher order it's tedious. To solve this problem we can use Python, namely **Sympy** if we want to have a symbolic approximation, or **Numpy**/**Scipy** to have a numeric approximation. Not to be confused with numeric approximation and approximation point. At $a = 0$ for function $\mathbb F(x) = e^{x}$ we had Taylor approximation
 $e^{x} = 1 + x + \frac{1}{2}x^2 + \frac{1}{6}x^3$. If we evaluate this expression at, say $x = 1$ we have function output. In this setup,
 
 $$
@@ -110,9 +118,9 @@ $$
 
 and evaluated at $x = 1$ we have $\mathbb F(1) = e^{1} = 2.71828182 \approx 2.66666666$, which is close to the real output.
 
-Now let visualize these functions and their Taylor approximations at different points with a 
-different order of expansion. Before visualizing results it's good to have a function which 
-will do symbolic Taylor expansion for higher orders for one variable functions. 
+Now let visualize these functions and their Taylor approximations at different points with a
+different order of expansion. Before visualizing results it's good to have a function which
+will do symbolic Taylor expansion for higher orders for one variable functions.
 For multi-variable functions, it's up to you.
 
 
@@ -249,10 +257,10 @@ plot_expansion(
 
 # Conclusion
 
-To conclude, in this post we saw how the Taylor series expansion works and coded it in Python. 
-Taylor series expansion while approximating a function introduces approximation error. 
-The magnitude of error depends on the approximation order. If we increase the order of 
-approximation, the error term will decrease, or we can set the tolerance level for error in advance. 
+To conclude, in this post we saw how the Taylor series expansion works and coded it in Python.
+Taylor series expansion while approximating a function introduces approximation error.
+The magnitude of error depends on the approximation order. If we increase the order of
+approximation, the error term will decrease, or we can set the tolerance level for error in advance.
 In other words, the error term in approximation can be regarded as $N^{th}$ order **Remainder** term.
 
 For $\mathbb F(x)$ at $x = x_{0} = a$ the remainder term is defined as:
@@ -269,12 +277,12 @@ $$
 P_{n}(x) + R_{n}(x)
 $$
 
-You may wonder why you need Taylor expansion, but it's very important concept in mathematics 
+You may wonder why you need Taylor expansion, but it's very important concept in mathematics
 and one of [mathematical beauty](https://en.wikipedia.org/wiki/Mathematical_beauty),
-[**Euler's Identity**](https://en.wikipedia.org/wiki/Euler%27s_identity) is derived from Taylor 
-series expansion of $cos(x)$, $sin(x)$, and $e(x)$. The derivation of Euler's Identity deserves separate post, 
-but if you want to see the derivation, you can take a look at [Khan Academy](https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/euler-s-formula-and-euler-s-identity). 
-Moreover, some training algorithms for neural networks, such as **Steepest Descent**, **Newton's method**, and 
+[**Euler's Identity**](https://en.wikipedia.org/wiki/Euler%27s_identity) is derived from Taylor
+series expansion of $cos(x)$, $sin(x)$, and $e(x)$. The derivation of Euler's Identity deserves separate post,
+but if you want to see the derivation, you can take a look at [Khan Academy](https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/euler-s-formula-and-euler-s-identity).
+Moreover, some training algorithms for neural networks, such as **Steepest Descent**, **Newton's method**, and
 **Conjugate Gradient** uses first or second order Taylor series expansion to minimize performance index.
 
 
