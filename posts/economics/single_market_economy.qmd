@@ -2,9 +2,19 @@
 title: "Modeling Single Good Market"
 author: "Nodar Okroshiashvili"
 date: "2019-06-16"
-categories: [Economics]
+date-modified: "2025-09-26"
+title-block-banner: true
+categories:
+    - Economics
+    - Python
+
 tags: [Economics, Python, Demand and Supply, Economic Modeling]
-keywords: [economics, economic modeling, macroeconomics and python, computational macroeconomics with python, single good market, supply, demand, consumer surplus, producer surplus, python, equilibrium price]
+
+abstract: |
+  Implementation of one good market economy in Python, where supply and demand are linear functions of price
+  and agents of this economy are price takers.
+
+image: "image.jpg"
 ---
 
 # Introduction
@@ -116,14 +126,14 @@ $$
 and this is the same to write
 
 $$
-p(Q) = 
+p(Q) =
 \frac{a - Q}{b}
 $$
 
 Doing the same for supply, we easily find inverse supply function, given by
 
 $$
-p(Q) = 
+p(Q) =
 \frac{Q - c}{d}
 $$
 
@@ -135,11 +145,11 @@ I'm going to write a simple Python class, which will calculate equilibrium price
 
 ```{python}
 
-import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import quad
-from matplotlib.path import Path
+import numpy as np
 from matplotlib.patches import PathPatch
+from matplotlib.path import Path
+from scipy.integrate import quad
 
 plt.style.use("ggplot")
 
@@ -148,6 +158,7 @@ plt.style.use("ggplot")
 ```{python}
 
 class Market:
+    """A class to model a single good market with linear demand and supply functions."""
     def __init__(self, a, b, c, d):
         self.a = a
         self.b = b
@@ -165,17 +176,21 @@ class Market:
         return self.a - self.b * self.price()
 
     def inverse_demand(self, x):
+        """Inverse demand function."""
         return (self.a - x) / self.b
 
     def inverse_supply(self, x):
+        """Inverse supply function."""
         return (x - self.c) / self.d
 
     def consumer_surplus(self):
+        """Calculates consumer surplus."""
         integrand = lambda x: (self.a - x) / self.b
         area, error = quad(integrand, 0, self.quantity())
         return area - self.price() * self.quantity()
 
     def producer_surplus(self):
+        """Calculates producer surplus."""
         integrand = lambda x: (x - self.c) / self.d
         area, error = quad(integrand, 0, self.quantity())
         return self.price() * self.quantity() - area
@@ -242,16 +257,16 @@ ax.text(1, 14, "Producer Surplus", fontsize=12)
 ax.text(0, 17, "$P^{*}$", fontsize=14)
 ax.text(6.5, 0, "$Q^{*}$", fontsize=14)
 
-ax.set_xlabel("Quantity")
+ax.set_xlabel("Quantity", labelpad=20)
 ax.set_xlim(0, q_max)
 ax.set_ylabel("Price")
-ax.legend(loc="best");
+ax.legend(loc="best")
 
 ```
 
 In the above graph, we see the equilibrium point. We can ask the following question.
 What will happen to the equilibrium price and quantity if demand or supply curve shits?
-Let make a table and summarize the changes in equilibrium due to changes in supply and demand curve.|
+Let make a table and summarize the changes in equilibrium due to changes in supply and demand curve.
 
 
 | Change                             | Change in$P^{*}$                        | Change in$Q^{*}$                        |
@@ -277,4 +292,4 @@ as well as a deadweight loss by imposing government tax and see graphically how 
 
 #### References
 * [Khan Academy](https://www.khanacademy.org/economics-finance-domain/microeconomics)
-* [Quantecon](https://lectures.quantecon.org/py/)
+* [Quantecon](https://quantecon.org/lectures/)
