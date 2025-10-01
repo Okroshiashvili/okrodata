@@ -10,7 +10,10 @@ about:
       href: https://www.linkedin.com/in/nodar-okroshiashvili/
     - icon: github
       text: Github
-      href: https://github.com/Okroshiashvili
+      href: https://github.com/Okroshiashvili/
+    - icon: stack-overflow
+      text: Stack Overflow
+      href: https://stackoverflow.com/users/6836950/okroshiashvili?tab=topactivity/
     - text: Resume
       url: "assets/resume.pdf"
 
