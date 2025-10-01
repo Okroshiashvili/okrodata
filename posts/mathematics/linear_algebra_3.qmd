@@ -2,15 +2,17 @@
 title: "Intermediate Linear Algebra with Python - Part I"
 author: "Nodar Okroshiashvili"
 date: "2021-03-17"
-categories: [Mathematics]
-tags: [Linear Algebra, Intermediate Topics]
-keywords: [linear algebra in python, vectors in numpy, vector operations in python and numpy, linear algebra for machine learning, python, numpy, scipy, linear algebra, machine learning]
-# description: "This is a short introduction to linear algebra with Python. It covers the basics of linear algebra and how to use Python to solve linear algebra problems."
+date-modified: "2025-10-01"
+categories: [Mathematics, Python]
+tags: [Mathematics, Linear Algebra, Vectors, Vector Operations, Vector Span, Vector Independence, Python]
+
+abstract: |
+    Part 3 of the linear algebra series with Python, that solely covers the vectors and vector operations in more detail.
+
+image: "linear_algebra.jpg"
 ---
 
 # Introduction
-
-This is the **third** post in the blog series about linear algebra, covering the vector and vector operations.
 
 
 1. [Introduction to Linear Algebra with Python](linear_algebra_1.qmd)
@@ -36,8 +38,8 @@ the result is a vector, so the cross product is also called the vector product. 
 right angles to both the other vectors in 3D Euclidean space. This means that the cross-product only really makes sense
 when working with vectors that contain three components.
 
-There are two formulas to calculate the cross product. One is algebraic and second is geometric. 
-More precisely, the first formula catches the algebraic intuition of cross product and second catches 
+There are two formulas to calculate the cross product. One is algebraic and second is geometric.
+More precisely, the first formula catches the algebraic intuition of cross product and second catches
 the geometric intuition of the cross product.
 
 If we have two vectors $A$ and $B$ in such a way:
@@ -61,10 +63,10 @@ $$
 The algebraic formula is:
 
 $$
-\vec{C} = \vec{A} \times \vec{B} = 
+\vec{C} = \vec{A} \times \vec{B} =
 \begin{bmatrix}
-(a_{2} \cdot b_{3}) - (a_{3} \cdot b_{2}) \\ 
-(a_{3} \cdot b_{1}) - (a_{1} \cdot b_{3}) \\ 
+(a_{2} \cdot b_{3}) - (a_{3} \cdot b_{2}) \\
+(a_{3} \cdot b_{1}) - (a_{1} \cdot b_{3}) \\
 (a_{1} \cdot b_{2}) - (a_{2} \cdot b_{1})
 \end{bmatrix}
 $$
@@ -126,7 +128,7 @@ $$
 (3 \cdot (-2)) - (1 \cdot 2) \\
 (1 \cdot 1) - (2 \cdot (-2)) \\
 (2 \cdot 2) - (3 \cdot 1)
-\end{bmatrix} = 
+\end{bmatrix} =
 \begin{bmatrix}
 (-6) - 2 \\
 1 - (-4) \\
@@ -394,7 +396,7 @@ $$
 c_{1} ([1, 2]) + c_{2} ([2, 4]) = [0, 0]
 $$
 
-There is a nontrivial linear combination with $c_{1} = 2$ and $c_{2} = 1$ that yields $0$. This implies $A$ is the linearly 
+There is a nontrivial linear combination with $c_{1} = 2$ and $c_{2} = 1$ that yields $0$. This implies $A$ is the linearly
 dependent set of vectors. It's easy in this case to spot linear dependence by first glance, as the second vector is 2 times the first vector, which indicates linear dependence.
 
 ```{python}
@@ -424,10 +426,10 @@ This says that vectors at index 0, 1, and 3 are linearly independent, while vect
 
 # Conclusion for part I
 
-Here, I only covered half of the materials that I initially had intended to cover. 
+Here, I only covered half of the materials that I initially had intended to cover.
 I split those materials into two parts, mainly because to improve readability and maintain consistency.
 
-In the second part I review matrices and operations on matrices.
+In the second part, I review matrices and operations on matrices.
 
 
 #### References

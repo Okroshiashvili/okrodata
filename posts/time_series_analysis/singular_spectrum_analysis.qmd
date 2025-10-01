@@ -2,9 +2,14 @@
 title: "Singular Spectrum Analysis with Python"
 author: "Nodar Okroshiashvili"
 date: "2021-08-10"
-categories: [Time Series Analysis]
-tags: [Singular spectrum analysis, Python, Time Series Analysis]
-keywords: [time series, singular spectrum analysis, python, numpy, scipy, matplotlib, pandas, statsmodels, time series decomposition, singular value decomposition]
+date-modified: "2025-10-01"
+categories: [Time Series Analysis, Python]
+tags: [Singular Spectrum Analysis, Python, Time Series Analysis]
+
+abstract: |
+    Review of Singular Spectrum Analysis and its implementation in Python
+
+image: "image.jpg"
 ---
 
 # Introduction

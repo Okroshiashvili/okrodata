@@ -2,15 +2,17 @@
 title: "Basic Linear Algebra with Python"
 author: "Nodar Okroshiashvili"
 date: "2021-03-01"
-categories: [Mathematics]
-tags: [Linear Algebra, Python]
-keywords: [linear algebra basics in python, vectors and matrices with python, linear algebra, machine learning, python, numpy, scipy]
-# description: "This is a short introduction to linear algebra with Python. It covers the basics of linear algebra and how to use Python to solve linear algebra problems."
+date-modified: "2025-10-01"
+categories: [Mathematics, Python]
+tags: [Mathematics, Linear Algebra, System of Equations, Vector, Matrix, Python]
+
+abstract: |
+    Part 2 of the linear algebra series with Python, that covers the basics of vectors and matrices.
+
+image: "linear_algebra.jpg"
 ---
 
 # Introduction
-
-This is the **second** post in the blog series about linear algebra, covering the basics.
 
 
 1. [Introduction to Linear Algebra with Python](linear_algebra_1.qmd)
@@ -34,7 +36,7 @@ $$
 2x + 5 = 15
 $$
 
-In this case, our variable is $x$ and the solution is $10$.
+In this case, our variable is $x$ and the solution is $5$.
 
 ```{python}
 
@@ -53,12 +55,12 @@ $$
 2y + 3 = 2x - 1
 $$
 
-This equation includes two different variables, $x$, and $y$. These variables depend on one another. 
-The value of $x$ is determined in part by the value of $y$ and vice-versa. So we can"t solve this equation as 
-in the case of one variable equation. However, we can express $y$ in terms of $x$ and obtain a result that 
+This equation includes two different variables, $x$, and $y$. These variables depend on one another.
+The value of $x$ is determined in part by the value of $y$ and vice-versa. So we can't solve this equation as
+in the case of one variable equation. However, we can express $y$ in terms of $x$ and obtain a result that
 describes a relative relationship between the variables.
 
-For example, let's solve this equation for $y$. First, rearrage equation in a way to have following:
+For example, let's solve this equation for $y$. First, rearrange equation in a way to have the following:
 
 $$
 2y = 2x - 4
@@ -91,7 +93,7 @@ df.head()
 
 ```
 
-Above table shows valid solutions for values of $x$ in range $(-10, 10)$. Besides numerical solution, 
+Above table shows valid solutions for values of $x$ in range $(-10, 10)$. Besides numerical solution,
 let see the graphical solution.
 
 ```{python}
@@ -109,12 +111,12 @@ plt.show()
 
 The solution of the above equation lies on the blue line, for any value pairs $(x,y)~\in~\mathbb{R}$
 
-When we use a linear equation to plot a line, we can easily see where the line intersects the X and Y axes of the plot. 
-These points are known as *intercepts*. The *x-intercept* is where the line intersects the X (horizontal) axis, 
+When we use a linear equation to plot a line, we can easily see where the line intersects the X and Y axes of the plot.
+These points are known as *intercepts*. The *x-intercept* is where the line intersects the X (horizontal) axis,
 and the *y-intercept* is where the line intersects the Y (horizontal) axis.
 
-The x-intercept is the point where the line crosses the $X$ axis, and at this point, the value for $y$ is always 0. 
-Similarly, the y-intercept is where the line crosses the $Y$ axis, at which $x$ value is 0. So to find the intercepts, 
+The x-intercept is the point where the line crosses the $X$ axis, and at this point, the value for $y$ is always 0.
+Similarly, the y-intercept is where the line crosses the $Y$ axis, at which $x$ value is 0. So to find the intercepts,
 we need to solve the equation for $x$ when $y$ is 0 and for $y$ when $x$ is 0.
 
 For the x-intercept, we have:
@@ -151,7 +153,7 @@ plt.show()
 
 ```
 
-It is natural to ask, what if we move one unit along the $x$ axis, how the value for the $y$ change? 
+It is natural to ask, what if we move one unit along the $x$ axis, how the value for the $y$ change?
 The answer to this question is the notion of *slope*. Slope is defined as
 
 $$
@@ -171,23 +173,23 @@ m = \frac{4 - 3}{6 - 5} = 1
 $$
 
 
-So what does that actually mean? Well, if we start from any point on the blue line and move one unit to the right 
+So what does that actually mean? Well, if we start from any point on the blue line and move one unit to the right
 (along with the $X$ axis), we'll need to move 1 unit up (along with the $Y$ axis) to get back to the blue line.
 
 
 ## The Systems of Equations
 
-To have the system of equations means that we have two or more linear equations together and we have to solve 
-them simultaneously to make the equality true. There are three possible solutions of the linear system. 
-One solution, No solution or system is inconsistent and infinitely many solutions. Generally, 
-the linear system can have two or more variables and two or more equations. There, I will consider two variable 
+To have the system of equations means that we have two or more linear equations together and we have to solve
+them simultaneously to make the equality true. There are three possible solutions of the linear system.
+One solution, No solution or system is inconsistent and infinitely many solutions. Generally,
+the linear system can have two or more variables and two or more equations. There, I will consider two variable
 and two-equation system with three solutions, in order to depict the intuition. It's up to you to delve deeper.
 
 * The system with one solution, meaning two lines intersect
 
 $$
 \begin{cases}
-2x-y = 2 \\ 
+2x-y = 2 \\
 x+y = -2
 \end{cases}
 $$
@@ -224,7 +226,7 @@ plt.show()
 
 $$
 \begin{cases}
-3x+2y = 3 \\ 
+3x+2y = 3 \\
 3x+2y = -4
 \end{cases}
 $$
@@ -257,12 +259,12 @@ plt.show()
 
 $$
 \begin{cases}
-x-y = -3 \\ 
+x-y = -3 \\
 2x-2y = -6
 \end{cases}
 $$
 
-The system has infinitely many solutions, as one of them is a linear combination of another. 
+The system has infinitely many solutions, as one of them is a linear combination of another.
 In this case, the second equation is scaled by 2 version of the first equation.
 
 ```{python}
@@ -293,10 +295,10 @@ plt.show()
 
 ### Vectors and Vector Notation
 
-In plain English, the vector is a directed arrow. Mathematically, the vector is an object that has magnitude and direction. 
-Magnitude is the length of the vector and direction is from its tail to its end. In other words, imagine vector as the line 
-which connects two points in the Cartesian Coordinate System. A vector of length $n$ is a sequence or array of $n$ numbers, 
-which we can write as:
+In plain English, the vector is a directed arrow. Mathematically, the vector is an object that has magnitude and direction.
+Magnitude is the length of the vector and direction is from its tail to its end. In other words, imagine vector as the line
+which connects two points in the Cartesian Coordinate System. A vector of length $n$ is a sequence or array of $n$ numbers,
+which we can be written as:
 
 $$
 \vec{X} = (x_1, x_2, x_3...x_n)
@@ -336,7 +338,7 @@ plt.show()
 
 ### Dimensions of Vector
 
-The dimension of vector is the number of elements in it. For example, the above vector is a row vector with 
+The dimension of vector is the number of elements in it. For example, the above vector is a row vector with
 dimension $1\times n$, but if we take it as a column vector its dimension will be $n\times 1$.
 
 $$
@@ -406,7 +408,7 @@ print("X + Y = ", X + Y, sep="\n")
 Multiplying vector by a scalar $\alpha$, gives
 
 $$
-\alpha \vec{X} = 
+\alpha \vec{X} =
 \begin{bmatrix}
 \alpha x_1 \\
 \alpha x_2 \\
@@ -433,7 +435,7 @@ $$
 \|\vec{X}\| = \sqrt{x_1^2 + x_2^2 + x_3^2 + ... + x_n^2} = \sqrt{\sum_{i=1}^n x_i^2}
 $$
 
-We can link notion of vector length to the Euclidean distance. If our vector $\vec{X}$ has tail at origin, 
+We can link notion of vector length to the Euclidean distance. If our vector $\vec{X}$ has tail at origin,
 $\vec{0} = [0_1, 0_2, 0_3, ... , 0_n]$ and point at $\vec{X} = [x_1,x_2,...x_n]$, then Euclidean distance between tail and point is the length of $\vec{X}$ by the formula:
 
 $$
@@ -443,7 +445,7 @@ $$
 For example, we have vector $X$
 
 $$
-\vec{X} = 
+\vec{X} =
 \begin{bmatrix}
 1 \\
 2 \\
@@ -471,8 +473,8 @@ print(np.linalg.norm(X))  # More concise method
 
 ### Unit Vector
 
-What if the length of a vector equal to 1? This kind of vector is known as the unit vector and it plays a very important 
-role in different calculations and formulae. We'll see it in later posts, but here unit vector is defined as 
+What if the length of a vector equal to 1? This kind of vector is known as the unit vector and it plays a very important
+role in different calculations and formulae. We'll see it in later posts, but here unit vector is defined as
 
 $$
 \hat{X} = \frac{X}{\|X\|}
@@ -480,7 +482,7 @@ $$
 
 where $\hat{X}$ is a unit vector, the numerator is vector $\vec{X}$ and denominator is the norm of vector $\vec{X}$.
 
-We can use vector $X$ from above example. We already calculated it length which is $\|\vec{X}\| = \sqrt{14}$. 
+We can use vector $X$ from above example. We already calculated it length which is $\|\vec{X}\| = \sqrt{14}$.
 So, we can construct unit vector $\hat{X}$ in the following way:
 
 $$
@@ -510,7 +512,7 @@ print("The length of vector n is:", np.linalg.norm(n))
 
 ### Scalar Product of Two Vectors
 
-Multiplication of two vectors is known as dot product, scalar product, or inner product and is defined by: 
+Multiplication of two vectors is known as dot product, scalar product, or inner product and is defined by:
 
 $$
 \langle\, \vec{X},\vec{Y}\rangle~=~\vec{X}\cdot\vec{Y}~=~x_1\times y_1 + x_2\times y_2 + ... + x_n\times y_n~=~\sum_{i=1}^n x_i\cdot y_i
@@ -561,10 +563,10 @@ print("Angle theta is:", theta)
 
 ### Matrices and Matrix Notation
 
-Matrix is a rectangular array of numbers and/or expressions that are arranged into rows and columns. 
-These rows and columns can be considered as row and column vectors. So, the matrix is the rectangular array 
-which contains either row or column vectors. Generally, capital letters are used to denote matrix and lower 
-case letters to denote each element of that matrix and I will follow this convention. A matrix arranges numbers 
+Matrix is a rectangular array of numbers and/or expressions that are arranged into rows and columns.
+These rows and columns can be considered as row and column vectors. So, the matrix is the rectangular array
+which contains either row or column vectors. Generally, capital letters are used to denote matrix and lower
+case letters to denote each element of that matrix and I will follow this convention. A matrix arranges numbers
 into rows and columns, like this:
 
 $$
@@ -575,13 +577,13 @@ a_{2,1} & a_{2,2}
 \end{bmatrix}
 $$
 
-Here, matrix $A$ has four elements, denoted by lower letter $a$, where subscripts denote row and column number. 
+Here, matrix $A$ has four elements, denoted by lower letter $a$, where subscripts denote row and column number.
 For example, $a_{2,1}$ denotes element at the cross of the second row and first column.
 
 
 ### Dimension of Matrices
 
-If a matrix $A$ has $n$ rows and $m$ columns, we call $A$ $n\times m$ matrix and it is read as **"n by m matrix"**. 
+If a matrix $A$ has $n$ rows and $m$ columns, we call $A$ $n\times m$ matrix and it is read as **"n by m matrix"**.
 A typical $n\times m$ matrix $A$ can be written as:
 
 $$
@@ -690,8 +692,8 @@ print("The negative of C is:", -C, sep="\n")
 
 ```
 
-Multiplying matrices is a little more complex than the operations we've seen so far. There are two cases to consider. 
-One is *scalar multiplication* (multiplying a matrix by a single number), and second is *matrix multiplication* 
+Multiplying matrices is a little more complex than the operations we've seen so far. There are two cases to consider.
+One is *scalar multiplication* (multiplying a matrix by a single number), and second is *matrix multiplication*
 (multiplying a matrix by another matrix).
 
 If we have some scalar or number $\gamma$ and matrix $A$, scalar multiplication is:
@@ -703,7 +705,7 @@ $$
 a_{11} &  \cdots & a_{1m} \\
 \vdots & \vdots  & \vdots \\
 a_{n1} &  \cdots & a_{nm} \\
-\end{bmatrix} = 
+\end{bmatrix} =
 \begin{bmatrix}
 \gamma a_{11} & \cdots & \gamma a_{1m} \\
 \vdots & \vdots & \vdots \\
@@ -726,7 +728,7 @@ print("Matrix multiplied by the scalar is:", scalar * A, sep="\n")
 
 ```
 
-To multiply two matrices, we take **inner product of $i$-th row of the matrix $A$ and $j$-th columns of matrix $B$**. 
+To multiply two matrices, we take **inner product of $i$-th row of the matrix $A$ and $j$-th columns of matrix $B$**.
 If we have two matrices $A$ is $n \times k$ and $B$ is $j \times m$, then to multiply $A$ and $B$, we require $k=j$, and resulting matrix $AB$ is $n \times m$.
 
 $$
@@ -785,9 +787,9 @@ $$
 \end{bmatrix}
 $$
 
-Note that the first matrix is $2\times 3$, and the second matrix is $3\times 2$. 
-The important thing here is that the first matrix has two rows, and the second matrix has two columns. 
-To perform the multiplication, we first take the dot product of the first ***row*** of the first matrix (1,2,3) 
+Note that the first matrix is $2\times 3$, and the second matrix is $3\times 2$.
+The important thing here is that the first matrix has two rows, and the second matrix has two columns.
+To perform the multiplication, we first take the dot product of the first ***row*** of the first matrix (1,2,3)
 and the first ***column*** of the second matrix (9,7,5):
 
 $$
@@ -797,7 +799,7 @@ $$
 (1 \times 9) + (2 \times 7) + (3 \times 5) = 38
 $$
 
-In our resulting matrix (which will always have the same number of ***rows*** as the first matrix, 
+In our resulting matrix (which will always have the same number of ***rows*** as the first matrix,
 and the same number of ***columns*** as the second matrix), we can enter this into the first row and first column element:
 
 $$
@@ -853,9 +855,9 @@ If this is not enough to catch the idea, take a look this [explanation](https://
 
 ### Matrix Transpose
 
-In the above example, we saw that the matrix is the collection of vectors. We also know that vectors can be horizontal 
-as well as vertical, or row and column vectors. Now, what if we change in any matrix row vectors into column vectors? 
-This operation is known as transposition. The idea of this operation is to change matrix rows into matrix columns or vice versa, and is denoted by the superscript $T$. 
+In the above example, we saw that the matrix is the collection of vectors. We also know that vectors can be horizontal
+as well as vertical, or row and column vectors. Now, what if we change in any matrix row vectors into column vectors?
+This operation is known as transposition. The idea of this operation is to change matrix rows into matrix columns or vice versa, and is denoted by the superscript $T$.
 
 $$
 A =
@@ -867,7 +869,7 @@ a_{n1} & a_{n2} & \cdots & a_{nm}
 \end{bmatrix}_{n \times m}
 $$
 
-then 
+then
 
 $$
 A^{T} =
@@ -892,10 +894,10 @@ print("Transpose of A is:", A.T, sep="\n")
 
 ### Identity Matrix
 
-There are several different types of matrices. In this post, we will introduce only **identity matix**. 
-Future post will introduce other types of matrices. An identity matrix (usually indicated by a capital $I$) 
-is the equivalent in matrix terms of the number 1. It is always square matrix, 
-and it has the value **1** in the diagonal element positions I<sub>1,1</sub>, I<sub>2,2</sub>, etc; 
+There are several different types of matrices. In this post, we will introduce only **identity matix**.
+Future post will introduce other types of matrices. An identity matrix (usually indicated by a capital $I$)
+is the equivalent in matrix terms of the number 1. It is always square matrix,
+and it has the value **1** in the diagonal element positions I<sub>1,1</sub>, I<sub>2,2</sub>, etc;
 and 0 in all other element positions. Here's an example of a $3 \times 3$ identity matrix:
 
 $$
@@ -941,9 +943,9 @@ print("A * I = ", np.dot(A, I), sep="\n")
 
 # Conclusion
 
-In this post, I tried to cover the basics of linear algebra. I depicted some theory with examples solved by 
-hand as well as with Numpy. I do hope, this blog will help you to grab the necessary knowledge in linear algebra 
-basics and further gives you the direction where to dig deeper. I did not provide here further resources not to 
+In this post, I tried to cover the basics of linear algebra. I depicted some theory with examples solved by
+hand as well as with Numpy. I do hope, this blog will help you to grab the necessary knowledge in linear algebra
+basics and further gives you the direction where to dig deeper. I did not provide here further resources not to
 confuse the reader and give freedom to look for some other materials.
 
 

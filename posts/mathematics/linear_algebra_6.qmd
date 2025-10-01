@@ -2,15 +2,17 @@
 title: "Advance Linear Algebra with Python - Part II"
 author: "Nodar Okroshiashvili"
 date: "2021-05-13"
-categories: [Mathematics]
-tags: [Linear Algebra, Advance Topics]
-keywords: [advance linear algebra, matrix decompositions in python, linear algebra advances in python, advance linear algebra for machine learning]
-# description: "This is a short introduction to linear algebra with Python. It covers the basics of linear algebra and how to use Python to solve linear algebra problems."
+date-modified: "2025-10-01"
+categories: [Mathematics, Python]
+tags: [Mathematics, Matrix Decompositions, Python]
+
+abstract: |
+    Part 6 of the linear algebra series with Python, that covers various forms of matrix decompositions.
+
+image: "linear_algebra.jpg"
 ---
 
 # Introduction
-
-This is the **sixth** post in the blog series about linear algebra, solely devoted to various matrix decompositions.
 
 
 1. [Introduction to Linear Algebra with Python](linear_algebra_1.qmd)
@@ -312,7 +314,7 @@ Q =
 \end{bmatrix}
 $$
 $$
-\Lambda = 
+\Lambda =
 \begin{bmatrix}
 7 & 0 \\
 0 & 2 \\
@@ -628,7 +630,7 @@ print("The inverse of A is: ", inv_A, sep="\n")
 
 In conclusion, my aim was to make linear algebra tutorials, which are in absence, while learning machine learning or deep learning. Particularly, existing materials either are pure mathematics books, which cover lots of unnecessary(actually they are necessary) things or machine learning books which assume that you already have some linear algebra knowledge. The series starts from very basic and at the end explains some advanced topics. I can say that I tried my best to filter the materials and only explained the most relevant topics for machine learning and deep learning.
 
-Based on my experience, these tutorials are not enough to master the concepts and all intuitions but the journey should 
+Based on my experience, these tutorials are not enough to master the concepts and all intuitions but the journey should
 be continuous. Meaning, that you have to practice more and more.
 
 

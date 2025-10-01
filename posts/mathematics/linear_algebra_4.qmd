@@ -2,15 +2,17 @@
 title: "Intermediate Linear Algebra with Python - Part II"
 author: "Nodar Okroshiashvili"
 date: "2021-03-22"
-categories: [Mathematics]
-tags: [Linear Algebra, Intermediate Topics]
-keywords: [linear algebra in python, vectors in numpy, vector operations in python and numpy, linear algebra for machine learning, python, numpy, scipy, linear algebra, machine learning]
-# description: "This is a short introduction to linear algebra with Python. It covers the basics of linear algebra and how to use Python to solve linear algebra problems."
+date-modified: "2025-10-01"
+categories: [Mathematics, Python]
+tags: [Mathematics, Matrices, Matrix Operations, Python]
+
+abstract: |
+    Part 4 of the linear algebra series with Python, that solely covers the matrices and matrix operations in more detail.
+
+image: "linear_algebra.jpg"
 ---
 
 # Introduction
-
-This is the **fourth** post in the blog series about linear algebra, covering the matrix and matrix operations.
 
 
 1. [Introduction to Linear Algebra with Python](linear_algebra_1.qmd)
@@ -69,7 +71,7 @@ A =
 \end{bmatrix}
 $$
 
-A square matrix is called **triangular** matrix if all of its elements above the main diagonal are zero 
+A square matrix is called **triangular** matrix if all of its elements above the main diagonal are zero
 (**lower triangular matrix**) or all of its elements below the main diagonal are zero (**upper triangular matrix**).
 
 $$
@@ -336,7 +338,7 @@ print("Trace: ", trace)
 
 ### Determinant of a Matrix
 
-There is not plain English definition of determinant but I'll try to explain it by examples to catch the main idea behind
+There is no plain English definition of determinant but I'll try to explain it by examples to catch the main idea behind
 of that special number. However, we can consider determinant as a function which as an input accepts $n \times n$ matrix
 and output real or a complex number, that is called determinant of input matrix and is denoted by $det(A)$ or $|A|$.
 
@@ -355,7 +357,7 @@ det(A) = ad - bc
 $$
 
 It seems easy to calculate the determinant of any $2 \times 2$ matrix right? Now think about how to calculate determinant
-for higher dimensional matrices...did you find a way? If no, let me explain it step by step. 
+for higher dimensional matrices...did you find a way? If no, let me explain it step by step.
 If we have, say $3 \times 3$ matrix $A$ and want to calculate determinant we need some other notions such as **minors**
 and **co-factors** of that matrix.
 
@@ -910,7 +912,7 @@ A =
 \end{bmatrix}
 $$
 
-and 
+and
 
 $$
 B =
@@ -1009,7 +1011,7 @@ X =
     y
 \end{bmatrix}
 \quad
-B = 
+B =
 \begin{bmatrix}
     18 \\
     34
@@ -1074,7 +1076,7 @@ print("X =", X, sep="\n")
 
 ### Elementary Row Operations
 
-Elementary row operations (ERO) play an important role in many matrix algebra applications,
+Elementary Row Operations (ERO) play an important role in many matrix algebra applications,
 such as finding the inverse of a matrix and solving simultaneous linear equations.
 These topics are covered in advance part of the series. An ERO transforms a given matrix $A$ into a
 new matrix $A^{'}$ via one of the following operations:
@@ -1401,7 +1403,7 @@ print("Frobenius Inner Product is: ", frobenius_inner_product)
 
 # Conclusion
 
-To sum up both part of intermediate linear algebra, we've reviewed a lot of materials. Some of them seemed easy, while some of them at the first glance seemed complex, but I do hope a little more practice and reading this tutorial 2 times will help you to master all of these intuitions further. 
+To sum up, both parts of intermediate linear algebra, we've reviewed a lot of materials. Some of them seemed easy, while some of them at the first glance seemed complex, but I do hope a little more practice and reading this tutorial 2 times will help you to master all of these intuitions further.
 
 
 #### References

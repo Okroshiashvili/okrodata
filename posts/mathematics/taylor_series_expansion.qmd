@@ -2,8 +2,8 @@
 title: "Taylor Series Expansion with Python"
 author: "Nodar Okroshiashvili"
 date: "2020-10-10"
-categories: [Mathematics, Python]
 date-modified: "2025-09-30"
+categories: [Mathematics, Python]
 tags: [Taylor Series Expansion, Maclaurin Series Expansion, Python, Numpy, Scipy, Sympy]
 
 abstract: |
