@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2021-03-17">
-<meta name="keywords" content="linear algebra in python, vectors in numpy, vector operations in python and numpy, linear algebra for machine learning, python, numpy, scipy, linear algebra, machine learning">
 
 <title>Intermediate Linear Algebra with Python - Part I</title>
 <style>
@@ -139,10 +138,8 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Intermediate Linear Algebra with Python - Part I">
-<meta property="og:description" content="Data Software Engineering blog">
-<meta property="og:image" content="https://okrodata.dev/posts/mathematics/right_handed.png">
-<meta property="og:image:height" content="291">
-<meta property="og:image:width" content="387">
+<meta property="og:description" content="Part 3 of the linear algebra series with Python, that solely covers the vectors and vector operations in more detail.">
+<meta property="og:image" content="https://okrodata.dev/posts/mathematics/linear_algebra.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -203,6 +200,7 @@ window.Quarto = {
       <h1 class="title">Intermediate Linear Algebra with Python - Part I</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Mathematics</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -224,14 +222,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 1, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>linear algebra in python, vectors in numpy, vector operations in python and numpy, linear algebra for machine learning, python, numpy, scipy, linear algebra, machine learning</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Part 3 of the linear algebra series with Python, that solely covers the vectors and vector operations in more detail.</p>
     </div>
   </div>
   
@@ -265,7 +268,6 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is the <strong>third</strong> post in the blog series about linear algebra, covering the vector and vector operations.</p>
 <ol type="1">
 <li><a href="../../posts/mathematics/linear_algebra_1.html">Introduction to Linear Algebra with Python</a></li>
 <li><a href="../../posts/mathematics/linear_algebra_2.html">Basic Linear Algebra with Python</a></li>
@@ -397,13 +399,13 @@ B =
 {\rm{Volume}} = \left| {\vec{a} \centerdot \left( {\vec{b} \times \vec{c}} \right)} \right|
 \]</span></p>
 <p>here, absolute value bars are necessary since the result could be negative and volume must be positive.</p>
-<div id="14ae102a" class="cell" data-execution_count="1">
+<div id="5e480472" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> cm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5b088a9f" class="cell" data-execution_count="2">
+<div id="3bd602fa" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -486,7 +488,7 @@ x_1 e_1 + x_2 e_2 + x_3 e_3
 \]</span></p>
 <p>This means that by using <span class="math inline">\(A\)</span> or vectors <span class="math inline">\(e_1\)</span>, <span class="math inline">\(e_2\)</span> and <span class="math inline">\(e_3\)</span> we can generate any vector in <span class="math inline">\(\mathbb{R}^3\)</span> by performing linear operations.</p>
 <p>This figure below shows the span of <span class="math inline">\(A = \{a_1, a_2\}\)</span> in <span class="math inline">\(\mathbb{R}^3\)</span>. The span is a 2 dimensional plane passing through these two points and the origin.</p>
-<div id="9a69ea13" class="cell" data-execution_count="3">
+<div id="d1aaeefd" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear function to generate a plane</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x, y):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="fl">0.2</span> <span class="op">*</span> x) <span class="op">+</span> (<span class="fl">0.1</span> <span class="op">*</span> y)</span>
@@ -586,7 +588,7 @@ A =
 c_{1} ([1, 2]) + c_{2} ([2, 4]) = [0, 0]
 \]</span></p>
 <p>There is a nontrivial linear combination with <span class="math inline">\(c_{1} = 2\)</span> and <span class="math inline">\(c_{2} = 1\)</span> that yields <span class="math inline">\(0\)</span>. This implies <span class="math inline">\(A\)</span> is the linearly dependent set of vectors. It’s easy in this case to spot linear dependence by first glance, as the second vector is 2 times the first vector, which indicates linear dependence.</p>
-<div id="7b041307" class="cell" data-execution_count="4">
+<div id="23ea3a13" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">1</span>]])  <span class="co"># this is our set of vectors</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>_, inds <span class="op">=</span> sympy.Matrix(matrix).T.rref()</span>
@@ -597,7 +599,7 @@ c_{1} ([1, 2]) + c_{2} ([2, 4]) = [0, 0]
 </div>
 </div>
 <p>This says that the vectors at index 0 and 1 are linearly independent. Let consider a linearly dependent set of vectors to see the result of the above code clearly.</p>
-<div id="e7403d07" class="cell" data-execution_count="5">
+<div id="4b75105c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]])  <span class="co"># this is our set of vectors</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>_, inds <span class="op">=</span> sympy.Matrix(matrix).T.rref()</span>
@@ -614,7 +616,7 @@ c_{1} ([1, 2]) + c_{2} ([2, 4]) = [0, 0]
 <section id="conclusion-for-part-i" class="level1">
 <h1>Conclusion for part I</h1>
 <p>Here, I only covered half of the materials that I initially had intended to cover. I split those materials into two parts, mainly because to improve readability and maintain consistency.</p>
-<p>In the second part I review matrices and operations on matrices.</p>
+<p>In the second part, I review matrices and operations on matrices.</p>
 <section id="references" class="level4">
 <h4 class="anchored" data-anchor-id="references">References</h4>
 <ul>

@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2021-02-22">
-<meta name="keywords" content="linear algebra, linear algebra with python, introduction to linear algebra with python, python, numpy, scipy">
 
 <title>Introduction to Linear Algebra with Python</title>
 <style>
@@ -104,7 +103,8 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Introduction to Linear Algebra with Python">
-<meta property="og:description" content="Data Software Engineering blog">
+<meta property="og:description" content="Part 1 of the linear algebra series with Python, that covers the basic building blocks of linear algebra.">
+<meta property="og:image" content="https://okrodata.dev/posts/mathematics/linear_algebra.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -165,6 +165,7 @@ window.Quarto = {
       <h1 class="title">Introduction to Linear Algebra with Python</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Mathematics</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -186,14 +187,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 1, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>linear algebra, linear algebra with python, introduction to linear algebra with python, python, numpy, scipy</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Part 1 of the linear algebra series with Python, that covers the basic building blocks of linear algebra.</p>
     </div>
   </div>
   
@@ -219,7 +225,6 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>These are the series of linear algebra mainly based on <em>Numpy</em> and <em>Scipy</em>.</p>
 <p>The series will follow the sequence:</p>
 <ol type="1">
 <li><strong>Introduction to Linear Algebra with Python</strong></li>
@@ -235,7 +240,7 @@ window.Quarto = {
 <li>Advance Linear Algebra with Python - Part II</li>
 </ol></li>
 </ol>
-<p><strong>In these series I will attempt to demystify linear algebra concepts to beginners and combine it with Python for practical use.</strong></p>
+<p><strong>In these series I will attempt to demystify linear algebra concepts for beginners and combine it with Python for practical use.</strong></p>
 <p>Linear algebra is one of the building block of data science among others. Its importance is huge, as all supervised, unsupervised and semi-supervised algorithms use it with some degree. One great example is Google’s famous <a href="https://en.wikipedia.org/wiki/PageRank">Page Rank</a> algorithm, which heavily relies on it. And that is not all. We can find as many usage cases of linear algebra as many individuals exist in the data science field.</p>
 <p>The purpose of this blog series is to introduce you the ways how to use linear algebra in data science. More precisely, by this series, I intend to help aspiring data scientist to refresh their linear algebra knowledge with Python and gain some hands-on experience. Moreover, this may serve you as a starting point to dig deeper into an amazing world of linear algebra with Python.</p>
 <p>Let start by defining what is linear algebra</p>
@@ -244,7 +249,7 @@ window.Quarto = {
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Linear algebra is a branch of mathematics that is concerned with mathematical structures, closed under addition and scalar multiplication operations and that includes the theory of systems of linear equations, matrices, determinants, vector spaces, and linear transformations.</p>
 </div>
 </blockquote>
-<p>Let’s start explaining word by word the definition of linear algebra. Loosely speaking, <a href="https://en.wikipedia.org/wiki/Mathematical_structure">mathematical structure</a> is a set, together with a family of operations and relations defined on that set. Now divide “Closed under addition and scalar multiplication” into two parts. First is “closed under addition” which means that a set is “closed under addition” if the sum of any two members of this set belongs to this set again. For example, imagine the set of even integers. Then, take any to integer and add them up. The result is an even integer belonging to the initial set. Here is a mathematical definition.</p>
+<p>Loosely speaking, <a href="https://en.wikipedia.org/wiki/Mathematical_structure">mathematical structure</a> is a set, together with a family of operations and relations defined on that set. Now divide “Closed under addition and scalar multiplication” into two parts. First is “closed under addition” which means that a set is “closed under addition” if the sum of any two members of this set belongs to this set again. For example, imagine the set of even integers. Then, take any to integer and add them up. The result is an even integer belonging to the initial set. Here is a mathematical definition.</p>
 <p><span class="math display">\[
 A=\{x \in \mathbb{Z}~\vert~mod~2 =0\}
 \]</span></p>
@@ -273,7 +278,7 @@ A = (0,1)
 </section>
 <section id="consclusion" class="level1">
 <h1>Consclusion</h1>
-<p>To sum up, this post is an introduction towards linear algebra series, where I will introduce you linear algebra concepts intuitively and programmatically in Python. The main idea of this series is to feel comfortable in the field and to give you the direction where to dig deeper.</p>
+<p>To sum up, this post is an introduction towards series, where I will introduce you linear algebra concepts intuitively and programmatically in Python. The main idea of this series is to feel comfortable in the field and to give you the direction where to dig deeper.</p>
 
 
 </section>

@@ -246,13 +246,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Disclaimer: Any name, phone, email, and the title is a pure coincidence. Data is random and fake.</p>
 </blockquote>
 <p>Here is our data.</p>
-<div id="e9cbabe7" class="cell" data-execution_count="1">
+<div id="ca395472" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="54e7c215" class="cell" data-execution_count="2">
+<div id="5787efc4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"company_name"</span>: [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>],</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"info"</span>: [</span>
@@ -344,11 +344,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let convert this dictionary into Pandas DataFrame and see what data we have.</p>
-<div id="ae46017d" class="cell" data-execution_count="3">
+<div id="7bc23a8b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="131">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -393,9 +393,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We see that the first column seems okay, but the second one not. Here we have one big list containing smaller two-element lists.</p>
-<div id="ad5b49e6" class="cell" data-execution_count="4">
+<div id="a0bd4879" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"info"</span>].iloc[<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="132">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>[['Name', 'Scott Lamb'],
  ['Title', 'Actuary'],
  ['Phone', '316-978-3804'],
@@ -434,11 +434,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-i-approached-this-problem" class="level2">
 <h2 class="anchored" data-anchor-id="how-i-approached-this-problem">How I approached this problem</h2>
 <p>The first idea that came to my mind was to use Pandas DataFrame <code>.explode()</code> method to unpack list of lists, which returned lists containing two elements. After that, I extracted these two elements into two different columns.</p>
-<div id="bbd980e6" class="cell" data-execution_count="5">
+<div id="a2843efa" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_exploded <span class="op">=</span> df.explode(<span class="st">"info"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_exploded.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="133">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -482,14 +482,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1533a0e1" class="cell" data-execution_count="6">
+<div id="465b7928" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two new columns</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_exploded.loc[:, <span class="st">"tag"</span>] <span class="op">=</span> df_exploded[<span class="st">"info"</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: x[<span class="dv">0</span>])</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df_exploded.loc[:, <span class="st">"result"</span>] <span class="op">=</span> df_exploded[<span class="st">"info"</span>].<span class="bu">map</span>(<span class="kw">lambda</span> x: x[<span class="dv">1</span>])</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df_exploded.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="134">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -546,7 +546,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Despite unpacking the list of lists, that is not the format I wanted. So, I need to do an extra transformation.</p>
-<div id="967290a9" class="cell" data-execution_count="7">
+<div id="96347cfd" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_exploded_final <span class="op">=</span> (</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    df_exploded.groupby([<span class="st">"company_name"</span>, <span class="st">"tag"</span>])[<span class="st">"result"</span>]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">apply</span>(<span class="kw">lambda</span> x: pd.Series(x.values))</span>
@@ -556,7 +556,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>df_exploded_final.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="135">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -620,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>It seems we did a good job. However, this approach is prone to errors. Namely, it does not preserve the order of the list values and may assign a different email to a different person. That was not what I need.</p>
 <p>So, I decided to use another way to solve this problem. Notably, as the data contained millions of rows, it seemed impossible to be too precise, but I wanted to reduce the error of non-matching cases. To achieve this, I iterated over the values of <code>info</code> column and converted it to dict of lists, where keys are tags (identifiers) and values are actual employee information.</p>
-<div id="159c1528" class="cell" data-execution_count="8">
+<div id="4544a058" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> []</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> df[<span class="st">"info"</span>].tolist():</span>
@@ -633,7 +633,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df.loc[:, <span class="st">"new_info"</span>] <span class="op">=</span> out</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"new_info"</span>].iloc[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="136">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>{'Name': ['David Jones'],
  'Title': ['CEO'],
  'Phone': ['207-685-1626'],
@@ -641,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>That’s a step forward. After this, I was interested in counting the values for each key in dicts for each row. I made small changes in the above code and applied it to the <code>new_info</code> column.</p>
-<div id="dd8e3d8c" class="cell" data-execution_count="9">
+<div id="1db7a560" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> []</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> df[<span class="st">"new_info"</span>]:</span>
@@ -654,12 +654,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>df.loc[:, <span class="st">"new_info_stats"</span>] <span class="op">=</span> out</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"new_info_stats"</span>].iloc[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="137">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>{'Name': 1, 'Title': 1, 'Phone': 1, 'Email': 1}</code></pre>
 </div>
 </div>
 <p>As we calculated value counts for each dict, now we need to add three helper columns to the dataset for further usage. These helper columns will help to differentiate matching cases and non-matching cases.</p>
-<div id="d4e567c4" class="cell" data-execution_count="10">
+<div id="337387e1" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"_max"</span>] <span class="op">=</span> df[<span class="st">"new_info_stats"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">max</span>(x.values()))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"_min"</span>] <span class="op">=</span> df[<span class="st">"new_info_stats"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">min</span>(x.values()))</span>
@@ -667,13 +667,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>df.loc[:, <span class="st">"max_equal_min"</span>] <span class="op">=</span> pd.Series(np.where((df[<span class="st">"_max"</span>] <span class="op">==</span> df[<span class="st">"_min"</span>]), <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The column <code>max_equal_min</code> is a dummy variable and helps us to differentiate matching and non-matching cases. The value 1 indicates we have a matching case and value 0 - non-matching case. According to this column, I split data into two parts. The first only contains matching examples, and the second will have only non-matching cases.</p>
-<div id="57c46c2c" class="cell" data-execution_count="11">
+<div id="f8f55654" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_first <span class="op">=</span> df[df[<span class="st">"max_equal_min"</span>] <span class="op">&gt;</span> <span class="dv">0</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df_second <span class="op">=</span> df[df[<span class="st">"max_equal_min"</span>] <span class="op">==</span> <span class="dv">0</span>].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The pre-processing of the first DataFrame is over and is ready to flatten. To do so, I iterate over <code>new_info</code> column and transform each row into Pandas DataFrame. After this step, data will be flat.</p>
-<div id="bc50ef41" class="cell" data-execution_count="12">
+<div id="1a433535" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> []</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> df_first[<span class="st">"new_info"</span>]:</span>
@@ -685,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>df_first_final_i.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="140">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -728,13 +728,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Woohoo, it works! However, imagine having millions of rows how slow this approach will be. For this reason, I tried another method and found it much faster. Here it is.</p>
-<div id="f9e45f03" class="cell" data-execution_count="13">
+<div id="db195fca" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_first_final_ii <span class="op">=</span> (</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    df_first[<span class="st">"new_info"</span>].<span class="bu">apply</span>(pd.Series).<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.explode()).drop_duplicates().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>df_first_final_ii.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="141">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -777,9 +777,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Faster and cleaner solution. But, what about the second DataFrame? It turned out that the above solution did not fit the second DataFrame and gave me an error. The error was <code>ValueError: cannot reindex from a duplicate axis</code>. Before finding the solution for this error, let take a look at the data.</p>
-<div id="41469a89" class="cell" data-execution_count="14">
+<div id="2c1a7514" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_second.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="142">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -844,7 +844,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In the second and third row, we have one <code>Name</code> and three <code>Title</code> and two <code>Phone</code>, respectively, for the <code>new_info_stats</code> column. This may be due to the data entry or extraction reason. Not 100% sure that this is the case, but the likelihood is very high. So, we have to handle this problem properly. One solution is to concatenate strings for the values of <code>Title</code> and <code>Phone</code> keys.</p>
-<div id="be37d656" class="cell" data-execution_count="15">
+<div id="7c74afec" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_info(record: <span class="bu">dict</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">len</span>(record.keys()) <span class="op">==</span> <span class="dv">4</span></span>
@@ -881,7 +881,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>df_second[<span class="st">"new_info"</span>] <span class="op">=</span> df_second[<span class="st">"new_info"</span>].<span class="bu">apply</span>(process_info)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This is a simple logic to check if we are correctly concatenating string. After applying this function, the second DataFrame is ready to flatten. As I mentioned above the good old method did not give me the desired result for this case and then I came up to the following:</p>
-<div id="3766303e" class="cell" data-execution_count="16">
+<div id="4ec74246" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> flatten(df, column):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> []</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> df[column]:</span>
@@ -901,7 +901,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>df_second_final <span class="op">=</span> flatten(df_second, <span class="st">"new_info"</span>)</span>
 <span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>df_second_final.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="144">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
 

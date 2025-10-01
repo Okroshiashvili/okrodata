@@ -335,7 +335,7 @@ e^{x} =
 <p>Now let visualize these functions and their Taylor approximations at different points with a different order of expansion. Before visualizing results it’s good to have a function which will do symbolic Taylor expansion for higher orders for one variable functions. For multi-variable functions, it’s up to you.</p>
 <section id="practical-examples" class="level2">
 <h2 class="anchored" data-anchor-id="practical-examples">Practical Examples</h2>
-<div id="d64399dc" class="cell" data-execution_count="1">
+<div id="db81fca6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> series, Symbol</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy.functions <span class="im">import</span> sin, cos, exp</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy.plotting <span class="im">import</span> plot</span>
@@ -343,7 +343,7 @@ e^{x} =
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0fadb95a" class="cell" data-execution_count="2">
+<div id="60e39ed5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define symbol</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> Symbol(<span class="st">"x"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -383,7 +383,7 @@ e^{x} =
 </div>
 <p>While defining “taylor” function, in return statement I used <strong>“.removeO()”</strong> method. This method is used in series expansion to remove <span class="math inline">\(\mathit O(x^{n})\)</span> term, which is Landau order term at <span class="math inline">\(x = 0\)</span> and not to be confused with big <span class="math inline">\(\mathit O\)</span> notation used in computer science, which generally represents the Landau order term at <span class="math inline">\(x = \infty\)</span>.</p>
 <p>We can do <span class="math inline">\(sin(x)\)</span>, <span class="math inline">\(cos(x)\)</span>, and <span class="math inline">\(e(x)\)</span> expansion by using <strong>Sympy</strong>.</p>
-<div id="2f2c3169" class="cell" data-execution_count="3">
+<div id="f862944e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"sin(x) ="</span>, taylor(sin(x), <span class="dv">0</span>, <span class="dv">4</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cos(x) ="</span>, taylor(cos(x), <span class="dv">0</span>, <span class="dv">4</span>))</span>
@@ -396,7 +396,7 @@ e(x) = x**3/6 + x**2/2 + x + 1</code></pre>
 </div>
 </div>
 <p>That’s not all. We can evaluate these functions at any point. For instance as we did above for <span class="math inline">\(x = 1\)</span></p>
-<div id="3fa89cc6" class="cell" data-execution_count="4">
+<div id="a3be4f91" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"sin(1) ="</span>, taylor(sin(x), <span class="dv">0</span>, <span class="dv">4</span>).subs(x, <span class="dv">1</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cos(1) ="</span>, taylor(cos(x), <span class="dv">0</span>, <span class="dv">4</span>).subs(x, <span class="dv">1</span>))</span>
@@ -411,7 +411,7 @@ e(1) = 8/3</code></pre>
 <p>As we have all the necessary tools to visualize the results, let do it.</p>
 <section id="sine-expansion" class="level3">
 <h3 class="anchored" data-anchor-id="sine-expansion">Sine Expansion</h3>
-<div id="1aad8d3a" class="cell" data-execution_count="5">
+<div id="e5488d57" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will plot sine and its Taylor approximations</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plot_expansion(</span>
@@ -431,7 +431,7 @@ e(1) = 8/3</code></pre>
 </section>
 <section id="cosine-expansion" class="level3">
 <h3 class="anchored" data-anchor-id="cosine-expansion">Cosine Expansion</h3>
-<div id="217583a9" class="cell" data-execution_count="6">
+<div id="7306d3ce" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will plot cosine and its Taylor approximations</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plot_expansion(</span>
@@ -451,7 +451,7 @@ e(1) = 8/3</code></pre>
 </section>
 <section id="exponential-expansion" class="level3">
 <h3 class="anchored" data-anchor-id="exponential-expansion">Exponential Expansion</h3>
-<div id="463c1373" class="cell" data-execution_count="7">
+<div id="5cf2475d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will plot exponent and its Taylor approximations</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plot_expansion(</span>

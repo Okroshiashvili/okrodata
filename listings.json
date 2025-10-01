@@ -3,7 +3,6 @@
     "listing": "/blog.html",
     "items": [
       "/posts/time_series_analysis/singular_spectrum_analysis.html",
-      "/posts/python/flatten_iterable.html",
       "/posts/mathematics/linear_algebra_6.html",
       "/posts/mathematics/linear_algebra_5.html",
       "/posts/mathematics/linear_algebra_4.html",

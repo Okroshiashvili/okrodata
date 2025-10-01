@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2021-04-21">
-<meta name="keywords" content="eigenvectors and eigenvalues in python, gauss and gauss-jordan elimination with python, matrix image and kernel, advances of linear algebra with python, linear algebra advances with python, numpy, scipy">
 
 <title>Advance Linear Algebra with Python - Part I</title>
 <style>
@@ -139,10 +138,8 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Advance Linear Algebra with Python - Part I">
-<meta property="og:description" content="Data Software Engineering blog">
-<meta property="og:image" content="https://okrodata.dev/posts/mathematics/linear_algebra_5_files/figure-html/cell-4-output-2.png">
-<meta property="og:image:height" content="822">
-<meta property="og:image:width" content="1180">
+<meta property="og:description" content="Part 5 of the linear algebra series with Python, that covers operations such as Basis, Ranks, Gauss and Gauss-Jordan elimination, eigenvalues and eigenvectors.">
+<meta property="og:image" content="https://okrodata.dev/posts/mathematics/linear_algebra.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -203,6 +200,7 @@ window.Quarto = {
       <h1 class="title">Advance Linear Algebra with Python - Part I</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Mathematics</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -224,14 +222,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 1, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>eigenvectors and eigenvalues in python, gauss and gauss-jordan elimination with python, matrix image and kernel, advances of linear algebra with python, linear algebra advances with python, numpy, scipy</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Part 5 of the linear algebra series with Python, that covers operations such as Basis, Ranks, Gauss and Gauss-Jordan elimination, eigenvalues and eigenvectors.</p>
     </div>
   </div>
   
@@ -277,7 +280,6 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is the <strong>fifth</strong> post in the blog series about linear algebra, covering advanced vector and matrix operations.</p>
 <ol type="1">
 <li><a href="../../posts/mathematics/linear_algebra_1.html">Introduction to Linear Algebra with Python</a></li>
 <li><a href="../../posts/mathematics/linear_algebra_2.html">Basic Linear Algebra with Python</a></li>
@@ -887,13 +889,13 @@ x_{4}
 \]</span></p>
 <p>Where, <span class="math inline">\(x_{3}\)</span> and <span class="math inline">\(x_{4}\)</span> are free variables and can be any number in <span class="math inline">\(R\)</span></p>
 <p>Note, that both original matrix <span class="math inline">\(A\)</span> and its row-echelon for has the same kernel. This means that row reduction preserves the kernel or null space.</p>
-<div id="b0953d23" class="cell" data-execution_count="1">
+<div id="5cbff8fe" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.linalg <span class="im">import</span> null_space</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sympy <span class="im">import</span> Matrix</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="54d805fd" class="cell" data-execution_count="2">
+<div id="07a11f7c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">2</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>]])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This matrix is normalized, meaning that it has unit length</span></span>
@@ -1173,7 +1175,7 @@ T(\vec{v}) = A \vec{v} =
 \end{bmatrix}
 \]</span></p>
 <p>In this case, the resulted vector changed in length but not changed in direction.</p>
-<div id="5b680dc1" class="cell" data-execution_count="3">
+<div id="c657ec50" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">2</span>]])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1222,7 +1224,7 @@ T(\vec{v}) = A \vec{v} =
 \end{bmatrix}
 \]</span></p>
 <p>This time, resulted vector changed in direction but has the same length.</p>
-<div id="f5cd8810" class="cell" data-execution_count="4">
+<div id="92c19954" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">0</span>]])</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1270,7 +1272,7 @@ T(\vec{v}) = A \vec{v} =
 \end{bmatrix}
 \]</span></p>
 <p>This time the resulted vector changed in the direction as well as the length.</p>
-<div id="a6362e68" class="cell" data-execution_count="5">
+<div id="c8d1439c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">0</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">2</span>]])</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1323,7 +1325,7 @@ T(\vec{v}) = A\vec{v} + \vec{b} =
 \end{bmatrix}
 \]</span></p>
 <p>This kind of transformation is actually the basic block of linear regression, which is a core foundation for machine learning. However, these concepts are out of the scope of this tutorial. Python code is below for this transformation.</p>
-<div id="eda7c4ea" class="cell" data-execution_count="6">
+<div id="bb6da948" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">1</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">1</span>]])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">6</span>])</span>
@@ -1526,7 +1528,7 @@ v_{\lambda = 1} =
 \end{bmatrix}
 \]</span></p>
 <p>Finding eigenvectors for <span class="math inline">\(\lambda = 2\)</span> and <span class="math inline">\(\lambda = 11\)</span> is up to you.</p>
-<div id="cb5eb61f" class="cell" data-execution_count="7">
+<div id="d5dde394" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">9</span>]])</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>

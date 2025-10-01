@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2021-03-22">
-<meta name="keywords" content="linear algebra in python, vectors in numpy, vector operations in python and numpy, linear algebra for machine learning, python, numpy, scipy, linear algebra, machine learning">
 
 <title>Intermediate Linear Algebra with Python - Part II</title>
 <style>
@@ -139,7 +138,8 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Intermediate Linear Algebra with Python - Part II">
-<meta property="og:description" content="Data Software Engineering blog">
+<meta property="og:description" content="Part 4 of the linear algebra series with Python, that solely covers the matrices and matrix operations in more detail.">
+<meta property="og:image" content="https://okrodata.dev/posts/mathematics/linear_algebra.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -200,6 +200,7 @@ window.Quarto = {
       <h1 class="title">Intermediate Linear Algebra with Python - Part II</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Mathematics</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -221,14 +222,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 1, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>linear algebra in python, vectors in numpy, vector operations in python and numpy, linear algebra for machine learning, python, numpy, scipy, linear algebra, machine learning</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Part 4 of the linear algebra series with Python, that solely covers the matrices and matrix operations in more detail.</p>
     </div>
   </div>
   
@@ -273,7 +279,6 @@ window.Quarto = {
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>This is the <strong>fourth</strong> post in the blog series about linear algebra, covering the matrix and matrix operations.</p>
 <ol type="1">
 <li><a href="../../posts/mathematics/linear_algebra_1.html">Introduction to Linear Algebra with Python</a></li>
 <li><a href="../../posts/mathematics/linear_algebra_2.html">Basic Linear Algebra with Python</a></li>
@@ -476,10 +481,10 @@ A^2 =
 \]</span></p>
 <hr>
 <p>So, as I said there are much much more matrices, but I restricted here due to limited space. If you think you need more, definitely check this out <a href="https://en.wikipedia.org/wiki/List_of_matrices">wikipedia page</a>.</p>
-<div id="cdc3059d" class="cell" data-execution_count="1">
+<div id="26f9ad12" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="43c472ac" class="cell" data-execution_count="2">
+<div id="56d049db" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagonal Matrix</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>diagonal <span class="op">=</span> np.diag([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Diagonal Matrix"</span>, diagonal, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
@@ -562,7 +567,7 @@ A =
 <p><span class="math display">\[
 tr(A)=\sum_{i=1}^{3}a_{ii} = a_{11} + a_{22} + a_{33} = 1 + 5 + 9 = 15
 \]</span></p>
-<div id="41f78ef4" class="cell" data-execution_count="3">
+<div id="ff2a1ca7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>trace <span class="op">=</span> np.trace(A)</span>
@@ -574,7 +579,7 @@ tr(A)=\sum_{i=1}^{3}a_{ii} = a_{11} + a_{22} + a_{33} = 1 + 5 + 9 = 15
 </section>
 <section id="determinant-of-a-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="determinant-of-a-matrix">Determinant of a Matrix</h3>
-<p>There is not plain English definition of determinant but I’ll try to explain it by examples to catch the main idea behind of that special number. However, we can consider determinant as a function which as an input accepts <span class="math inline">\(n \times n\)</span> matrix and output real or a complex number, that is called determinant of input matrix and is denoted by <span class="math inline">\(det(A)\)</span> or <span class="math inline">\(|A|\)</span>.</p>
+<p>There is no plain English definition of determinant but I’ll try to explain it by examples to catch the main idea behind of that special number. However, we can consider determinant as a function which as an input accepts <span class="math inline">\(n \times n\)</span> matrix and output real or a complex number, that is called determinant of input matrix and is denoted by <span class="math inline">\(det(A)\)</span> or <span class="math inline">\(|A|\)</span>.</p>
 <p>For any <span class="math inline">\(2 \times 2\)</span> square matrix <span class="math inline">\(A\)</span> determinant is calculated by:</p>
 <p><span class="math display">\[
 A =
@@ -587,7 +592,7 @@ A =
 det(A) = ad - bc
 \]</span></p>
 <p>It seems easy to calculate the determinant of any <span class="math inline">\(2 \times 2\)</span> matrix right? Now think about how to calculate determinant for higher dimensional matrices…did you find a way? If no, let me explain it step by step. If we have, say <span class="math inline">\(3 \times 3\)</span> matrix <span class="math inline">\(A\)</span> and want to calculate determinant we need some other notions such as <strong>minors</strong> and <strong>co-factors</strong> of that matrix.</p>
-<div id="34e8ceaa" class="cell" data-execution_count="4">
+<div id="bd096845" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">8</span>]])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>determinant <span class="op">=</span> np.linalg.det(A)</span>
@@ -1003,7 +1008,7 @@ A \cdot A^{-1} =
 \begin{bmatrix}1 &amp; 0 &amp; 0\\0 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 1\end{bmatrix} = I
 \]</span></p>
 <p>Do you see how challenging can be finding the inverse of <span class="math inline">\(4 \times 4\)</span> matrix? That’s why we use calculators or computer program to compute it.</p>
-<div id="686b1b98" class="cell" data-execution_count="5">
+<div id="08426ca1" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">8</span>]])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>inverse <span class="op">=</span> np.linalg.inv(A)</span>
@@ -1060,7 +1065,7 @@ A \cdot B^{-1}
 \ \equiv
 A \div B
 \]</span></p>
-<div id="16681e73" class="cell" data-execution_count="6">
+<div id="d7026236" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">8</span>]])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1155,7 +1160,7 @@ X =
 \]</span> <span class="math display">\[
 30 + 4 = 34
 \]</span></p>
-<div id="834d72ea" class="cell" data-execution_count="7">
+<div id="d96bf0dc" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">6</span>, <span class="dv">2</span>]])</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">18</span>], [<span class="dv">34</span>]])</span>
@@ -1179,7 +1184,7 @@ X =
 </section>
 <section id="elementary-row-operations" class="level3">
 <h3 class="anchored" data-anchor-id="elementary-row-operations">Elementary Row Operations</h3>
-<p>Elementary row operations (ERO) play an important role in many matrix algebra applications, such as finding the inverse of a matrix and solving simultaneous linear equations. These topics are covered in advance part of the series. An ERO transforms a given matrix <span class="math inline">\(A\)</span> into a new matrix <span class="math inline">\(A^{'}\)</span> via one of the following operations:</p>
+<p>Elementary Row Operations (ERO) play an important role in many matrix algebra applications, such as finding the inverse of a matrix and solving simultaneous linear equations. These topics are covered in advance part of the series. An ERO transforms a given matrix <span class="math inline">\(A\)</span> into a new matrix <span class="math inline">\(A^{'}\)</span> via one of the following operations:</p>
 <ol type="1">
 <li>Interchange two rows (or columns)</li>
 <li>Multiply each element in a row (or column) by a non-zero number</li>
@@ -1248,7 +1253,7 @@ Rank(A) \leq min(m, n)
 <p>This means that if a matrix has, for example, 3 rows and 5 columns, its rank cannot be more than 3. The rank of a matrix would be zero if and only if the matrix had no elements. If a matrix had even one element, its minimum rank would be one. When all of the vectors in a matrix are linearly independent, the matrix is said to be <strong>full rank</strong>.</p>
 <p>To calculate the rank of a matrix, we have to compute the determinant. It turns out that the rank of a matrix <span class="math inline">\(A\)</span>, denoted by <span class="math inline">\(Rank(A)\)</span> is the size of the largest non-zero <span class="math inline">\(m \times m\)</span> sub-matrix with non-zero determinant. To simplify further, if the determinant of <span class="math inline">\(4 \times 4\)</span> matrix <span class="math inline">\(A\)</span> is zero and any <span class="math inline">\(3 \times3\)</span> sub-matrix of original matrix <span class="math inline">\(A\)</span> has non-zero determinant then the rank of the original matrix <span class="math inline">\(A\)</span> is <span class="math inline">\(3\)</span>. So we can say that rank shows the <a href="https://en.wikipedia.org/wiki/Degenerate_bilinear_form">“non-degenerateness”</a> of the matrix <span class="math inline">\(A\)</span>.</p>
 <p>Actually, there is no only one way to compute the rank. I will provide one more way in the advanced tutorial.</p>
-<div id="f75ac83c" class="cell" data-execution_count="8">
+<div id="0bf51d8f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>], [<span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>, <span class="dv">5</span>]])</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>rank_A <span class="op">=</span> np.linalg.matrix_rank(A)</span>
@@ -1299,7 +1304,7 @@ A A
     15 &amp; 22
 \end{bmatrix}
 \]</span></p>
-<div id="2b8273d2" class="cell" data-execution_count="9">
+<div id="5d66a68f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>A_square <span class="op">=</span> np.linalg.matrix_power(A, <span class="dv">2</span>)</span>
@@ -1403,7 +1408,7 @@ B =
 <p><span class="math display">\[
 \langle A,B \rangle_{F} = 2 \cdot 8 + 0 \cdot (-3) + 1 \cdot 4 + 1 \cdot 1 = 21
 \]</span></p>
-<div id="da109d28" class="cell" data-execution_count="10">
+<div id="24a85f6a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]])</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>frobenius_norm <span class="op">=</span> np.linalg.norm(A, <span class="bu">ord</span><span class="op">=</span><span class="st">"fro"</span>)</span>
@@ -1433,7 +1438,7 @@ Frobenius Inner Product is:  21</code></pre>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>To sum up both part of intermediate linear algebra, we’ve reviewed a lot of materials. Some of them seemed easy, while some of them at the first glance seemed complex, but I do hope a little more practice and reading this tutorial 2 times will help you to master all of these intuitions further.</p>
+<p>To sum up, both parts of intermediate linear algebra, we’ve reviewed a lot of materials. Some of them seemed easy, while some of them at the first glance seemed complex, but I do hope a little more practice and reading this tutorial 2 times will help you to master all of these intuitions further.</p>
 <section id="references" class="level4">
 <h4 class="anchored" data-anchor-id="references">References</h4>
 <ul>

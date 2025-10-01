@@ -8,7 +8,6 @@
 
 <meta name="author" content="Nodar Okroshiashvili">
 <meta name="dcterms.date" content="2021-08-10">
-<meta name="keywords" content="time series, singular spectrum analysis, python, numpy, scipy, matplotlib, pandas, statsmodels, time series decomposition, singular value decomposition">
 
 <title>Singular Spectrum Analysis with Python</title>
 <style>
@@ -142,10 +141,8 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Singular Spectrum Analysis with Python">
-<meta property="og:description" content="Data Software Engineering blog">
-<meta property="og:image" content="https://okrodata.dev/posts/time_series_analysis/singular_spectrum_analysis_files/figure-html/cell-13-output-1.png">
-<meta property="og:image:height" content="760">
-<meta property="og:image:width" content="1675">
+<meta property="og:description" content="Review of Singular Spectrum Analysis and its implementation in Python">
+<meta property="og:image" content="https://okrodata.dev/posts/time_series_analysis/image.jpg">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -206,6 +203,7 @@ window.Quarto = {
       <h1 class="title">Singular Spectrum Analysis with Python</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Time Series Analysis</div>
+                <div class="quarto-category">Python</div>
               </div>
                   </div>
   </div>
@@ -227,14 +225,19 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 1, 2025</p>
+      </div>
+    </div>
       
     </div>
     
-
   <div>
-    <div class="keywords">
-      <div class="block-title">Keywords</div>
-      <p>time series, singular spectrum analysis, python, numpy, scipy, matplotlib, pandas, statsmodels, time series decomposition, singular value decomposition</p>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p>Review of Singular Spectrum Analysis and its implementation in Python</p>
     </div>
   </div>
   
@@ -289,14 +292,14 @@ x_3 &amp; x_4 &amp; x_5 &amp; \cdots &amp; x_{K+1} \\
 \]</span></p>
 <p>We can see that, the first column of the trajectory matrix is the original time series up to a length <span class="math inline">\(L\)</span>, the second column is the original time series shifted by one time step, and so on. We also see that our matrix <span class="math inline">\(\mathbf{X}\)</span> has equal elements <span class="math inline">\(x_{ij}\)</span> on the anti-diagonals <span class="math inline">\(i + j = const\)</span>. Hence, the matrix <span class="math inline">\(\mathbf{X}\)</span> is called <strong><a href="https://en.wikipedia.org/wiki/Hankel_matrix">Hankel matrix</a></strong>.</p>
 <p>Instead of implementing Hankel matrix from scratch, we can use <code>scipy</code> to hankelize any given time series. The function below takes time series and window length as input and returns Hankel matrix.</p>
-<div id="01c2af36" class="cell" data-execution_count="1">
+<div id="3837b9f2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.linalg</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f4aa7cc9" class="cell" data-execution_count="2">
+<div id="af8a61cf" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> embed(time_series, window_length):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Embed the time series into a Hankel matrix. This is the trajectory matrix.</span></span>
@@ -306,14 +309,14 @@ x_3 &amp; x_4 &amp; x_5 &amp; \cdots &amp; x_{K+1} \\
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> trajectory_matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let consider following time series as an example:</p>
-<div id="42179545" class="cell" data-execution_count="3">
+<div id="34a8e4d5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>time_series <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>window_length <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>trajectory_matrix <span class="op">=</span> embed(time_series, window_length)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>trajectory_matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>array([[ 1.,  2.,  3.,  4.,  5.,  6.,  7.],
        [ 2.,  3.,  4.,  5.,  6.,  7.,  8.],
        [ 3.,  4.,  5.,  6.,  7.,  8.,  9.],
@@ -324,7 +327,7 @@ x_3 &amp; x_4 &amp; x_5 &amp; \cdots &amp; x_{K+1} \\
 <p><a href="../../posts/mathematics/linear_algebra_6.html#singular-value-decomposition">For more information how SVD works check my previous blog.</a></p>
 <p>After performing SVD, we get eigenvalues, sorted in decreasing order and left singular vectors of the matrix <span class="math inline">\(\mathbf{S}\)</span>. We’re not interested in the right singular vectors, so we can discard them. For the next step, we also need to calculate the rank <span class="math inline">\(d\)</span> of the trajectory matrix <span class="math inline">\(\mathbf{X}\)</span>.</p>
 <p>The function below takes trajectory matrix as input and returns rank, eigenvalues, and left singular vectors.</p>
-<div id="a27a1b9e" class="cell" data-execution_count="4">
+<div id="587a10b3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> decompose(trajectory_matrix):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Decompose the trajectory matrix into its singular values and vectors.</span></span>
@@ -335,7 +338,7 @@ x_3 &amp; x_4 &amp; x_5 &amp; \cdots &amp; x_{K+1} \\
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> np.linalg.matrix_rank(trajectory_matrix)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rank, singular_values, singular_vectors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="abf6af2f" class="cell" data-execution_count="5">
+<div id="1ec804b5" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(suppress<span class="op">=</span><span class="va">True</span>)  <span class="co"># Suppress scientific notation</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>rank, singular_values, singular_vectors <span class="op">=</span> decompose(trajectory_matrix)</span>
@@ -359,7 +362,7 @@ Singular vectors:
 <h3 class="anchored" data-anchor-id="reconstruction">Reconstruction</h3>
 <p>At that stage, we have to perform eigentriple grouping followed by diagonal averaging. The SVD step of the trajectory matrix is not finished. I split it into two parts for better understanding. The first part was actual decomposition, and the second part is grouping to form elementary matrices.</p>
 <p>The function below takes trajectory matrix, rank, eigenvalues, and left singular vectors as input and returns grouped matrices. The rank of each matrix is 1, hence the name <strong>elementary matrices</strong>. The collection <span class="math inline">\((\sqrt{\lambda_{i}}, U_{i}, V_i{})\)</span> is called <strong>eigentriple</strong> of the SVD. Not to be confused with <span class="math inline">\(V_{i}\)</span>. It is not the right singular vector, but the following matrix <span class="math inline">\(V_{i} = \\ \mathbf{X}^{T}U_{i}/{\sqrt{\lambda_{i}}}\)</span></p>
-<div id="7653ac08" class="cell" data-execution_count="6">
+<div id="d2130ca8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> group(trajectory_matrix, rank, singular_values, singular_vectors):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Group the singular values and vectors into matrices.</span></span>
@@ -372,11 +375,11 @@ Singular vectors:
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3a32c669" class="cell" data-execution_count="7">
+<div id="40aa650f" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> group(trajectory_matrix, rank, singular_values, singular_vectors)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>X</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>{0: array([[ 1.98365074,  2.71791138,  3.45217202,  4.18643267,  4.92069331,
           5.65495395,  6.38921459],
         [ 2.40556386,  3.29599826,  4.18643267,  5.07686707,  5.96730148,
@@ -400,7 +403,7 @@ Singular vectors:
 x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 \]</span></p>
 <p>The function below takes grouped matrices as input and returns reconstructed time series.</p>
-<div id="f2a5828a" class="cell" data-execution_count="8">
+<div id="524d5dd8" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> diagonal_averaging(X, m):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Perform anti-diagonal averaging of the given hankel matrix</span></span>
@@ -423,11 +426,11 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(result).rename(columns<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"reconstruction"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here, I pick the first matrix of the grouped decomposition and perform diagonal averaging. The result is a reconstructed time series.</p>
-<div id="432968d8" class="cell" data-execution_count="9">
+<div id="04040657" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reconstructed_time_series <span class="op">=</span> diagonal_averaging(X, <span class="dv">1</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>reconstructed_time_series</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -486,11 +489,11 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 </div>
 </div>
 <p>Here is the result for the first two matrices. We see that it produces exactly the same series as initial one.</p>
-<div id="14dab6a5" class="cell" data-execution_count="10">
+<div id="288505a7" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>reconstructed_time_series <span class="op">=</span> diagonal_averaging(X, <span class="dv">2</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>reconstructed_time_series</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -549,7 +552,7 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 </div>
 </div>
 <p>We can also visualize how much each singular value contributes to the variance.</p>
-<div id="959527f1" class="cell" data-execution_count="11">
+<div id="1910bf47" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_contributions(trajectory_matrix, singular_values):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""View the contribution to variance of each singular value and its corresponding signal"""</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    lambdas <span class="op">=</span> np.power(singular_values, <span class="dv">2</span>)</span>
@@ -572,7 +575,7 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 <span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Contribution"</span>)</span>
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7897b0f6" class="cell" data-execution_count="12">
+<div id="35d57ec6" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot_contributions(trajectory_matrix, singular_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -588,7 +591,7 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 <h3 class="anchored" data-anchor-id="real-life-example">Real Life Example</h3>
 <p>I guess, the above example does not make much sense as it’s not something real. Let consider real life data and go thru all the steps one by one. You can download <a href="https://www.kaggle.com/datasets/nodarokroshiashvili/time-series">the data from here</a>.</p>
 <p>Let read the data and replicate above steps.</p>
-<div id="8c38a420" class="cell" data-execution_count="13">
+<div id="d6b0c670" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.read_csv(<span class="st">"TS.csv"</span>, parse_dates<span class="op">=</span><span class="va">True</span>, index_col<span class="op">=</span><span class="st">"date"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -597,7 +600,7 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>sns.lineplot(data<span class="op">=</span>ts, x<span class="op">=</span>ts.index, y<span class="op">=</span><span class="st">"price"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/mz/3thvm62j52l8lpr5sllrt6rh0000gn/T/ipykernel_31497/3609878243.py:1: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+<pre><code>/var/folders/mz/3thvm62j52l8lpr5sllrt6rh0000gn/T/ipykernel_23011/3609878243.py:1: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
   ts = pd.read_csv("TS.csv", parse_dates=True, index_col="date")</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -609,11 +612,11 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
 </div>
 </div>
 <p>We see that the data is characterized with some seasonality. Due to that reason, we will use a window size of 24.</p>
-<div id="0266a95f" class="cell" data-execution_count="14">
+<div id="ec44a751" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>trajectory_matrix <span class="op">=</span> embed(ts, window_length<span class="op">=</span><span class="dv">24</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>trajectory_matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>array([[ 6345., 20965., 51355., ..., 13655.,  4565.,  2840.],
        [20965., 51355., 26435., ...,  4565.,  2840., 15380.],
        [51355., 26435.,  9830., ...,  2840., 15380., 14340.],
@@ -624,18 +627,18 @@ x_{n} = \sum_{k=1}^{m} \tilde{x}^{(k)}_{n}, \quad n = 1, \cdots, N
       shape=(24, 594))</code></pre>
 </div>
 </div>
-<div id="e4af167f" class="cell" data-execution_count="15">
+<div id="d5f9af6d" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rank, singular_values, singular_vectors <span class="op">=</span> decompose(trajectory_matrix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="339e7647" class="cell" data-execution_count="16">
+<div id="c7ef67a6" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> group(trajectory_matrix, rank, singular_values, singular_vectors)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7f8e66e4" class="cell" data-execution_count="17">
+<div id="9206f155" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>reconstructed <span class="op">=</span> diagonal_averaging(X, m<span class="op">=</span><span class="dv">12</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ts[<span class="st">"reconstruction"</span>] <span class="op">=</span> reconstructed[<span class="st">"reconstruction"</span>].values</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3f6b4b6c" class="cell" data-execution_count="18">
+<div id="a0927f01" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot original and reconstructed series</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
