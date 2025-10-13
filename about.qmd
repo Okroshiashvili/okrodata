@@ -1,6 +1,6 @@
 ---
 title: "Nodar Okroshiashvili"
-image: assets/profile.jpg
+# image: assets/profile.jpg
 about:
   template: solana
   image-shape: rounded

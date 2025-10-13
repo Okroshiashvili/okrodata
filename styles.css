@@ -1,1 +1,1563 @@
-/* css styles */
+/*
+ * Okrodata.dev Custom Styles
+ * Python & Data Engineering Blog Theme
+ * Colors: Purple (#8b5cf6) & Pink (#ec4899)
+ */
+
+/* ========================================
+   Import Fonts
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ========================================
+   CSS Variables - Brand Colors
+   ======================================== */
+:root {
+    /* Brand Colors */
+    --okro-purple: #8b5cf6;
+    --okro-pink: #ec4899;
+    --okro-purple-light: #a78bfa;
+    --okro-purple-dark: #7c3aed;
+    --okro-pink-light: #f472b6;
+
+    /* Neutral Colors */
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-code: #f8f9fa;
+    --border-color: #e5e7eb;
+
+    /* Syntax Highlighting Accents */
+    --code-keyword: var(--okro-purple);
+    --code-string: var(--okro-pink);
+    --code-function: #0ea5e9;
+    --code-comment: #9ca3af;
+
+    /* Spacing */
+    --content-max-width: 800px;
+
+    /* Logo & Branding */
+    --logo-size: 70px;
+    --logo-hover-scale: 1.05;
+    --brand-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+    --brand-shadow-hover: 0 4px 12px rgba(236, 72, 153, 0.4);
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --bg-primary: #111827;
+        --bg-secondary: #1f2937;
+        --bg-code: #1e293b;
+        --border-color: #374151;
+    }
+
+    /* Dark mode inline code */
+    code:not(pre code) {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.1));
+        color: var(--okro-purple-light);
+        border-color: rgba(139, 92, 246, 0.3);
+    }
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    color: var(--okro-purple);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.5rem;
+    border-bottom: 4px solid var(--okro-pink);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: 2rem;
+    border-left: 5px solid var(--okro-pink);
+    padding-left: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--okro-purple-dark);
+}
+
+/* ========================================
+   Links
+   ======================================== */
+a {
+    color: var(--okro-purple);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+a:hover {
+    color: var(--okro-pink);
+    border-bottom-color: var(--okro-pink);
+}
+
+/* Navigation Links */
+.navbar a {
+    border-bottom: none;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: var(--okro-pink);
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   Enhanced Code Formatting
+   ======================================== */
+
+/* GitHub-Style Inline Code */
+code:not(pre code) {
+    background-color: rgba(175, 184, 193, 0.2);
+    color: #24292f;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-family: 'MesloLGS NF', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-size: 85%;
+}
+
+@media (prefers-color-scheme: dark) {
+    code:not(pre code) {
+        background-color: rgba(110, 118, 129, 0.4);
+        color: #e6edf3;
+    }
+}
+
+/* GitHub-Style Code Blocks */
+pre {
+    background-color: #f6f8fa !important;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+    font-size: 85%;
+    line-height: 1.45;
+    position: relative;
+}
+
+/* Dark mode code blocks */
+@media (prefers-color-scheme: dark) {
+    pre {
+        background-color: #0d1117 !important;
+        border-color: #30363d;
+    }
+}/* Code content styling */
+pre code {
+    font-family: 'MesloLGS NF', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #24292f;
+    display: block;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+}
+
+@media (prefers-color-scheme: dark) {
+    pre code {
+        color: #e6edf3;
+    }
+}
+
+/* Language-specific styling */
+/* Python */
+pre.python,
+pre.sourceCode.python,
+.cell-code pre,
+pre[class*="language-python"] {
+    border-left-color: var(--okro-pink);
+}
+
+/* JavaScript */
+pre[class*="language-javascript"],
+pre[class*="language-js"] {
+    border-left-color: #f7df1e;
+}
+
+/* JSON */
+pre[class*="language-json"] {
+    border-left-color: #ff6b35;
+}
+
+/* SQL */
+pre[class*="language-sql"] {
+    border-left-color: #336791;
+}
+
+/* Bash/Shell */
+pre[class*="language-bash"],
+pre[class*="language-shell"] {
+    border-left-color: #4eaa25;
+}
+
+/* R */
+pre[class*="language-r"] {
+    border-left-color: #198ce7;
+}
+
+/* GitHub-Style Syntax Highlighting - Multiple selectors for compatibility */
+.token.comment,
+pre code .token.comment,
+code .token.comment,
+.hljs-comment,
+.sourceCode .co,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #6e7781 !important;
+    font-style: italic;
+}
+
+.token.punctuation,
+pre code .token.punctuation,
+code .token.punctuation,
+.hljs-punctuation,
+.sourceCode .op {
+    color: #24292f !important;
+}
+
+.token.property,
+pre code .token.property,
+code .token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+pre code .token.number,
+code .token.number,
+.hljs-number,
+.sourceCode .dv,
+.sourceCode .fl,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #0550ae !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+pre code .token.string,
+code .token.string,
+.hljs-string,
+.sourceCode .st,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #0a3069 !important;
+}
+
+.token.operator,
+pre code .token.operator,
+code .token.operator,
+.hljs-operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #cf222e !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+pre code .token.keyword,
+code .token.keyword,
+.hljs-keyword,
+.sourceCode .kw,
+.sourceCode .cf,
+.sourceCode .im {
+    color: #cf222e !important;
+}
+
+.token.function,
+pre code .token.function,
+code .token.function,
+.hljs-function,
+.sourceCode .fu,
+.token.class-name,
+.hljs-class,
+.sourceCode .dt {
+    color: #8250df !important;
+}
+
+    .token.regex,
+    .token.important,
+    .token.variable,
+    pre code .token.variable,
+    code .token.variable,
+    .hljs-variable,
+    .sourceCode .va {
+        color: #0550ae !important;
+    }
+
+    /* Additional syntax highlighting for more elements */
+    .token.builtin,
+    .hljs-built_in,
+    .hljs-type,
+    .sourceCode .bu {
+        color: #8250df !important;
+    }
+
+    .token.literal,
+    .hljs-literal,
+    .hljs-params,
+    .sourceCode .pp {
+        color: #0550ae !important;
+    }
+
+    .token.namespace,
+    .hljs-namespace {
+        color: #953800 !important;
+    }
+
+    .token.property,
+    .hljs-property,
+    .hljs-attribute {
+        color: #116329 !important;
+    }
+
+    .token.decorator,
+    .token.annotation,
+    .hljs-meta {
+        color: #8250df !important;
+    }
+
+    /* Python-specific */
+    .hljs-doctag,
+    .sourceCode .co .hljs-doctag {
+        color: #8250df !important;
+        font-weight: bold;
+    }
+
+    /* Python keywords and control flow */
+    .language-python .token.keyword,
+    .hljs-keyword.hljs-python,
+    .python .hljs-keyword {
+        color: #cf222e !important;
+    }
+
+    /* Python built-in functions */
+    .language-python .token.builtin,
+    .python .hljs-built_in,
+    .sourceCode .python .bu {
+        color: #8250df !important;
+    }
+
+    /* Python decorators */
+    .language-python .token.decorator,
+    .python .hljs-meta,
+    .sourceCode .python .pp {
+        color: #e36209 !important;
+    }
+
+    /* Python self/cls parameters */
+    .language-python .token.self,
+    .python .hljs-params .hljs-self {
+        color: #cf222e !important;
+        font-style: italic;
+    }
+
+    /* Python f-strings and string formatting */
+    .language-python .token.f-string,
+    .python .hljs-string .hljs-subst {
+        background-color: rgba(139, 92, 246, 0.1);
+        color: #8250df !important;
+    }
+
+    /* R/Statistics specific */
+    .sourceCode .fl,
+    .sourceCode .dv {
+        color: #0550ae !important;
+    }
+
+    /* Shell/Bash specific */
+    .hljs-subst,
+    .hljs-symbol {
+        color: #0a3069 !important;
+    }
+
+    /* JSON specific */
+    .hljs-attr {
+        color: #116329 !important;
+    }
+
+    /* CSS specific */
+    .hljs-selector-tag,
+    .hljs-selector-id,
+    .hljs-selector-class {
+        color: #116329 !important;
+    }
+
+    .hljs-selector-pseudo {
+        color: #8250df !important;
+    }
+
+    /* HTML specific */
+    .hljs-tag,
+    .hljs-name {
+        color: #116329 !important;
+    }
+
+    .hljs-title {
+        color: #0550ae !important;
+        font-weight: bold;
+    }/* Dark mode syntax highlighting */
+@media (prefers-color-scheme: dark) {
+    .token.comment,
+    pre code .token.comment,
+    code .token.comment,
+    .hljs-comment,
+    .sourceCode .co,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+        color: #8b949e !important;
+    }
+
+    .token.punctuation,
+    pre code .token.punctuation,
+    code .token.punctuation,
+    .hljs-punctuation,
+    .sourceCode .op {
+        color: #e6edf3 !important;
+    }
+
+    .token.property,
+    .token.tag,
+    .token.boolean,
+    .token.number,
+    pre code .token.number,
+    code .token.number,
+    .hljs-number,
+    .sourceCode .dv,
+    .sourceCode .fl,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+        color: #79c0ff !important;
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    pre code .token.string,
+    code .token.string,
+    .hljs-string,
+    .sourceCode .st,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+        color: #a5d6ff !important;
+    }
+
+    .token.operator,
+    pre code .token.operator,
+    code .token.operator,
+    .hljs-operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+        color: #ff7b72 !important;
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword,
+    pre code .token.keyword,
+    code .token.keyword,
+    .hljs-keyword,
+    .sourceCode .kw,
+    .sourceCode .cf,
+    .sourceCode .im {
+        color: #ff7b72 !important;
+    }
+
+    .token.function,
+    pre code .token.function,
+    code .token.function,
+    .hljs-function,
+    .sourceCode .fu,
+    .token.class-name,
+    .hljs-class,
+    .sourceCode .dt {
+        color: #d2a8ff !important;
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable,
+    pre code .token.variable,
+    code .token.variable,
+    .hljs-variable,
+    .sourceCode .va {
+        color: #79c0ff !important;
+    }
+
+    /* Additional syntax highlighting for more elements - Dark Mode */
+    .token.builtin,
+    .hljs-built_in,
+    .hljs-type,
+    .sourceCode .bu {
+        color: #d2a8ff !important;
+    }
+
+    .token.literal,
+    .hljs-literal,
+    .hljs-params,
+    .sourceCode .pp {
+        color: #79c0ff !important;
+    }
+
+    .token.namespace,
+    .hljs-namespace {
+        color: #ffa657 !important;
+    }
+
+    .token.property,
+    .hljs-property,
+    .hljs-attribute {
+        color: #7ee787 !important;
+    }
+
+    .token.decorator,
+    .token.annotation,
+    .hljs-meta {
+        color: #d2a8ff !important;
+    }
+
+    /* Python-specific - Dark Mode */
+    .hljs-doctag,
+    .sourceCode .co .hljs-doctag {
+        color: #d2a8ff !important;
+        font-weight: bold;
+    }
+
+    /* Python keywords and control flow - Dark Mode */
+    .language-python .token.keyword,
+    .hljs-keyword.hljs-python,
+    .python .hljs-keyword {
+        color: #ff7b72 !important;
+    }
+
+    /* Python built-in functions - Dark Mode */
+    .language-python .token.builtin,
+    .python .hljs-built_in,
+    .sourceCode .python .bu {
+        color: #d2a8ff !important;
+    }
+
+    /* Python decorators - Dark Mode */
+    .language-python .token.decorator,
+    .python .hljs-meta,
+    .sourceCode .python .pp {
+        color: #ffa657 !important;
+    }
+
+    /* Python self/cls parameters - Dark Mode */
+    .language-python .token.self,
+    .python .hljs-params .hljs-self {
+        color: #ff7b72 !important;
+        font-style: italic;
+    }
+
+    /* Python f-strings and string formatting - Dark Mode */
+    .language-python .token.f-string,
+    .python .hljs-string .hljs-subst {
+        background-color: rgba(210, 168, 255, 0.1);
+        color: #d2a8ff !important;
+    }
+
+    /* R/Statistics specific - Dark Mode */
+    .sourceCode .fl,
+    .sourceCode .dv {
+        color: #79c0ff !important;
+    }
+
+    /* Shell/Bash specific - Dark Mode */
+    .hljs-subst,
+    .hljs-symbol {
+        color: #a5d6ff !important;
+    }
+
+    /* JSON specific - Dark Mode */
+    .hljs-attr {
+        color: #7ee787 !important;
+    }
+
+    /* CSS specific - Dark Mode */
+    .hljs-selector-tag,
+    .hljs-selector-id,
+    .hljs-selector-class {
+        color: #7ee787 !important;
+    }
+
+    .hljs-selector-pseudo {
+        color: #d2a8ff !important;
+    }
+
+    /* HTML specific - Dark Mode */
+    .hljs-tag,
+    .hljs-name {
+        color: #7ee787 !important;
+    }
+
+    .hljs-title {
+        color: #79c0ff !important;
+        font-weight: bold;
+    }
+}
+
+/* Line highlighting */
+pre code .highlight-line {
+    background-color: rgba(139, 92, 246, 0.1);
+    display: block;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    border-left: 3px solid var(--okro-purple);
+}
+
+/* Line numbers */
+pre code .line-numbers {
+    counter-reset: linenumber;
+}
+
+pre code .line-numbers > span {
+    counter-increment: linenumber;
+    position: relative;
+    padding-left: 3em;
+}
+
+pre code .line-numbers > span::before {
+    content: counter(linenumber);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #94a3b8;
+    font-size: 0.8em;
+    text-align: right;
+    width: 2.5em;
+    padding-right: 0.5em;
+    user-select: none;
+}
+
+/* REMOVED: Python label - no longer adding labels to code blocks */
+
+/* ========================================
+   Blockquotes & Callouts
+   ======================================== */
+blockquote {
+    border-left: 4px solid var(--okro-pink);
+    background: linear-gradient(90deg, rgba(236, 72, 153, 0.05), transparent);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* Quarto Callouts */
+.callout {
+    border-radius: 8px;
+    border-left-width: 5px;
+    margin: 1.5rem 0;
+}
+
+.callout-note {
+    border-left-color: var(--okro-purple);
+}
+
+.callout-tip {
+    border-left-color: var(--okro-pink);
+}
+
+.callout-important {
+    border-left-color: var(--okro-purple-dark);
+}
+
+/* ========================================
+   Tables - Data-focused styling
+   ======================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    color: white;
+}
+
+th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+    background-color: rgba(139, 92, 246, 0.05);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========================================
+   Lists - Enhanced styling
+   ======================================== */
+ul,
+ol {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+li {
+    margin: 0.5rem 0;
+    line-height: 1.7;
+}
+
+ul li::marker {
+    color: var(--okro-pink);
+    font-weight: bold;
+}
+
+ol li::marker {
+    color: var(--okro-purple);
+    font-weight: bold;
+}
+
+/* ========================================
+   Images & Figures
+   ======================================== */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem 0;
+}
+
+figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+figcaption {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    font-style: italic;
+}
+
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
+/* General buttons - exclude search and code copy buttons */
+button:not(.aa-SubmitButton):not(.aa-ClearButton):not([class*="aa-"]):not(.code-copy-button):not([class*="code-copy"]),
+.btn:not([class*="aa-"]):not(.code-copy-button):not([class*="code-copy"]) {
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+button:not(.aa-SubmitButton):not(.aa-ClearButton):not([class*="aa-"]):not(.code-copy-button):not([class*="code-copy"]):hover,
+.btn:not([class*="aa-"]):not(.code-copy-button):not([class*="code-copy"]):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+}
+
+/* ========================================
+   Article/Post Metadata
+   ======================================== */
+.article-metadata {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.article-metadata .author {
+    color: var(--okro-purple);
+    font-weight: 600;
+}
+
+.article-metadata .date {
+    color: var(--text-secondary);
+}
+
+/* Tags */
+.article-tags a,
+.tag {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+    color: var(--okro-purple);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.article-tags a:hover,
+.tag:hover {
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+}
+
+/* ========================================
+   Search Bar Fixes - Flatly Theme Specific
+   ======================================== */
+
+/* Main search container */
+#quarto-search,
+.aa-DetachedFormContainer {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    overflow: hidden;
+}
+
+/* Search input wrapper */
+.aa-Form,
+.aa-InputWrapper {
+    background: var(--bg-primary) !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+}
+
+/* Remove any separators, borders, or dividers */
+.aa-InputWrapper::before,
+.aa-InputWrapper::after,
+.aa-Form::before,
+.aa-Form::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove borders from all search components */
+.aa-InputWrapper>*,
+.aa-Form>*,
+.aa-InputWrapperPrefix,
+.aa-InputWrapperSuffix {
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+}
+
+/* Search input field */
+.aa-Input {
+    color: var(--text-primary) !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    flex-grow: 1 !important;
+}
+
+.aa-Input:focus {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.aa-Input::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.7 !important;
+}
+
+/* Search button (magnifying glass) */
+.aa-SubmitButton {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--okro-purple) !important;
+    transition: color 0.2s ease !important;
+}
+
+.aa-SubmitButton:hover {
+    background: rgba(139, 92, 246, 0.1) !important;
+    color: var(--okro-pink) !important;
+}
+
+.aa-SubmitIcon {
+    width: 16px !important;
+    height: 16px !important;
+    fill: currentColor !important;
+}
+
+/* Hide all clear buttons */
+.aa-ClearButton,
+.aa-InputWrapperSuffix button,
+.aa-InputWrapperSuffix,
+button[title="Clear"],
+button[aria-label*="Clear"],
+button[aria-label*="clear"],
+.search-clear-button,
+[class*="clear"] button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.aa-ClearIcon,
+.aa-InputWrapperSuffix svg {
+    display: none !important;
+}
+
+/* Hide only search-related copy buttons */
+.aa-DetachedCancelButton,
+#quarto-search .aa-CopyButton,
+.aa-Form button[title="Copy"],
+.aa-InputWrapper button[aria-label*="Copy"],
+.aa-InputWrapper button[aria-label*="copy"],
+#quarto-search .search-copy-button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Search results panel */
+.aa-Panel,
+.aa-DetachedContainer {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    margin-top: 4px !important;
+    z-index: 1000 !important;
+}
+
+/* Search result items */
+.aa-Item {
+    padding: 12px !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.aa-Item:hover,
+.aa-Item[aria-selected="true"] {
+    background: rgba(139, 92, 246, 0.1) !important;
+}
+
+.aa-Item:last-child {
+    border-bottom: none !important;
+}
+
+/* Highlighted text in search results */
+.aa-Item mark,
+.aa-ItemContentTitle mark {
+    background: rgba(139, 92, 246, 0.2) !important;
+    color: var(--okro-purple-dark) !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+}
+
+/* Additional button hiding rules */
+#quarto-search button:not(.aa-SubmitButton),
+.aa-Form button:not(.aa-SubmitButton),
+.aa-InputWrapper button:not(.aa-SubmitButton) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Hide any suffix/prefix buttons except submit */
+.aa-InputWrapperPrefix:not(:has(.aa-SubmitButton)),
+.aa-InputWrapperSuffix:not(:has(.aa-SubmitButton)) {
+    display: none !important;
+}
+
+/* Remove any vertical separators or dividers */
+.aa-InputWrapper .aa-InputWrapperPrefix::after,
+.aa-InputWrapper .aa-InputWrapperSuffix::before,
+.aa-Form .aa-InputWrapperPrefix::after,
+.aa-Form .aa-InputWrapperSuffix::before {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+    background: none !important;
+}
+
+/* Ensure no borders on any search element */
+#quarto-search *,
+.aa-Form *,
+.aa-InputWrapper * {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/* Remove any box shadows that might appear as lines */
+.aa-InputWrapper,
+.aa-Form,
+.aa-Input,
+.aa-SubmitButton {
+    box-shadow: none !important;
+}
+
+
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .aa-DetachedFormContainer {
+        margin: 0 16px !important;
+    }
+
+    .aa-Input {
+        font-size: 16px !important;
+        /* Prevent zoom on iOS */
+    }
+}
+
+/* Ensure search container has proper dimensions */
+#quarto-search {
+    min-width: 200px !important;
+}
+
+.aa-Form {
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+}
+
+
+
+/* Aggressively remove ALL placeholder boxes and pseudo-elements */
+div.sourceCode::after,
+div.sourceCode::before,
+pre::after,
+pre::before,
+.code-with-copy::after,
+.code-with-copy::before,
+.sourceCode::after,
+.sourceCode::before,
+.highlight::after,
+.highlight::before {
+    display: none !important;
+    content: "" !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+
+
+/* ========================================
+   Logo & Favicon Integration
+   ======================================== */
+
+/* Method 1: CSS-Generated Logo (if you want a pure CSS logo) */
+.css-logo {
+    display: inline-block;
+    width: var(--logo-size);
+    height: var(--logo-size);
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.css-logo::before {
+    content: "OK";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+.css-logo:hover {
+    transform: scale(var(--logo-hover-scale)) rotate(5deg);
+    box-shadow: var(--brand-shadow-hover);
+}
+
+/* Method 2: Enhanced Favicon Support */
+/* Ensure favicon is crisp and properly sized */
+link[rel="icon"] {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+/* Method 3: Custom Logo Background Pattern */
+.logo-pattern {
+    background-image:
+        radial-gradient(circle at 25% 25%, var(--okro-purple) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, var(--okro-pink) 2px, transparent 2px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+/* Method 4: Logo with animated background */
+.navbar-brand-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.navbar-brand-container::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.navbar-brand-container:hover::before {
+    opacity: 1;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* ========================================
+   Navbar/Header Customization
+   ======================================== */
+.navbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--okro-purple), var(--okro-pink)) 1;
+    min-height: calc(var(--logo-size) + 40px) !important;
+    padding: 20px 0 !important;
+}
+
+/* Ensure navbar-brand container is large enough */
+.navbar-brand {
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced logo styling - optimized for SVG */
+.navbar-brand img,
+.navbar-brand svg {
+    height: var(--logo-size) !important;
+    width: auto !important;
+    max-height: none !important;
+    max-width: none !important;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.2));
+    /* SVG optimization */
+    shape-rendering: geometricPrecision;
+    /* Ensure crisp rendering */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.navbar-brand:hover img,
+.navbar-brand:hover svg {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.3));
+}
+
+/* Logo + Text combination styling (if you have both) */
+.navbar-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+/* If you want a CSS-only logo fallback */
+.navbar-brand::before {
+    content: "";
+    display: none; /* Hidden by default, can be enabled if needed */
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    border-radius: 8px;
+    margin-right: 0.5rem;
+}
+
+/* Advanced logo effects */
+@keyframes logoGlow {
+    0%, 100% {
+        filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.2));
+    }
+    50% {
+        filter: drop-shadow(0 4px 12px rgba(236, 72, 153, 0.4));
+    }
+}
+
+.navbar-brand:hover img,
+.navbar-brand:hover svg {
+    animation: logoGlow 2s ease-in-out infinite;
+}
+
+/* SVG-specific enhancements */
+.navbar-brand svg {
+    /* Allow SVG to inherit colors from CSS if needed */
+    fill: currentColor;
+}
+
+/* Optional: Colorize SVG with your brand colors */
+.navbar-brand svg path {
+    transition: fill 0.3s ease;
+}
+
+/* Uncomment below if you want to colorize your SVG on hover */
+/*
+.navbar-brand:hover svg path {
+    fill: var(--okro-purple);
+}
+*/
+
+/* ========================================
+   Footer
+   ======================================== */
+footer {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--okro-purple), var(--okro-pink)) 1;
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Jupyter Notebook Cell Output
+   ======================================== */
+.cell-output {
+    margin: 1.5rem 0;
+    padding: 0;
+    /* Remove padding to avoid double frame */
+    background: transparent;
+    /* Remove background to avoid double frame */
+    border-radius: 0;
+    /* Remove border radius */
+    border-left: none;
+    /* Remove border */
+}
+
+.cell-output pre {
+    background: var(--bg-code) !important;
+    margin: 0;
+    border-left: 4px solid var(--okro-pink);
+}
+
+/* Remove any nested containers that create double frames */
+.cell-output>div {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.cell-output-stdout,
+.cell-output-display {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* ========================================
+   Scrollbar Styling
+   ======================================== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--okro-purple), var(--okro-pink));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--okro-purple-dark), var(--okro-pink));
+}
+
+/* ========================================
+   Reading Progress Bar (Optional)
+   ======================================== */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--okro-purple), var(--okro-pink));
+    transform-origin: left;
+    z-index: 9999;
+}
+
+/* ========================================
+   Code Block Enhancements
+   ======================================== */
+
+/* Code block with title - Clean Theme */
+.code-with-filename {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.code-filename {
+    background: #ffffff;
+    color: var(--okro-purple);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid rgba(139, 92, 246, 0.2);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    box-shadow: 0 -2px 8px rgba(139, 92, 246, 0.1);
+}
+
+.code-with-filename pre {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Output blocks - Clean White Theme */
+.cell-output pre,
+.output pre {
+    border-left-color: #10b981;
+    background: #ffffff !important;
+    border: 2px solid rgba(16, 185, 129, 0.1);
+    box-shadow:
+        0 8px 25px -5px rgba(16, 185, 129, 0.1),
+        0 4px 6px -2px rgba(16, 185, 129, 0.05);
+}
+
+/* Error blocks - Clean White Theme */
+.error pre,
+pre.error {
+    border-left-color: #ef4444;
+    background: #ffffff !important;
+    border: 2px solid rgba(239, 68, 68, 0.1);
+    box-shadow:
+        0 8px 25px -5px rgba(239, 68, 68, 0.1),
+        0 4px 6px -2px rgba(239, 68, 68, 0.05);
+}
+
+/* Warning blocks - Clean White Theme */
+.warning pre,
+pre.warning {
+    border-left-color: #f59e0b;
+    background: #ffffff !important;
+    border: 2px solid rgba(245, 158, 11, 0.1);
+    box-shadow:
+        0 8px 25px -5px rgba(245, 158, 11, 0.1),
+        0 4px 6px -2px rgba(245, 158, 11, 0.05);
+}
+
+/* Dark mode variants */
+@media (prefers-color-scheme: dark) {
+    .cell-output pre,
+    .output pre {
+        background: #0f1419 !important;
+        border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .error pre,
+    pre.error {
+        background: #0f1419 !important;
+        border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .warning pre,
+    pre.warning {
+        background: #0f1419 !important;
+        border-color: rgba(245, 158, 11, 0.2);
+    }
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    pre {
+        padding: 1rem;
+        font-size: 0.8rem;
+        margin: 1rem 0;
+        border-radius: 8px;
+    }
+
+    pre code {
+        font-size: 0.8rem;
+        line-height: 1.6;
+    }
+
+    code:not(pre code) {
+        font-size: 0.8em;
+        padding: 2px 6px;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+.text-gradient {
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.highlight-purple {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.1));
+    padding: 0.125rem 0.5rem;
+    border-radius: 4px;
+}
+
+.badge-python {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+    a {
+        color: var(--okro-purple);
+        text-decoration: underline;
+    }
+
+    pre {
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+
+    h1,
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

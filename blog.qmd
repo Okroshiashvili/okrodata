@@ -1,5 +1,5 @@
 ---
-title: "Okro Data"
+title: "Pythonic Mind"
 listing:
   contents: posts
   sort: "date desc"

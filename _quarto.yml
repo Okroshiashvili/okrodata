@@ -6,7 +6,7 @@ project:
 website:
   # title: "Okro Data"
   description: Data Software Engineering blog
-  favicon: assets/favicon.ico
+  favicon: assets/favicon.svg
   page-footer: "Copyright 2025, Nodar Okroshiashvili"
   site-url: https://okrodata.dev
   open-graph: true
@@ -15,7 +15,7 @@ website:
     type: textbox
     copy-button: true
   navbar:
-    # logo: "assets/logo.png"
+    logo: "assets/logo.svg"
     back-to-top-navigation: true
     background: primary
     left:
