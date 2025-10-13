@@ -17,13 +17,3 @@ dependencies = [
     "structlog>=25.4.0",
     "sympy>=1.14.0",
 ]
-
-[dependency-groups]
-dev = ["poethepoet>=0.37.0"]
-
-
-# Poe tasks
-[tool.poe.tasks]
-preview = "quarto preview"
-build = "quarto render"
-publish = "quarto publish gh-pages"
