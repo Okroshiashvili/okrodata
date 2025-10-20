@@ -1222,7 +1222,7 @@ link[rel="icon"] {
 
 .navbar-brand {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.1rem; /* Made smaller from 1.5rem */
     background: linear-gradient(135deg, var(--okro-purple), var(--okro-pink));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
