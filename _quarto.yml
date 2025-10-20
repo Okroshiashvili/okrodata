@@ -4,7 +4,7 @@ project:
     - "assets/resume.pdf"
 
 website:
-  # title: "Okro Data"
+  title: "Pythonic Mind"
   description: Data Software Engineering blog
   favicon: assets/favicon.svg
   page-footer: "Copyright 2025, Nodar Okroshiashvili"
