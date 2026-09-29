@@ -1,3 +1,7 @@
+# Set the Quarto Python interpreter path globally
+export QUARTO_PYTHON := ".venv/bin/python"
+
+
 preview:
     @echo "✅ Generating preview..."
     quarto preview
