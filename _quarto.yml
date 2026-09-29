@@ -8,7 +8,7 @@ website:
   description: Data Software Engineering blog
   favicon: assets/favicon.svg
   page-footer: "Copyright 2025, Nodar Okroshiashvili"
-  site-url: https://okrodata.dev
+  site-url: https://okroshiashvili.github.io/okrodata/
   open-graph: true
   search:
     location: navbar
